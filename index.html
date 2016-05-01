@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="description" content="Cosmograve, partie cosmo, programme qui permet de déterminer l'age de l'univers ainsi que tracer son evolution" />
+	<meta http-equiv="Content-Language" content="fr-FR" />
+	<title>Cosmograve - Cosmologie</title>
+	<link rel="stylesheet" media="screen and (min-width: 800px)" href="css/style.css">
+	<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="css/mobile.css" />
+	<script src="lib/jquery-1.12.3.min.js"></script>
+	<script src="lib/math.js"></script>
+	<script src="lib/d3.js"></script>
+	
+	<script src="js/rungekutta.js"></script>
+	<script src="js/range.js"></script>
+	<script src="js/integrale.js"></script>
+	<script src="js/graphique.js"></script>
+	<script src="js/main_calcul.js"></script>
+	</head>
+	
+	<body>
+		<div id="plus"><button type="button">+</button></div>
+		<div id="temp"></div>
+		<form id="parametres" action="" method="post" autocomplete="off">
+			<div class="desact_retour">
+				<label for="T0">T<sub>0</sub> =</label>
+				<input id="T0" value="2.725" maxlength="10" type="text">
+			</div>
+			<div class="desact_retour">
+				<label for="H0">H<sub>0</sub> =</label>
+				<input id="H0" value="67.74" maxlength="10" type="text">
+			</div>
+			<div class="desact_retour">
+				<label for="omegam0">&Omega;<sub>m0</sub> =</label>
+				<input id="omegam0" value="0.3089" maxlength="10" type="text">
+			</div>
+			<div class="desact_retour">
+				<label for="omegalambda0">&Omega;<sub>&Lambda;0</sub> =</label>
+				<input id="omegalambda0" value="0.6911" maxlength="10" type="text">
+			</div>
+			
+			<div>
+				<select id="liste" name="type" size="1">
+					<option selected="selected">Mati&egrave;re et Lambda</option>
+					<option>Mati&egrave;re, Lambda et RFC</option>
+					<option>Mati&egrave;re, Lambda, RFC et Neutrinos</option>
+				</select>
+				
+				<div class="button, desact_retour" onclick="calcul()">
+					<button type="button">Tracer</button>
+				</div>
+			</div>
+		</form>
+		
+		<div id="graphique">
+			<script src="js/graphique_initial.js"></script>
+		</div>
+		
+		<div id="information">
+			&Omega;<sub>r0</sub> = <span id="resultat_omegar0"></span><br />
+			&Omega;<sub>&Lambda;0</sub> = <span id="resultat_omegarlambda0"></span><br />
+			&Omega;<sub>k0</sub> = <span id="resultat_omegak0"></span><br />
+			<span id="resultat_ageunivers"></span><br />
+			<span id="resultat_bigcrunch"></span><br />
+			Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
+		</div>
+		
+	</body></html>									
