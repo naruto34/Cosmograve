@@ -1,3 +1,7 @@
+function init(){
+		getData();
+}
+
 function getData(){
    document.getElementById("T0").innerHTML = window.opener.document.getElementById('T0').value;
    document.getElementById("H0").innerHTML = window.opener.document.getElementById('H0').value;

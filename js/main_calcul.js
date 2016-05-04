@@ -29,8 +29,6 @@ function calcul(){   // declaration de la fonction
 	
 	H0parGan = h0*1.0245974*Math.pow(10, -3);
 	
-	//age = integrale(0, 1000, 1000000, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	
 	age = simpson(0, 10000, 100000, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
 	
 	if(age >= 0){
@@ -83,5 +81,4 @@ function calcul(){   // declaration de la fonction
 	}
 	
 	graphique_creation();
-	
 }
