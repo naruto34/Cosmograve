@@ -24,6 +24,9 @@
 			$(function() {
 				$( "#tabs" ).tabs();
 			});
+			
+			var largeur_fenetre = $(window).width();
+			var hauteur_fenetre = $(window).height();
 		</script>
 	</head>
 	
@@ -36,7 +39,7 @@
 			</ul>
 			
 			<div id="tabs-1">
-				<object type="text/html" data="theorie.html" width="1000" height="500"></object>
+				<object id="theorie" type="text/html" data="theorie.html" width="1320" height="560"></object>
 			</div>
 			
 			<div id="tabs-2">
@@ -61,6 +64,8 @@
 					</div>
 					
 					<div>
+						<input id="grille" type="checkbox" name="grille" checked="checked">Afficher grille
+						
 						<select id="liste" name="type" size="1">
 							<option selected="selected">Mati&egrave;re et Lambda</option>
 							<option>Mati&egrave;re, Lambda et RFC</option>
@@ -70,21 +75,25 @@
 						<div class="button, desact_retour" onclick="calcul()">
 							<button type="button">Tracer</button>
 						</div>
+						
 					</div>
 				</form>
 				
 				<div id="graphique">
-				<script src="js/graphique_initial.js"></script>
+					<script src="js/graphique_initial.js"></script>
 				</div>
 				
 				<div id="information">
-				&Omega;<sub>r0</sub> = <span id="resultat_omegar0"></span><br />
-				&Omega;<sub>&Lambda;0</sub> = <span id="resultat_omegarlambda0"></span><br />
-				&Omega;<sub>k0</sub> = <span id="resultat_omegak0"></span><br />
-				<span id="resultat_ageunivers"></span><br />
-				<span id="resultat_bigcrunch"></span><br />
-				Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
+					&Omega;<sub>r0</sub> = <span id="resultat_omegar0"></span><br />
+					&Omega;<sub>&Lambda;0</sub> = <span id="resultat_omegarlambda0"></span><br />
+					&Omega;<sub>k0</sub> = <span id="resultat_omegak0"></span><br />
+					<span id="resultat_ageunivers"></span><br />
+					<span id="resultat_bigcrunch"></span><br />
+					Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
 				</div>
-				</div>
-				</div>
-				</body></html>														
+			</div>
+		</div>
+		<script>document.getElementById("theorie").setAttribute("width", largeur_fenetre-40);
+			document.getElementById("theorie").setAttribute("height", hauteur_fenetre-100);</script>
+	</body>
+</html>															
