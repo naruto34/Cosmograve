@@ -41,31 +41,33 @@ function graphique_creation(){
 	x.domain(d3.extent(data, function(d) { return d.date; }));
 	y.domain([0, d3.max(data, function(d) { return d.close; })]);
 	
-	svg.selectAll("line.x")
-    .data(x.ticks(10))
-    .enter().append("line")
-    .attr("class", "x")
-    .attr("x1", x)
-    .attr("x2", x)
-    .attr("y1", 0)
-    .attr("y2", 390)
-    .style("stroke", "#ccc");
-	
 	// Add the X Axis
 	svg.append("g")
 	.attr("class", "x axis")
 	.attr("transform", "translate(0," + height + ")")
 	.call(xAxis);
 	
-	svg.selectAll("line.y")
-    .data(y.ticks(8))
-    .enter().append("line")
-    .attr("class", "y")
-    .attr("x1", 0)
-    .attr("x2", 2000)
-    .attr("y1", y)
-    .attr("y2", y)
-    .style("stroke", "#ccc");
+	if(document.getElementById("grille").checked == true){
+		svg.selectAll("line.x")
+		.data(x.ticks(10))
+		.enter().append("line")
+		.attr("class", "x")
+		.attr("x1", x)
+		.attr("x2", x)
+		.attr("y1", 0)
+		.attr("y2", 390)
+		.style("stroke", "#ccc");
+		
+		svg.selectAll("line.y")
+		.data(y.ticks(8))
+		.enter().append("line")
+		.attr("class", "y")
+		.attr("x1", 0)
+		.attr("x2", 2000)
+		.attr("y1", y)
+		.attr("y2", y)
+		.style("stroke", "#ccc");
+	}
 	
 	// Add the Y Axis
 	svg.append("g")
@@ -101,4 +103,4 @@ function graphique_creation(){
 	.attr("class", "line")
 	.attr("d", valueline(data));
 	
-	}	
+}	
