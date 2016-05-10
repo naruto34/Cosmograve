@@ -49,6 +49,10 @@
 				z1 = document.getElementById("z1").value;
 				z2 = document.getElementById("z2").value;
 				
+				if(z2 == "inf"){
+					z2 = 1e3;
+				}
+				
 				integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 100000, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
 				
 				if (omegak0>0){
@@ -104,7 +108,7 @@
 			</div>
 			<div class="desact_retour">
 				<label for="z2">Z<sub>2</sub> =</label>
-				<input id="z2" value="10" maxlength="10" type="text">
+				<input id="z2" value="11.1" maxlength="10" type="text">
 			</div>
 			<div class="desact_retour">
 				<label for="diametre">D =</label>

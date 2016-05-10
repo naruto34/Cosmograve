@@ -27,6 +27,10 @@
 			
 			var largeur_fenetre = $(window).width();
 			var hauteur_fenetre = $(window).height();
+			
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				alert("ces un mobile");
+			}
 		</script>
 	</head>
 	
@@ -36,6 +40,7 @@
 			<ul>
 				<li><a href="#tabs-1">Théorie</a></li>
 				<li><a href="#tabs-2">Simulation</a></li>
+				<li><a href="#tabs-3">A propos</a></li>
 			</ul>
 			
 			<div id="tabs-1">
@@ -92,8 +97,17 @@
 					Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
 				</div>
 			</div>
+			
+			<div id="tabs-3">
+				Version : Alpha - 0.4<br />
+				Développé par :  Anthony GOURDIN
+   & Mahuta Tamatoa
+   & Hamza Alhousseini
+   & Moussa-oumar Sy<br />
+			Licence : CC-BY-SA <p><object type="image/svg+xml" data="./img/CC-BY-SA_icon.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
+			</div>
 		</div>
 		<script>document.getElementById("theorie").setAttribute("width", largeur_fenetre-40);
-			document.getElementById("theorie").setAttribute("height", hauteur_fenetre-100);</script>
+		document.getElementById("theorie").setAttribute("height", hauteur_fenetre-100);</script>
 	</body>
-</html>															
+</html>																				
