@@ -32,6 +32,83 @@
 				alert("ces un mobile");
 			}
 		</script>
+		
+		
+		<script type="text/javascript">
+			<!--
+			
+			function FindPosition(oElement)
+			{
+				if(typeof( oElement.offsetParent ) != "undefined")
+				{
+					for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+					{
+						posX += oElement.offsetLeft;
+						posY += oElement.offsetTop;
+					}
+					return [ posX, posY ];
+				}
+				else
+				{
+					return [ oElement.x, oElement.y ];
+				}
+			}
+			
+			function GetCoordinates(e)
+			{
+				var PosX = 0;
+				var PosY = 0;
+				var ImgPos;
+				ImgPos = FindPosition(myImg);
+				if (!e) var e = window.event;
+				if (e.pageX || e.pageY)
+				{
+					PosX = e.pageX;
+					PosY = e.pageY;
+				}
+				else if (e.clientX || e.clientY)
+				{
+					PosX = e.clientX + document.body.scrollLeft
+					+ document.documentElement.scrollLeft;
+					PosY = e.clientY + document.body.scrollTop
+					+ document.documentElement.scrollTop;
+				}
+				PosX = PosX - ImgPos[0];
+				PosY = PosY - ImgPos[1];
+				
+				if(PosX < 53){
+					PosX = 53;
+				}else if(PosX > 283){
+					PosX = 283;
+				}
+				
+				if(PosY > 354){
+					PosY = 354;
+				}else if(PosY < 29){
+					PosY = 29;
+				}
+				
+				PosX -= 53;
+				PosY -= 29;
+				
+				PosX = PosX*3/230;
+				if(PosY >= 217){
+					PosY -= 217;
+					PosY = -PosY*4.5/325;
+				}else{
+					PosY = 217-PosY;
+					PosY = PosY*4.5/325
+				}
+				PosX = PosX.toPrecision(3);
+				PosY = PosY.toPrecision(3);
+				
+				document.getElementById("omegam0").value = PosX;
+				document.getElementById("omegalambda0").value = PosY;
+			}
+			
+			//-->
+		</script>
+		
 	</head>
 	
 	<body>
@@ -96,15 +173,26 @@
 					<span id="resultat_bigcrunch"></span><br />
 					Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
 				</div>
+				
+				<div id="modele">
+					<img id="myImgId" src="./img/SCP2003SNeCMBClust-1.png" alt="modele" style="height:400px;"/>
+				</div>
+				<script type="text/javascript">
+					<!--
+					var myImg = document.getElementById("myImgId");
+					myImg.onmousedown = GetCoordinates;
+					//-->
+				</script>
+				
 			</div>
 			
 			<div id="tabs-3">
 				Version : Alpha - 0.4<br />
 				Développé par :  Anthony GOURDIN
-   & Mahuta Tamatoa
-   & Hamza Alhousseini
-   & Moussa-oumar Sy<br />
-			Licence : CC-BY-SA <p><object type="image/svg+xml" data="./img/CC-BY-SA_icon.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
+				& Mahuta Tamatoa
+				& Hamza Alhousseini
+				& Moussa-oumar Sy<br />
+				Licence : CC-BY-SA <p><object type="image/svg+xml" data="./img/CC-BY-SA_icon.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
 			</div>
 		</div>
 		<script>document.getElementById("theorie").setAttribute("width", largeur_fenetre-40);

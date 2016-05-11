@@ -19,12 +19,18 @@ label{
 	float			:	right;
 }
 #information{
-	margin-top		:	10%;
+	margin-top		:	20px;
 	margin-left		:	20px;
-	margin-bottom	:	270px;
+	/*margin-bottom	:	270px;*/
 	border			:	1px black solid;
 	padding			:	10px;
 	width			:	350px;
+}
+#modele{
+	float			:	left;
+	margin-top		:	20px;
+	margin-left		:	20px;
+	border			:	1px black solid;
 }
 #plus{
 	float			:	right;
@@ -52,4 +58,7 @@ svg{
 .legend_titre{
 	font-weight		:	bold;
 	font-size		:	1.2em;
+}
+#tabs-2{
+	height			:	650px;
 }
