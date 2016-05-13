@@ -56,8 +56,8 @@
 			
 			function GetCoordinates(e)
 			{
-				var PosX = 0;
-				var PosY = 0;
+				PosX = 0;
+				PosY = 0;
 				var ImgPos;
 				ImgPos = FindPosition(myImg);
 				if (!e) var e = window.event;
@@ -88,6 +88,8 @@
 					PosY = 29;
 				}
 				
+				update_modele();
+				
 				PosX -= 53;
 				PosY -= 29;
 				
@@ -99,11 +101,26 @@
 					PosY = 217-PosY;
 					PosY = PosY*4.5/325
 				}
-				PosX = PosX.toPrecision(3);
-				PosY = PosY.toPrecision(3);
+				PosX = PosX.toFixed(3);
+				PosY = PosY.toFixed(3);
 				
 				document.getElementById("omegam0").value = PosX;
 				document.getElementById("omegalambda0").value = PosY;
+			}
+			
+			function update_modele(){
+				canvas  = document.getElementById('canvas');
+					context = canvas.getContext('2d');
+					
+					var zozor = new Image();
+					zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
+          
+					context.drawImage(zozor, 0, 0, 298, 400);
+				
+				context.beginPath();
+				context.fillStyle="#F00000"
+				context.arc(PosX, PosY, 4, 0, 2 * Math.PI);
+				context.fill();
 			}
 			
 			//-->
@@ -175,12 +192,24 @@
 				</div>
 				
 				<div id="modele">
-					<img id="myImgId" src="./img/SCP2003SNeCMBClust-1.png" alt="modele" style="height:400px;"/>
+					<!--<img id="myImgId" src="./img/SCP2003SNeCMBClust-1.png" alt="modele" style="height:400px;"/>-->
+					<canvas id="canvas" width="298" height="400">
+						<p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
+					</canvas>
 				</div>
 				<script type="text/javascript">
 					<!--
-					var myImg = document.getElementById("myImgId");
+					canvas  = document.getElementById('canvas');
+					context = canvas.getContext('2d');
+					
+					zozor = new Image();
+					zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
+          
+					context.drawImage(zozor, 0, 0, 298, 400);
+					
+					var myImg = document.getElementById("canvas");
 					myImg.onmousedown = GetCoordinates;
+					
 					//-->
 				</script>
 				
