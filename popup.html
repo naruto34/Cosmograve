@@ -16,6 +16,7 @@
 		<script src="js/init.js"></script>
 		<script src="js/getData.js"></script>
 		<script src="js/formreturn.js"></script>
+		<script src="js/calculDpHi.js"></script>
 		<script>window.onload=init;</script>
 		
 		<script>
@@ -120,24 +121,33 @@
 				<label for="z2">z<sub>2</sub> =</label>
 				<input id="z2" value="11.1" maxlength="10" type="text">
 			</div>
-			<div class="desact_retour">
-				<label for="diametre">D =</label>
-				<input id="diametre" value="" maxlength="10" type="text">
+			<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
+			
 			</div>
-			
-			<div id="plus"><button type="button" onclick="calcu()">Calcul</button>
 			</form>
-			<div id="plus"><button type="button" onclick="formreturn(false);">Retour</button></div>
-			
 			<div>
 				<div class="desact_retour">
-					<label for="dm">d<sub>M</sub> =</label>
+					<label for="dm">d<sub>m</sub> =</label>
 					<span id="dm" style="color:blue"></span>
 				</div>
 				<div class="desact_retour">
 					<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
 					<span id="agebetween" style="color:blue"></span>
 				</div>
+				<div class="desact_retour">
+					<label for="diametre">D =</label>
+					<input id="diametre" value="" maxlength="17" type="text">
+					<input type="button" value="Phi" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
+				</div>
+				<div class="desact_retour">
+					<label for="pHi">pHi</sub> =</label>
+					<input id="pHi" value="" maxlength="17" type="text">
+					<input type="button" value="D" onClick="window.document.getElementById('diametre').value = window.document.getElementById('pHi').value* Number(dda)">
+					<span id="pHi" style="color:blue"></span>
+				</div>
+			
 			</div>
+			
+	<div id="plus"><button type="button" onclick="formreturn(false);">Retour</button></div>
 			
 		</body></html>													
