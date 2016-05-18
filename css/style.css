@@ -3,6 +3,7 @@
 */
 body { 
 	font			:	12px Arial;
+	background-color:	#FAFAFA;
 }
 label{
 	font-weight 	:	bold;
@@ -59,6 +60,6 @@ svg{
 	font-weight		:	bold;
 	font-size		:	1.2em;
 }
-#tabs-2{
-	height			:	650px;
+#tabs-a{
+	height			:	670px;
 }

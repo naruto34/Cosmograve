@@ -1,0 +1,19 @@
+d_m = \frac{c}{H_0 \mid\Omega_{k0}\mid^{1/2}} S_k \left\{ \mid\Omega_{k0}\mid^{1/2} \int_0^z E^{-1/2}(x) dx \right\}
+
+S_k(x) = \begin{cases} sinh x & \text{Si } k = -1 \\ x & \text{Si } k = 0 \\ sin x & \text{Si } k = 1 \end{cases}
+
+E \overset{def}{=} \frac{L}{4 \pi d^2 }
+
+E \overset{def}{=} \frac{L}{4 \pi d_L^2 }
+
+d_L = d_m(1+z)
+
+d_A = \frac{d_m}{(1+z)}
+
+\Theta \simeq \frac{AB}{d}
+
+\Theta \overset{def}{=} \frac{AB}{d_A}
+
+d_{LT} = (t_2-t_1)c
+
+l(z_2) = (\frac{1+z_1}{1+z_2})l(z_1)

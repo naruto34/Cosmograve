@@ -6,8 +6,8 @@
 		<meta name="description" content="Cosmograve, partie cosmo, programme qui permet de déterminer l'age de l'univers ainsi que tracer son evolution" />
 		<meta http-equiv="Content-Language" content="fr-FR" />
 		<title>Cosmograve - Cosmologie</title>
-		<link rel="stylesheet" media="screen and (min-width: 800px)" href="css/style.css">
 		<link rel="stylesheet" media="screen and (min-width: 800px)" href="lib/jquery-ui-1.11.4/jquery-ui.min.css">
+		<link rel="stylesheet" media="screen and (min-width: 800px)" href="css/style.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="css/mobile.css" />
 		<script src="lib/jquery-1.12.3.min.js"></script>
 		<script src="lib/math.js"></script>
@@ -22,6 +22,8 @@
 		<script src="js/ouvrirPopup.js"></script>
 		<script>
 			$(function() {
+				$("#tabs-a").tabs();
+				$("#tabs-b").tabs();
 				$( "#tabs" ).tabs();
 			});
 			
@@ -78,13 +80,13 @@
 				
 				if(PosX < 53){
 					PosX = 53;
-				}else if(PosX > 283){
+					}else if(PosX > 283){
 					PosX = 283;
 				}
 				
 				if(PosY > 354){
 					PosY = 354;
-				}else if(PosY < 29){
+					}else if(PosY < 29){
 					PosY = 29;
 				}
 				
@@ -97,7 +99,7 @@
 				if(PosY >= 217){
 					PosY -= 217;
 					PosY = -PosY*4.5/325;
-				}else{
+					}else{
 					PosY = 217-PosY;
 					PosY = PosY*4.5/325
 				}
@@ -110,12 +112,12 @@
 			
 			function update_modele(){
 				canvas  = document.getElementById('canvas');
-					context = canvas.getContext('2d');
-					
-					var zozor = new Image();
-					zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
-          
-					context.drawImage(zozor, 0, 0, 298, 400);
+				context = canvas.getContext('2d');
+				
+				var zozor = new Image();
+				zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
+				
+				context.drawImage(zozor, 0, 0, 298, 400);
 				
 				context.beginPath();
 				context.fillStyle="#F00000"
@@ -132,99 +134,128 @@
 		<div id="tabs">
 			
 			<ul>
-				<li><a href="#tabs-1">Théorie</a></li>
-				<li><a href="#tabs-2">Simulation</a></li>
-				<li><a href="#tabs-3">A propos</a></li>
+				<li><a href="#tabs-1">Accueil</a></li>
+				<li><a href="#tabs-2">Cosmologie</a></li>
+				<li><a href="#tabs-3">Gravitation</a></li>
+				<li><a href="#tabs-4">A propos</a></li>
 			</ul>
 			
 			<div id="tabs-1">
-				<object id="theorie" type="text/html" data="theorie.html" width="1320" height="560"></object>
+				<p style="text-align: center; font-size:20px">Bienvenue sur Cosmograve</p>
+				<p style="text-align: center;"><img src="./img/logo.png" height="200px" /></p>
 			</div>
 			
 			<div id="tabs-2">
-				<div id="plus"><button type="button" onClick="ouvrirPopup()">Afficher les paramètres</button></div>
-				<div id="temp"></div>
-				<form id="parametres" action="" method="post" autocomplete="off">
-					<div class="desact_retour">
-						<label for="T0">T<sub>0</sub> =</label>
-						<input id="T0" value="2.725" maxlength="10" type="text">
+				<div id="tabs-a">
+					<ul>
+						<li><a href="#tabs-a-1" title="tabs-a-1">Théorie</a></li>
+						<li><a href="#tabs-a-2" title="tabs-a-2">Simulation</a></li>
+					</ul>
+					<div id="tabs-a-1">
+						<object id="theorie" type="text/html" data="theorie.html" width="1280" height="560"></object>
 					</div>
-					<div class="desact_retour">
-						<label for="H0">H<sub>0</sub> =</label>
-						<input id="H0" value="67.74" maxlength="10" type="text">
-					</div>
-					<div class="desact_retour">
-						<label for="omegam0">&Omega;<sub>m0</sub> =</label>
-						<input id="omegam0" value="0.3089" maxlength="10" type="text">
-					</div>
-					<div class="desact_retour">
-						<label for="omegalambda0">&Omega;<sub>&Lambda;0</sub> =</label>
-						<input id="omegalambda0" value="0.6911" maxlength="10" type="text">
-					</div>
-					
-					<div>
-						<input id="grille" type="checkbox" name="grille" checked="checked">Afficher grille
+					<div id="tabs-a-2">
+						<div id="plus"><button type="button" onClick="ouvrirPopup()">Afficher les paramètres</button></div>
+						<div id="temp"></div>
+						<form id="parametres" action="" method="post" autocomplete="off">
+							<div class="desact_retour">
+								<label for="T0">T<sub>0</sub> =</label>
+								<input id="T0" value="2.725" maxlength="10" type="text">
+							</div>
+							<div class="desact_retour">
+								<label for="H0">H<sub>0</sub> =</label>
+								<input id="H0" value="67.74" maxlength="10" type="text">
+							</div>
+							<div class="desact_retour">
+								<label for="omegam0">&Omega;<sub>m0</sub> =</label>
+								<input id="omegam0" value="0.3089" maxlength="10" type="text">
+							</div>
+							<div class="desact_retour">
+								<label for="omegalambda0">&Omega;<sub>&Lambda;0</sub> =</label>
+								<input id="omegalambda0" value="0.6911" maxlength="10" type="text">
+							</div>
+							
+							<div>
+								<input id="grille" type="checkbox" name="grille" checked="checked">Afficher grille
+								
+								<select id="liste" name="type" size="1">
+									<option selected="selected">Mati&egrave;re et Lambda</option>
+									<option>Mati&egrave;re, Lambda et RFC</option>
+									<option>Mati&egrave;re, Lambda, RFC et Neutrinos</option>
+								</select>
+								
+								<div class="button, desact_retour" onclick="calcul()">
+									<button type="button">Tracer</button>
+								</div>
+								
+							</div>
+						</form>
 						
-						<select id="liste" name="type" size="1">
-							<option selected="selected">Mati&egrave;re et Lambda</option>
-							<option>Mati&egrave;re, Lambda et RFC</option>
-							<option>Mati&egrave;re, Lambda, RFC et Neutrinos</option>
-						</select>
-						
-						<div class="button, desact_retour" onclick="calcul()">
-							<button type="button">Tracer</button>
+						<div id="graphique">
+							<script src="js/graphique_initial.js"></script>
 						</div>
 						
+						<div id="information">
+							&Omega;<sub>r0</sub> = <span id="resultat_omegar0"></span><br />
+							&Omega;<sub>&Lambda;0</sub> = <span id="resultat_omegarlambda0"></span><br />
+							&Omega;<sub>k0</sub> = <span id="resultat_omegak0"></span><br />
+							<span id="resultat_ageunivers"></span><br />
+							<span id="resultat_bigcrunch"></span><br />
+							Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
+						</div>
+						
+						<div id="modele">
+							<!--<img id="myImgId" src="./img/SCP2003SNeCMBClust-1.png" alt="modele" style="height:400px;"/>-->
+							<canvas id="canvas" width="298" height="400">
+								<p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
+							</canvas>
+						</div>
+						<script type="text/javascript">
+							<!--
+							canvas  = document.getElementById('canvas');
+							context = canvas.getContext('2d');
+							
+							zozor = new Image();
+							zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
+							
+							context.drawImage(zozor, 0, 0, 298, 400);
+							
+							var myImg = document.getElementById("canvas");
+							myImg.onmousedown = GetCoordinates;
+							
+							//-->
+						</script>
+						
 					</div>
-				</form>
-				
-				<div id="graphique">
-					<script src="js/graphique_initial.js"></script>
-				</div>
-				
-				<div id="information">
-					&Omega;<sub>r0</sub> = <span id="resultat_omegar0"></span><br />
-					&Omega;<sub>&Lambda;0</sub> = <span id="resultat_omegarlambda0"></span><br />
-					&Omega;<sub>k0</sub> = <span id="resultat_omegak0"></span><br />
-					<span id="resultat_ageunivers"></span><br />
-					<span id="resultat_bigcrunch"></span><br />
-					Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
-				</div>
-				
-				<div id="modele">
-					<!--<img id="myImgId" src="./img/SCP2003SNeCMBClust-1.png" alt="modele" style="height:400px;"/>-->
-					<canvas id="canvas" width="298" height="400">
-						<p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
-					</canvas>
-				</div>
-				<script type="text/javascript">
-					<!--
-					canvas  = document.getElementById('canvas');
-					context = canvas.getContext('2d');
-					
-					zozor = new Image();
-					zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
-          
-					context.drawImage(zozor, 0, 0, 298, 400);
-					
-					var myImg = document.getElementById("canvas");
-					myImg.onmousedown = GetCoordinates;
-					
-					//-->
-				</script>
-				
+				</div> 
 			</div>
 			
 			<div id="tabs-3">
-				Version : Alpha - 0.4<br />
-				Développé par :  Anthony GOURDIN
+				<div id="tabs-b">
+                <ul>
+                    <li><a href="#tabs-b-1" title="tabs-b-1">Théorie</a></li>
+                    <li><a href="#tabs-b-2" title="tabs-b-2">Simulation</a></li>
+                </ul>
+                <div id="tabs-b-1">
+                    <strong>ONGLET 2.1</strong>
+                </div>
+                <div id="tabs-b-2">
+                    <strong>ONGLET 2.2</strong>
+                </div>
+            </div>
+			</div>
+			
+			<div id="tabs-4">
+			<p><strong>Version :</strong> Alpha - 0.5</p>
+				<p><strong>Développé par :</strong>  Anthony GOURDIN
 				& Mahuta Tamatoa
 				& Hamza Alhousseini
 				& Moussa-oumar Sy<br />
-				Licence : CC-BY-SA <p><object type="image/svg+xml" data="./img/CC-BY-SA_icon.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
+				Etudiant en 1er année de Master Physique.</p>
+				<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
 			</div>
 		</div>
-		<script>document.getElementById("theorie").setAttribute("width", largeur_fenetre-40);
+		<script>document.getElementById("theorie").setAttribute("width", largeur_fenetre-100);
 		document.getElementById("theorie").setAttribute("height", hauteur_fenetre-100);</script>
 	</body>
 </html>																				
