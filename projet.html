@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="description" content="Cosmograve" />
+	<meta http-equiv="Content-Language" content="fr-FR" />
+	<title>Cosmograve</title>
+	<link rel="stylesheet" media="screen and (min-width: 800px)" href="css/style.css">
+	<script src="lib/jquery-1.12.3.min.js"></script>
+	<script src="lib/math.js"></script>
+	<script src="lib/d3.js"></script>
+	<script src="js/graphique1.js"></script>
+	<script src="js/potentiel1.js"></script>
+	</head>
+	
+	<body>
+		<div id="plus"><button type="button">+</button></div>
+		<div id="temp"></div>
+		<form id="parametres" action="" method="post" autocomplete="off">
+			<div class="desact_retour">
+				<label for="M">M<sub>0</sub> =</label>
+				<input id="M" value="1.95e26" maxlength="30" type="text">
+			</div>
+			<div class="desact_retour">
+				<label for="r0">r<sub>0</sub> =</label>
+				<input id="r0" value="11" maxlength="30" type="text">
+			</div>
+			<div class="desact_retour">
+				<label for="Vphi0">V<sub>&phi;0</sub> =</label>
+				<input id="Vphi0" value="9.9e9" maxlength="10" type="text">
+			</div>
+			
+				
+				<div class="button, desact_retour" onclick="Calcul_potentiel()">
+					<button type="button">Tracer</button>
+				</div>
+			
+		</form>
+		
+		<div id="graphique">
+			<script src="js/graphique_initial1.js"></script>
+		</div>
+		
+	</body></html>									
