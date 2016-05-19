@@ -6,20 +6,20 @@
 		<meta name="description" content="Cosmograve, partie cosmo, programme qui permet de déterminer l'age de l'univers ainsi que tracer son evolution" />
 		<meta http-equiv="Content-Language" content="fr-FR" />
 		<title>Cosmograve - Cosmologie</title>
-		<link rel="stylesheet" media="screen and (min-width: 800px)" href="lib/jquery-ui-1.11.4/jquery-ui.min.css">
-		<link rel="stylesheet" media="screen and (min-width: 800px)" href="css/style.css">
-		<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="css/mobile.css" />
-		<script src="lib/jquery-1.12.3.min.js"></script>
-		<script src="lib/math.js"></script>
-		<script src="lib/d3.js"></script>
-		<script src="lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./lib/jquery-ui-1.11.4/jquery-ui.min.css">
+		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./css/style.css">
+		<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="./css/mobile.css" />
+		<script src="./lib/jquery-1.12.3.min.js"></script>
+		<script src="./lib/math.js"></script>
+		<script src="./lib/d3.js"></script>
+		<script src="./lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		
-		<script src="js/rungekutta.js"></script>
-		<script src="js/range.js"></script>
-		<script src="js/integrale.js"></script>
-		<script src="js/graphique.js"></script>
-		<script src="js/main_calcul.js"></script>
-		<script src="js/ouvrirPopup.js"></script>
+		<script src="./js/rungekutta.js"></script>
+		<script src="./js/range.js"></script>
+		<script src="./js/integrale.js"></script>
+		<script src="./js/graphique.js"></script>
+		<script src="./js/main_calcul.js"></script>
+		<script src="./js/ouvrirPopup.js"></script>
 		<script>
 			$(function() {
 				$("#tabs-a").tabs();
@@ -152,7 +152,7 @@
 						<li><a href="#tabs-a-2" title="tabs-a-2">Simulation</a></li>
 					</ul>
 					<div id="tabs-a-1">
-						<object id="theorie" type="text/html" data="theorie.html" width="1280" height="560"></object>
+						<object id="theorie" type="text/html" data="./sous_page/theorie_cosmologie.html" width="1300" height="560"></object>
 					</div>
 					<div id="tabs-a-2">
 						<div id="plus"><button type="button" onClick="ouvrirPopup()">Afficher les paramètres</button></div>
@@ -237,10 +237,10 @@
                     <li><a href="#tabs-b-2" title="tabs-b-2">Simulation</a></li>
                 </ul>
                 <div id="tabs-b-1">
-                    <strong>ONGLET 2.1</strong>
+                    <object id="theorie_gravi" type="text/html" data="./sous_page/theorie_gravitation.html" width="1300" height="560"></object>
                 </div>
                 <div id="tabs-b-2">
-                    <strong>ONGLET 2.2</strong>
+                    <object id="simu_gravi" type="text/html" data="./sous_page/gravitation_simulation.html" width="1300" height="560"></object>
                 </div>
             </div>
 			</div>
@@ -255,7 +255,15 @@
 				<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
 			</div>
 		</div>
-		<script>document.getElementById("theorie").setAttribute("width", largeur_fenetre-100);
-		document.getElementById("theorie").setAttribute("height", hauteur_fenetre-100);</script>
+		<script>
+		document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
+		document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
+		
+		document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
+		document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
+		
+		document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
+		document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
+		</script>
 	</body>
 </html>																				
