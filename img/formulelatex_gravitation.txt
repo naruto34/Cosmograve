@@ -1,0 +1,27 @@
+ds^2 = -e^\lambda dr^2 - r^2 (d\theta^2 + sin^2 \theta d\phi^2) +e^\nu c^2 dt^2
+
+\lambda + \nu = 0 \qquad e^\nu = 1 - \frac{2m}{r}
+
+m = \frac{GM}{c^2}
+
+\theta = \frac{1}{2} \pi
+
+\frac{d^2t}{ds^2} + \frac{d\nu}{dr}\frac{dr}{ds}\frac{dt}{ds} \qquad \frac{d^2\phi}{ds^2} + \frac{2}{r}\frac{dr}{ds}\frac{d\phi}{ds} + \frac{2}{tg \theta}\frac{d\theta}{ds}\frac{d\phi}{ds} = 0
+
+(1-\frac{2m}{r})\frac{dt}{d\tau} = E \qquad r^2\frac{d\phi}{d\tau} = cL
+
+v_\phi (\tau) = r(\tau) \frac{d\phi}{d\tau}
+
+L = \frac{v_\phi (\tau_0) r(\tau_0)}{c}
+
+(\frac{dr}{d\tau})^2 + c^2(1 - \frac{2m}{r})(1+\frac{L^2}{r^2}) = c^2E^2
+
+v_r(\tau) = \frac{dr}{d\tau}
+
+E = \sqrt{\frac{v_r^2(\tau_0)}{c^2} + (1 - \frac{2m}{r(\tau_0)})(1+\frac{L^2}{r^2(\tau_0)})}
+
+\frac{d^2r}{d\tau^2} = -\frac{1}{2}\frac{dV}{dr}
+
+V(r) = c^2(1 - \frac{2m}{r})(1+\frac{L^2}{r^2})
+
+d\tau = \frac{1}{E}(1-\frac{2m}{r(\tau)})dt
