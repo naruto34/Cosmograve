@@ -1,5 +1,5 @@
 function calcul(){   // declaration de la fonction
-	c = 2.99*Math.pow(10, 8);
+	c = 299792458;
 	G = 6.67384*Math.pow(10, -11);
 	
 	t0 = document.getElementById("T0").value;
@@ -53,7 +53,7 @@ function calcul(){   // declaration de la fonction
 	document.getElementById("resultat_omegarlambda0").innerHTML = omegalambda0;
 	document.getElementById("resultat_omegak0").innerHTML = omegak0;
 	
-	H0parGan = h0*1.0245974*Math.pow(10, -3);
+	H0parGan = h0*1.02269032*Math.pow(10, -3);
 	
 	age = simpson(0, 1e5, 1e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
 	
