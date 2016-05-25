@@ -20,6 +20,7 @@
 		<script src="./js/graphique.js"></script>
 		<script src="./js/main_calcul.js"></script>
 		<script src="./js/ouvrirPopup.js"></script>
+		<script src="./js/canvas.js"></script>
 		<script>
 			$(function() {
 				$("#tabs-a").tabs();
@@ -33,102 +34,6 @@
 			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 				alert("ces un mobile");
 			}
-		</script>
-		
-		
-		<script type="text/javascript">
-			<!--
-			
-			function FindPosition(oElement)
-			{
-				if(typeof( oElement.offsetParent ) != "undefined")
-				{
-					for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
-					{
-						posX += oElement.offsetLeft;
-						posY += oElement.offsetTop;
-					}
-					return [ posX, posY ];
-				}
-				else
-				{
-					return [ oElement.x, oElement.y ];
-				}
-			}
-			
-			function GetCoordinates(e)
-			{
-				PosX = 0;
-				PosY = 0;
-				var ImgPos;
-				ImgPos = FindPosition(myImg);
-				if (!e) var e = window.event;
-				if (e.pageX || e.pageY)
-				{
-					PosX = e.pageX;
-					PosY = e.pageY;
-				}
-				else if (e.clientX || e.clientY)
-				{
-					PosX = e.clientX + document.body.scrollLeft
-					+ document.documentElement.scrollLeft;
-					PosY = e.clientY + document.body.scrollTop
-					+ document.documentElement.scrollTop;
-				}
-				PosX = PosX - ImgPos[0];
-				PosY = PosY - ImgPos[1];
-				
-				if(PosX < 53){
-					PosX = 53;
-					}else if(PosX > 283){
-					PosX = 283;
-				}
-				
-				if(PosY > 354){
-					PosY = 354;
-					}else if(PosY < 29){
-					PosY = 29;
-				}
-				
-				update_modele();
-				
-				PosX -= 53;
-				PosY -= 29;
-				
-				PosX = PosX*3/230;
-				if(PosY >= 217){
-					PosY -= 217;
-					PosY = -PosY*4.5/325;
-					}else{
-					PosY = 217-PosY;
-					PosY = PosY*4.5/325
-				}
-				PosX = PosX.toFixed(3);
-				PosY = PosY.toFixed(3);
-				
-				document.getElementById("omegam0").value = PosX;
-				document.getElementById("omegalambda0").value = PosY;
-				
-				calcul();
-			}
-			
-			function update_modele(){
-				canvas  = document.getElementById('canvas');
-				context = canvas.getContext('2d');
-				
-				var zozor = new Image();
-				zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
-				
-				context.drawImage(zozor, 0, 0, 298, 400);
-				
-				context.beginPath();
-				context.fillStyle="#F00000"
-				context.arc(PosX, PosY, 4, 0, 2 * Math.PI);
-				context.fill();
-				
-			}
-			
-			//-->
 		</script>
 		
 	</head>
@@ -235,62 +140,62 @@
 			
 			<div id="tabs-3">
 				<div id="tabs-b">
-                <ul>
-                    <li><a href="#tabs-b-1" title="tabs-b-1">Théorie</a></li>
-                    <li><a href="#tabs-b-2" title="tabs-b-2">Simulation</a></li>
-                </ul>
-                <div id="tabs-b-1">
-                    <object id="theorie_gravi" type="text/html" data="./sous_page/theorie_gravitation.html" width="1300" height="560"></object>
-                </div>
-                <div id="tabs-b-2">
-                    <object id="simu_gravi" type="text/html" data="./sous_page/gravitation_simulation.html" width="1300" height="560"></object>
-                </div>
-            </div>
+					<ul>
+						<li><a href="#tabs-b-1" title="tabs-b-1">Théorie</a></li>
+						<li><a href="#tabs-b-2" title="tabs-b-2">Simulation</a></li>
+					</ul>
+					<div id="tabs-b-1">
+						<object id="theorie_gravi" type="text/html" data="./sous_page/theorie_gravitation.html" width="1300" height="560"></object>
+					</div>
+					<div id="tabs-b-2">
+						<object id="simu_gravi" type="text/html" data="./sous_page/gravitation_simulation.html" width="1300" height="560"></object>
+					</div>
+				</div>
 			</div>
 			
 			<div id="tabs-4">
-			<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
-			<p><strong>Version 2016 :</strong> Alpha - 0.5<br />
-			<strong>Développé par :</strong>  Anthony Gourdin
-				& Mahuta Tamatoa
+				<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
+				<p><strong>Version 2016 :</strong> Alpha - 0.5<br />
+					<strong>Développé par :</strong>  Anthony Gourdin
+					& Mahuta Tamatoa
 				& Hamza Alhousseini</p>
 				
-			<p><strong>Version 2015 :</strong><br />
-			<strong>Développé par :</strong>  Thibault Jarossay
-				& Samir Loukyly
-				& Franck Malet
+				<p><strong>Version 2015 :</strong><br />
+					<strong>Développé par :</strong>  Thibault Jarossay
+					& Samir Loukyly
+					& Franck Malet
 				</p>
-			
-			<p><strong>Version 2014 :</strong><br />
-			<strong>Développé par :</strong>  Thibault Jarossay
-				& Samir Loukyly
-				& Franck Malet
+				
+				<p><strong>Version 2014 :</strong><br />
+					<strong>Développé par :</strong>  Thibault Jarossay
+					& Samir Loukyly
+					& Franck Malet
 				</p>
-			
-			<p><strong>Version 2013 :</strong><br />
-			<strong>Développé par :</strong>  Nicolas Boulay
+				
+				<p><strong>Version 2013 :</strong><br />
+					<strong>Développé par :</strong>  Nicolas Boulay
 				& Alexandra Grabon
 				& Dwight Smite
 				& El Hadj Modou Thiam
 				</p>
-			
-			<p><strong>Version 2009 :</strong><br />
-			<strong>Développé par :</strong>  Karim Bammou
+				
+				<p><strong>Version 2009 :</strong><br />
+				<strong>Développé par :</strong>  Karim Bammou
 				& Brice Cervera
 				& Gaëlle Daste
 				</p>
 				<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
-			</div>
-		</div>
-		<script>
-		document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
-		document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
-		
-		document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
-		document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
-		
-		document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
-		document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
-		</script>
-	</body>
-</html>																				
+				</div>
+				</div>
+				<script>
+				document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
+				document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
+				
+				document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
+				document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
+				
+				document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
+				document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
+				</script>
+				</body>
+				</html>																													
