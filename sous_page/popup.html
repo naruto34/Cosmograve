@@ -71,11 +71,15 @@
 				dl=dm*(1+(z2-z1));
 				
 				agebetween = integrale(Number(z1), Number(z2), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+				tempsReception = integrale(Number(z1), 0, 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+				tempsEmission = tempsReception - agebetween;
 				
 				dm = Math.abs(dm);
 				
 				document.getElementById("dm").innerHTML = dm;
 				document.getElementById("agebetween").innerHTML = agebetween;
+				document.getElementById("tempsReception").innerHTML = tempsReception;
+				document.getElementById("tempsEmission").innerHTML = tempsEmission;
 			}
 		</script>
 	</head>
@@ -84,7 +88,7 @@
 		Les paramètres cosmologiques:
 		<div class="desact_retour">
 			<label for="T0">T<sub>0</sub> =</label>
-			<span id="T0" style="color:blue"></span>
+			<span id="T0" style="color:blue"></span> 
 		</div>
 		
 		<div class="desact_retour">
@@ -119,7 +123,7 @@
 			</div>
 			<div class="desact_retour">
 				<label for="z2">z<sub>2</sub> =</label>
-				<input id="z2" value="11.1" maxlength="10" type="text">
+				<input id="z2" value="0" maxlength="10" type="text"> 
 			</div>
 			<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
 			
@@ -134,13 +138,30 @@
 					<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
 					<span id="agebetween" style="color:blue"></span>
 				</div>
+				
+				
+				
+				<div class="desact_retour">
+					<label for="tempsEmission">t<sub>1</sub>=</label>
+					<span id="tempsEmission" style="color:blue"></span>
+				</div>
+				
+				
+				<div class="desact_retour">
+					<label for="tempsReception">t<sub>2</sub>=</label>
+					<span id="tempsReception" style="color:blue"></span>
+				</div>
+				
+				
+				
+				
 				<div class="desact_retour">
 					<label for="diametre">D =</label>
 					<input id="diametre" value="" maxlength="17" type="text">
-					<input type="button" value="Phi" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
+					<input type="button" value="Φ" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
 				</div>
 				<div class="desact_retour">
-					<label for="pHi">pHi =</label>
+					<label for="pHi">Φ =</label>
 					<input id="pHi" value="" maxlength="17" type="text">
 					<input type="button" value="D" onClick="window.document.getElementById('diametre').value = window.document.getElementById('pHi').value* Number(dda)">
 					<span id="pHi" style="color:blue"></span>
