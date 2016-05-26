@@ -51,7 +51,7 @@ function GetCoordinates(e)
 		PosY = 29;
 	}
 	
-	alert(PosX+"	"+PosY);
+	//alert(PosX+"	"+PosY);
 	
 	update_modele();
 	
@@ -106,11 +106,32 @@ function update_modele(){
 	context.closePath();
 	context.stroke();
 	
+	var text = '1';
+	context.font = "12pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text, 125, 362);
+	
 	context.beginPath();
 	context.moveTo(207, 354);
 	context.lineTo(207, 344);
 	context.closePath();
 	context.stroke();
+	
+	var text = '2';
+	context.font = "12pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text,204,362);
+	
+	var text = '0';
+	context.font = "12pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text, 47, 362);
 	
 	context.beginPath();
 	context.moveTo(53, 247);
@@ -118,11 +139,25 @@ function update_modele(){
 	context.closePath();
 	context.stroke();
 	
+	var text = '0';
+	context.font = "12pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text, 40, 240);
+	
 	context.beginPath();
 	context.moveTo(53, 318);
 	context.lineTo(63, 318);
 	context.closePath();
 	context.stroke();
+	
+	var text = '-1';
+	context.font = "12pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text, 35, 312);
 	
 	context.beginPath();
 	context.moveTo(53, 174);
@@ -130,11 +165,25 @@ function update_modele(){
 	context.closePath();
 	context.stroke();
 	
+	var text = '1';
+	context.font = "12pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text, 40, 168);
+	
 	context.beginPath();
 	context.moveTo(53, 101);
 	context.lineTo(63, 101);
 	context.closePath();
 	context.stroke();
+	
+	var text = '2';
+	context.font = "12pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text, 40, 95);
 	
 	var text = 'Ω';
 	context.font = "23pt Verdana";
@@ -150,9 +199,9 @@ function update_modele(){
 	context.textAlign = "left";
 	context.textBaseline = "top";
 	context.fillStyle = "black";
-	context.fillText(text,13,172);
+	context.fillText(text,10,172);
 	context.font = "16pt Verdana";
-	context.fillText("λ", 35,185);
+	context.fillText("λ", 32,185);
 	
 	var text = 'Pas de Big Bang';
 	context.font = "8pt Verdana";
@@ -208,7 +257,7 @@ function update_modele(){
 	context.lineTo(x, y);
 	Om=1.;
 	u = 0;
-	while (Om<=3.){
+	while (Om<=2.95){
 		u=1./3.*(Math.acos((1./Om)-1));
 		OlER=4.*Om*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI));
 		x=Omo+Om*dtx;
@@ -235,7 +284,7 @@ function update_modele(){
 	}
 	Om=0.5;
 	v = 0;
-	while (Om<=1.5){
+	while (Om<=1.4){
 		v =(1./3.)*Math.acos((1./Om)-1.) ;
 		OlER=4.*Om*Math.cos(v)*Math.cos(v)*Math.cos(v);
 		x=Omo+Om*dtx;
