@@ -5,7 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="description" content="Cosmograve, partie cosmo, programme qui permet de déterminer l'age de l'univers ainsi que tracer son evolution" />
 		<meta http-equiv="Content-Language" content="fr-FR" />
-		<title>Cosmograve - Cosmologie</title>
+		<title>Cosmograve</title>
 		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./lib/jquery-ui-1.11.4/jquery-ui.min.css">
 		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./css/style.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="./css/mobile.css" />
@@ -49,7 +49,30 @@
 			</ul>
 			
 			<div id="tabs-1">
-				<p style="text-align: center; font-size:20px">Bienvenue sur Cosmograve</p>
+				<p style="text-align: center; font-size:16px">Cosmograve est une application a but pédagogique creer dans le cadre du Projet tuteuré du Master de Physique Numérique de l'Université de Montpellier.<br />Le programme est composé de 2 parties :<br /><br />- l'évolution des paramètres cosmologique de Friedmann-lemaître<br />- trajectoire d'une particule au voisinage d'un trou noir.</p>
+				<p style="text-align: center;">
+				<img src='./img/separatrice.png' style="display: inline;" height="250px">
+     <img src='./img/univers_plat.png' style="display: none;" height="250px" >
+     <img src='./img/separa.png' style="display: none;" height="250px" >
+	 <img src='./img/univer_ferme.png' style="display: none;" height="250px" >
+				</p>
+  
+<script type="text/javascript">
+     I = 0 ;
+     Imax = document.images.length - 1 ;
+     setTimeout(suivante, 2000) ;
+    
+     function suivante()
+     {
+     document.images[I].style.display = "none" ;
+     if ( I < Imax )
+          I++;
+     else
+          I=0;    
+     document.images[I].style.display = "inline";
+     setTimeout(suivante, 3000) ;
+     }
+</script> 
 				<p style="text-align: center;"><img src="./img/logo.png" height="200px" /></p>
 			</div>
 			
@@ -68,7 +91,7 @@
 						<form id="parametres" action="" method="post" autocomplete="off">
 							<div class="desact_retour">
 								<label for="T0">T<sub>0</sub> =</label>
-								<input id="T0" value="2.725" maxlength="6" type="text"> (°K) 
+								<input id="T0" value="2.725" maxlength="10" type="text"> (°K)
 							</div>
 							<div class="desact_retour">
 								<label for="H0">H<sub>0</sub> =</label>
@@ -126,7 +149,8 @@
 							zozor = new Image();
 							zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
 							
-							context.drawImage(zozor, 0, 0, 298, 400);
+							//context.drawImage(zozor, 0, 0, 298, 400);
+							calcul();
 							
 							var myImg = document.getElementById("canvas");
 							myImg.onmousedown = GetCoordinates;
@@ -155,7 +179,8 @@
 			
 			<div id="tabs-4">
 				<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
-				<p><strong>Version 2016 :</strong> Alpha - 0.5<br />
+				<p>Encadré par Mr Cordoni Jean-Pierre, Mr Reboul Henri et Mme Mougenot Isabelle sous la réponsabilité de Mr Cassagne David.</p>
+				<p><strong>Version 2016 :</strong> Alpha - 0.6<br />
 					<strong>Développé par :</strong>  Anthony Gourdin
 					& Mahuta Tamatoa
 				& Hamza Alhousseini</p>
@@ -167,9 +192,7 @@
 				</p>
 				
 				<p><strong>Version 2014 :</strong><br />
-					<strong>Développé par :</strong>  Thibault Jarossay
-					& Samir Loukyly
-					& Franck Malet
+					<strong>Développé par :</strong>
 				</p>
 				
 				<p><strong>Version 2013 :</strong><br />

@@ -88,7 +88,7 @@
 		Les paramètres cosmologiques:
 		<div class="desact_retour">
 			<label for="T0">T<sub>0</sub> =</label>
-			<span id="T0" style="color:blue"></span> 
+			<span id="T0" style="color:blue"></span> °K
 		</div>
 		
 		<div class="desact_retour">
@@ -157,12 +157,12 @@
 				
 				<div class="desact_retour">
 					<label for="diametre">D =</label>
-					<input id="diametre" value="" maxlength="17" type="text">
-					<input type="button" value="Φ" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
+					<input id="diametre" value="" maxlength="17" type="text">  (m)
+					<input type="button" value="θ" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
 				</div>
 				<div class="desact_retour">
-					<label for="pHi">Φ =</label>
-					<input id="pHi" value="" maxlength="17" type="text">
+					<label for="pHi">θ =</label>
+					<input id="pHi" value="" maxlength="17" type="text"> (rad)
 					<input type="button" value="D" onClick="window.document.getElementById('diametre').value = window.document.getElementById('pHi').value* Number(dda)">
 					<span id="pHi" style="color:blue"></span>
 				</div>
