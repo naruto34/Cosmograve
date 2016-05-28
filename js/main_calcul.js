@@ -1,7 +1,9 @@
 function calcul(){   // declaration de la fonction
-	c = 299792458;
-	G = 6.67384*Math.pow(10, -11);
-	h = 6.62607004*Math.pow(10, -34);
+	c = Number(document.getElementById("c").value);
+	G = Number(document.getElementById("G").value);
+	h = Number(document.getElementById("h").value);
+	k = Number(document.getElementById("k").value);
+	alert(c);
 	
 	t0 = document.getElementById("T0").value;
 	h0 = document.getElementById("H0").value; 
@@ -9,13 +11,20 @@ function calcul(){   // declaration de la fonction
 	omegalambda0 = Number(document.getElementById("omegalambda0").value);
 	
 	H0parGan = 0;
+	H0parsec = h0/(3.085677581*Math.pow(10, 19));
 	Or = 0;
 	if (document.getElementById("liste").options[2].selected) {
-		Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
+		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
+		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
+		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
+		//Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
 		Or=1.68*Or;
 		Or = Or.toExponential();
 		} else if (document.getElementById("liste").options[1].selected) {
-		Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
+		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
+		rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
+		Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
+		//Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
 		Or = Or.toExponential();
 		} else {
 	}

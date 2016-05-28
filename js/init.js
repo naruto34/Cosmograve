@@ -15,3 +15,10 @@ function getData(){
    document.getElementById("omegam0").value = window.opener.document.getElementById('omegam0').value;
    document.getElementById("omegalambda0").value = window.opener.document.getElementById('omegalambda0').value;
 }
+
+function getData_para(){
+	document.getElementById("c").value = window.opener.document.getElementById('c').value;
+	document.getElementById("k").value = window.opener.document.getElementById('k').value;
+	document.getElementById("h").value = window.opener.document.getElementById('h').value;
+	document.getElementById("G").value = window.opener.document.getElementById('G').value;
+}
