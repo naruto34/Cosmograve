@@ -201,14 +201,25 @@ function update_modele(){
 	context.fillStyle = "black";
 	context.fillText(text,10,172);
 	context.font = "16pt Verdana";
-	context.fillText("λ", 32,185);
+	context.fillText("Λ", 32,185);
 	
+	context.save();
 	var text = 'Pas de Big Bang';
 	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
 	context.fillStyle = "black";
+	context.rotate(-0.8);
+	context.translate(-80,60);
 	context.fillText(text,55,50);
+	context.restore();
+	
+	var text = 'Big Bang';
+	context.font = "8pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text,115,80);
 	
 	var text = 'Fermé';
 	context.font = "8pt Verdana";
@@ -216,6 +227,13 @@ function update_modele(){
 	context.textBaseline = "top";
 	context.fillStyle = "black";
 	context.fillText(text,210,270);
+	
+	var text = 'Ouvert';
+	context.font = "8pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "black";
+	context.fillText(text,110,300);
 	
 	var text = 'Plat';
 	context.font = "8pt Verdana";
@@ -257,6 +275,7 @@ function update_modele(){
 	context.lineTo(x, y);
 	Om=1.;
 	u = 0;
+	liste_valeur = [];
 	while (Om<=2.95){
 		u=1./3.*(Math.acos((1./Om)-1));
 		OlER=4.*Om*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI));

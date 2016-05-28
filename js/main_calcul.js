@@ -1,6 +1,7 @@
 function calcul(){   // declaration de la fonction
 	c = 299792458;
 	G = 6.67384*Math.pow(10, -11);
+	h = 6.62607004*Math.pow(10, -34);
 	
 	t0 = document.getElementById("T0").value;
 	h0 = document.getElementById("H0").value; 
@@ -40,12 +41,12 @@ function calcul(){   // declaration de la fonction
 	}
 	if(omegak0 != 0){
 		omegak0 = parseFloat(omegak0).toExponential();
-	}else{
+		}else{
 		omegak0 = 0;
 	}
 	if(Or != 0){
 		Or = parseFloat(Or).toExponential();
-	}else{
+		}else{
 		Or = 0;
 	}
 	
@@ -59,52 +60,62 @@ function calcul(){   // declaration de la fonction
 	
 	if(age >= 0){
 		document.getElementById("resultat_ageunivers").innerHTML = "Temps depuis le Big Bang = "+age+" Ga";
-	}else{
-	document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
-	age = 0;
+		}else{
+		document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
+		age = 0;
 	}
 	
 	
 	ymoinsrunge = [1,1]; //variable necessaire pour eviter une recurence longue
-ymoinsrungederiv = [1,1];
-k = [0,0,0,0];
-j = [0,0,0,0];
-pas = 0.001;
-
-m = 0;
-yrunge = 1;
-yrunge2 = 1;
-data = [];
-
-while (yrunge2 > 0 && yrunge2 < 5.){
-if(yrunge2<0.1){pas=Math.pow(10,-6);}
-yrunge2 = rungekutta_neg(m);
-data.push({date:age+m/H0parGan,close:yrunge2});
-m=m-pas;
-}
-
-data.reverse();
-i = 0;
-pas = 0.001;
-ymoinsrunge = [1,1]; //variable necessaire pour eviter une recurence longue
-ymoinsrungederiv = [1,1];
-k = [0,0,0,0];
-j = [0,0,0,0];
-while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une veleur de reference
-if(yrunge<0.1){pas=Math.pow(10,-6);}
-yrunge = rungekutta(i); //position f(x) Runge-Kutta
-data.push({date:age+i/H0parGan,close:yrunge});
-i=i+pas;
-}
-
-if(yrunge <= 0.){
-tBC = i/H0parGan;
-document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC+" Ga";
-document.getElementById("resultat_dureeuniv").innerHTML = (age+tBC)+" Ga";
-}else{
-document.getElementById("resultat_bigcrunch").innerHTML = "Pas de Big Crunch";
-document.getElementById("resultat_dureeuniv").innerHTML = "";
-}
-
-graphique_creation();
+	ymoinsrungederiv = [1,1];
+	k = [0,0,0,0];
+	j = [0,0,0,0];
+	pas = 0.001;
+	
+	m = 0;
+	yrunge = 1;
+	yrunge2 = 1;
+	data = [];
+	while (yrunge2 > 0 && yrunge2 < 5.){
+		if(yrunge2<0.1){pas=Math.pow(10,-6);}
+		yrunge2 = rungekutta_neg(m);
+		data.push({date:age+m/H0parGan,close:yrunge2});
+		m=m-pas;
+	}
+	
+	data.reverse();
+	i = 0;
+	pas = 0.001;
+	ymoinsrunge = [1,1]; //variable necessaire pour eviter une recurence longue
+	ymoinsrungederiv = [1,1];
+	k = [0,0,0,0];
+	j = [0,0,0,0];
+	u_max=1./3.*(Math.acos((1./omegam0)-1));
+	OlER_max=4.*omegam0*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI));
+	if(omegalambda0 < OlER_max){
+		while (yrunge > -0.01){ // permet de boucler sur une valeur de reference
+			if(yrunge<0.1){pas=Math.pow(10,-6);}
+			yrunge = rungekutta(i); //position f(x) Runge-Kutta
+			data.push({date:age+i/H0parGan,close:yrunge});
+			i=i+pas;
+		}
+		}else{
+		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
+			if(yrunge<0.1){pas=Math.pow(10,-6);}
+			yrunge = rungekutta(i); //position f(x) Runge-Kutta
+			data.push({date:age+i/H0parGan,close:yrunge});
+			i=i+pas;
+		}
+	}
+	
+	if(yrunge <= 0.){
+		tBC = i/H0parGan;
+		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC+" Ga";
+		document.getElementById("resultat_dureeuniv").innerHTML = (age+tBC)+" Ga";
+		}else{
+		document.getElementById("resultat_bigcrunch").innerHTML = "Pas de Big Crunch";
+	document.getElementById("resultat_dureeuniv").innerHTML = "";
+	}
+	
+	graphique_creation();
 }
