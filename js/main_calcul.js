@@ -3,7 +3,6 @@ function calcul(){   // declaration de la fonction
 	G = Number(document.getElementById("G").value);
 	h = Number(document.getElementById("h").value);
 	k = Number(document.getElementById("k").value);
-	alert(c);
 	
 	t0 = document.getElementById("T0").value;
 	h0 = document.getElementById("H0").value; 
@@ -66,9 +65,10 @@ function calcul(){   // declaration de la fonction
 	H0parGan = h0*1.02269032*Math.pow(10, -3);
 	
 	age = simpson(0, 1e5, 1e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	age_afficher = Number(age.toFixed(2));
 	
 	if(age >= 0){
-		document.getElementById("resultat_ageunivers").innerHTML = "Temps depuis le Big Bang = "+age+" Ga";
+		document.getElementById("resultat_ageunivers").innerHTML = "Temps depuis le Big Bang = "+age_afficher+" Ga";
 		}else{
 		document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
 		age = 0;
@@ -102,7 +102,7 @@ function calcul(){   // declaration de la fonction
 	u_max=1./3.*(Math.acos((1./omegam0)-1));
 	OlER_max=4.*omegam0*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI));
 	if(omegalambda0 < OlER_max){
-		while (yrunge > -0.01){ // permet de boucler sur une valeur de reference
+		while (yrunge > -0.01 && yrunge < 30.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
 			data.push({date:age+i/H0parGan,close:yrunge});
@@ -119,11 +119,13 @@ function calcul(){   // declaration de la fonction
 	
 	if(yrunge <= 0.){
 		tBC = i/H0parGan;
-		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC+" Ga";
-		document.getElementById("resultat_dureeuniv").innerHTML = (age+tBC)+" Ga";
+		tBC_afficher = Number(tBC.toFixed(2));
+		total = Number((age_afficher+tBC_afficher).toFixed(2));
+		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC_afficher+" Ga";
+		document.getElementById("resultat_dureeuniv").innerHTML = (total)+" Ga";
 		}else{
 		document.getElementById("resultat_bigcrunch").innerHTML = "Pas de Big Crunch";
-	document.getElementById("resultat_dureeuniv").innerHTML = "";
+		document.getElementById("resultat_dureeuniv").innerHTML = "";
 	}
 	
 	graphique_creation();

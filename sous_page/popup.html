@@ -20,22 +20,29 @@
 		
 		<script>
 			function calcu(){
-				c = 2.99*Math.pow(10, 8);
-				G = 6.67384*Math.pow(10, -11);
+				c = Number(window.opener.document.getElementById("c").value);
+				G = Number(window.opener.document.getElementById("G").value);
+				h = Number(window.opener.document.getElementById("h").value);
+				k = Number(window.opener.document.getElementById("k").value);
 				
 				t0 = document.getElementById("T0").value;
 				h0 = document.getElementById("H0").value; 
 				omegam0 = Number(document.getElementById("omegam0").value);
 				omegalambda0 = Number(document.getElementById("omegalambda0").value);
-				H0parGan = 0;
 				
+				H0parGan = 0;
+				H0parsec = h0/(3.085677581*Math.pow(10, 19));
 				Or = 0;
 				if (document.getElementById("type") == "Matière, Lambda, RFC et Neutrinos") {
-					Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
+					sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
+					rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
+					Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
+					//Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
 					Or=1.68*Or;
 					Or = Or.toExponential();
 					} else if (document.getElementById("type") == "Matière, Lambda et RFC") {
-					Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
+					Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
+					//Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
 					Or = Or.toExponential();
 					} else {
 				}
@@ -130,8 +137,12 @@
 			</form>
 			<div>
 				<div class="desact_retour">
-					<label for="dm">d<sub>m</sub> =</label>
+					<label for="dm">d<sub>m1</sub> =</label>
 					<span id="dm" style="color:blue"></span>
+				</div>
+				<div class="desact_retour">
+					<label for="dm2">d<sub>m2</sub> =</label>
+					<span id="dm2" style="color:blue"></span>
 				</div>
 				<div class="desact_retour">
 					<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
