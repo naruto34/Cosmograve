@@ -6,17 +6,24 @@
 		<meta name="description" content="Cosmograve, partie cosmo, programme qui permet de déterminer l'age de l'univers ainsi que tracer son evolution" />
 		<meta http-equiv="Content-Language" content="fr-FR" />
 		<title>Calculs</title>
-		<link rel="stylesheet" media="screen and (min-width: 800px)" href="../css/style.css">
-		<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="../css/mobile.css" />
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../lib/jquery-ui-1.11.4/jquery-ui.min.css">
 		<script src="../lib/jquery-1.12.3.min.js"></script>
 		<script src="../lib/math.js"></script>
 		<script src="../lib/d3.js"></script>
+		<script src="../lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		
 		<script src="../js/integrale.js"></script>
 		<script src="../js/init.js"></script>
 		<script src="../js/formreturn.js"></script>
 		<script src="../js/calculDpHi.js"></script>
 		<script>window.onload=init;</script>
+		
+		<script>
+			$(function() {
+				$( "#tabs" ).tabs();
+			});
+		</script>
 		
 		<script>
 			function calcu(){
@@ -80,7 +87,7 @@
 					dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_2);
 				}
 				
-				dda=dm/(1+(z2-z1));
+				dda=dm1/(1+z1);
 				dl=dm*(1+(z2-z1));
 				
 				agebetween = integrale(Number(z1), Number(z2), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
@@ -121,98 +128,107 @@
 	</head>
 	
 	<body>
-		Les paramètres cosmologiques:
-		<div class="desact_retour">
-			<label for="T0">T<sub>0</sub> =</label>
-			<span id="T0" style="color:blue"></span> K
-		</div>
-		
-		<div class="desact_retour">
-			<label for="H0">H<sub>0</sub> =</label>
-			<span id="H0" style="color:blue"></span> km.s<sup>-1</sup>.Mpc<sup>-1</sup>
-		</div>
-		
-		<div class="desact_retour">
-			<label for="omegam0">&Omega;<sub>m0</sub> =</label>
-			<span id="omegam0" style="color:blue"></span>
-		</div>
-		
-		<div class="desact_retour">
-			<label for="omegalambda0">&Omega;<sub>&Lambda;0</sub> =</label>
-			<span id="omegalambda0" style="color:blue"></span>
-		</div>
-		
-		<div class="desact_retour">
-			<label for="resultat_omegar0">&Omega;<sub>r0</sub> =</label>
-			<span id="resultat_omegar0" style="color:blue"></span>
-		</div>
-		
-		<div class="desact_retour">
-			<label for="type">Type =</label>
-			<span id="type" style="color:blue"></span>
-		</div>
-		
-		<form id="nouvellesDonnees" action="" method="post">
-			<div class="desact_retour">
-				<label for="z1">z<sub>1</sub> =</label>
-				<input id="z1" value="0" maxlength="10" type="text">
-			</div>
-			<div class="desact_retour">
-				<label for="z2">z<sub>2</sub> =</label>
-				<input id="z2" value="0" maxlength="10" type="text"> 
-			</div>
-			<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
+		<div id="tabs">
 			
+			<ul>
+				<li><a href="#tabs-1">Calculs Annexes</a></li>
+			</ul>
+			
+			<div id="tabs-1">
+				
+				Les paramètres cosmologiques:
+				<div>
+					<label for="T0">T<sub>0</sub> =</label>
+					<span id="T0" style="color:blue"></span> K
+				</div>
+				
+				<div>
+					<label for="H0">H<sub>0</sub> =</label>
+					<span id="H0" style="color:blue"></span> km.s<sup>-1</sup>.Mpc<sup>-1</sup>
+				</div>
+				
+				<div>
+					<label for="omegam0">&Omega;<sub>m0</sub> =</label>
+					<span id="omegam0" style="color:blue"></span>
+				</div>
+				
+				<div>
+					<label for="omegalambda0">&Omega;<sub>&Lambda;0</sub> =</label>
+					<span id="omegalambda0" style="color:blue"></span>
+				</div>
+				
+				<div>
+					<label for="resultat_omegar0">&Omega;<sub>r0</sub> =</label>
+					<span id="resultat_omegar0" style="color:blue"></span>
+				</div>
+				
+				<div class="desact_retour">
+					<label for="type">Type =</label>
+					<span id="type" style="color:blue"></span>
+				</div>
+				
+				<form id="nouvellesDonnees" action="" method="post">
+					<div class="desact_retour">
+						<label for="z1">z<sub>1</sub> =</label>
+						<input id="z1" value="0" maxlength="10" type="text">
+					</div>
+					<div class="desact_retour">
+						<label for="z2">z<sub>2</sub> =</label>
+						<input id="z2" value="0" maxlength="10" type="text"> 
+					</div>
+					<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
+						
+					</div>
+				</form>
+				<br />
+				<div>
+					<div>
+						<label for="dm">d<sub>m</sub> =</label>
+						<span id="dm" style="color:blue"></span> m (Alignés sur la ligne de visée)
+					</div>
+					<div>
+						<label for="dm1">d<sub>m1</sub> =</label>
+						<span id="dm1" style="color:blue"></span> m
+					</div>
+					<div>
+						<label for="dm2">d<sub>m2</sub> =</label>
+						<span id="dm2" style="color:blue"></span> m
+					</div>
+					<div>
+						<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
+						<span id="agebetween" style="color:blue"></span> Ga
+					</div>
+					
+					
+					
+					<div>
+						<label for="tempsEmission">t<sub>1</sub>=</label>
+						<span id="tempsEmission" style="color:blue"></span> Ga
+					</div>
+					
+					
+					<div>
+						<label for="tempsReception">t<sub>2</sub>=</label>
+						<span id="tempsReception" style="color:blue"></span> Ga
+					</div>
+					
+					
+					
+					<div>
+						<p>Les 2 calculs suivant utilise z<sub>1</sub>,</p>
+						<div class="desact_retour">
+							<label for="diametre">D =</label>
+							<input id="diametre" value="" maxlength="17" type="text">  (m)
+							<input type="button" value="--> θ" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
+						</div>
+						<div class="desact_retour">
+							<input type="button" value="D <--" onClick="window.document.getElementById('diametre').value = window.document.getElementById('pHi').value* Number(dda)">
+							<label for="pHi">θ =</label>
+							<input id="pHi" value="" maxlength="17" type="text"> (rad)
+						</div>
+					</div>
+				</div>
+				
+				<div id="plus"><button type="button" onclick="formreturn(false);">Retour</button></div>
 			</div>
-			</form>
-			<div>
-				<div class="desact_retour">
-					<label for="dm">d<sub>m</sub> =</label>
-					<span id="dm" style="color:blue"></span> m (Alignés sur la ligne de visée)
-				</div>
-				<div class="desact_retour">
-					<label for="dm1">d<sub>m1</sub> =</label>
-					<span id="dm1" style="color:blue"></span> m
-				</div>
-				<div class="desact_retour">
-					<label for="dm2">d<sub>m2</sub> =</label>
-					<span id="dm2" style="color:blue"></span> m
-				</div>
-				<div class="desact_retour">
-					<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
-					<span id="agebetween" style="color:blue"></span>
-				</div>
-				
-				
-				
-				<div class="desact_retour">
-					<label for="tempsEmission">t<sub>1</sub>=</label>
-					<span id="tempsEmission" style="color:blue"></span>
-				</div>
-				
-				
-				<div class="desact_retour">
-					<label for="tempsReception">t<sub>2</sub>=</label>
-					<span id="tempsReception" style="color:blue"></span>
-				</div>
-				
-				
-				
-				
-				<div class="desact_retour">
-					<label for="diametre">D =</label>
-					<input id="diametre" value="" maxlength="17" type="text">  (m)
-					<input type="button" value="θ" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
-				</div>
-				<div class="desact_retour">
-					<label for="pHi">θ =</label>
-					<input id="pHi" value="" maxlength="17" type="text"> (rad)
-					<input type="button" value="D" onClick="window.document.getElementById('diametre').value = window.document.getElementById('pHi').value* Number(dda)">
-					<span id="pHi" style="color:blue"></span>
-				</div>
-			
-			</div>
-			
-	<div id="plus"><button type="button" onclick="formreturn(false);">Retour</button></div>
-			
-		</body></html>													
+		</body></html>															
