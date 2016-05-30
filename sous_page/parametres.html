@@ -3,13 +3,21 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 		<title>Cosmograve - Param&egrave;tres</title>
+		<link rel="stylesheet" href="../lib/jquery-ui-1.11.4/jquery-ui.min.css">
+		<link rel="stylesheet" href="../css/style.css">
 		<script src="../lib/jquery-1.12.3.min.js"></script>
 		<script src="../lib/math.js"></script>
 		<script src="../lib/d3.js"></script>
+		<script src="../lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		
 		<script src="../js/init.js"></script>
 		<script src="../js/save_para.js"></script>
 		<script>window.onload=getData_para;</script>
+		<script>
+			$(function() {
+				$( "#tabs" ).tabs();
+			});
+		</script>
 		<script>
 			function reset(){
 				document.getElementById('c').value = 299792458;
@@ -20,10 +28,19 @@
 		</script>
 	</head>
 	<body>
-		<label for="c">c = </label><input type="text" id="c" /> m.s<sup>-1</sup><br />
-		<label for="k">k = </label><input type="text" id="k" /> m<sup>2</sup>.kg.s<sup>-2</sup>.K<sup>-1</sup> <br />
-		<label for="h">h = </label><input type="text" id="h" /> m<sup>2</sup>.kg.s<sup>-1</sup> <br />
-		<label for="G">G = </label><input type="text" id="G" /> m<sup>3</sup>.kg<sup>-1</sup>.s<sup>-2</sup> <br />
-		<button type="button" onClick="save_para()">Enregistrer</button><button type="button" onClick="reset()">Reset</button><button type="button" onClick="window.close()">Retour</button> 
+		<div id="tabs">
+			
+			<ul>
+				<li><a href="#tabs-1">Param&egrave;tre</a></li>
+			</ul>
+			
+			<div id="tabs-1">
+				<label for="c">c = </label><input type="text" id="c" /> m.s<sup>-1</sup><br />
+				<label for="k">k = </label><input type="text" id="k" /> m<sup>2</sup>.kg.s<sup>-2</sup>.K<sup>-1</sup> <br />
+				<label for="h">h = </label><input type="text" id="h" /> m<sup>2</sup>.kg.s<sup>-1</sup> <br />
+				<label for="G">G = </label><input type="text" id="G" /> m<sup>3</sup>.kg<sup>-1</sup>.s<sup>-2</sup> <br /><br />
+				<button type="button" onClick="save_para()">Enregistrer</button><button type="button" onClick="reset()">Reset</button><button type="button" onClick="window.close()">Retour</button> 
+			</div>
+		</div>
 	</body>
 </html>
