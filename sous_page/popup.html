@@ -31,6 +31,7 @@
 				omegalambda0 = Number(document.getElementById("omegalambda0").value);
 				
 				H0parGan = 0;
+				H0parGan = h0*1.0245974*Math.pow(10, -3);
 				H0parsec = h0/(3.085677581*Math.pow(10, 19));
 				Or = 0;
 				if (document.getElementById("type") == "Matière, Lambda, RFC et Neutrinos") {
@@ -51,8 +52,6 @@
 				
 				omegak0 = 1-Or-omegam0-omegalambda0;
 				
-				H0parGan = h0*1.0245974*Math.pow(10, -3);
-				
 				z1 = document.getElementById("z1").value;
 				z2 = document.getElementById("z2").value;
 				
@@ -64,13 +63,21 @@
 				}
 				
 				integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+				integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+				integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
 				
 				if (omegak0>0){
-					dm=(1/(H0parGan*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ);
+					dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ);
+					dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_1);
+					dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_2);
 					}else if (omegak0==0){
-					dm=(1/(H0parGan) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+					dm=(c/(H0parsec) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+					dm1=(c/(H0parsec) * simpson(0, Number(z1), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+					dm2=(c/(H0parsec) * simpson(0, Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
 					}else{
-					dm=(1/(H0parGan*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
+					dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
+					dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_1);
+					dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_2);
 				}
 				
 				dda=dm/(1+(z2-z1));
@@ -81,8 +88,31 @@
 				tempsEmission = tempsReception - agebetween;
 				
 				dm = Math.abs(dm);
+				dm1 = Math.abs(dm1);
+				dm2 = Math.abs(dm2);
+				
+				if(dm != 0){
+					dm = dm.toPrecision(5);
+				}
+				if(dm1 != 0){
+					dm1 = dm1.toPrecision(5);
+				}
+				if(dm2 != 0){
+					dm2 = dm2.toPrecision(5);
+				}
+				if(agebetween != 0){
+					agebetween = agebetween.toPrecision(5);
+				}
+				if(tempsReception != 0){
+					tempsReception = tempsReception.toPrecision(5);
+				}
+				if(tempsEmission != 0){
+					tempsEmission = tempsEmission.toPrecision(5);
+				}
 				
 				document.getElementById("dm").innerHTML = dm;
+				document.getElementById("dm1").innerHTML = dm1;
+				document.getElementById("dm2").innerHTML = dm2;
 				document.getElementById("agebetween").innerHTML = agebetween;
 				document.getElementById("tempsReception").innerHTML = tempsReception;
 				document.getElementById("tempsEmission").innerHTML = tempsEmission;
@@ -137,12 +167,16 @@
 			</form>
 			<div>
 				<div class="desact_retour">
-					<label for="dm">d<sub>m1</sub> =</label>
-					<span id="dm" style="color:blue"></span>
+					<label for="dm">d<sub>m</sub> =</label>
+					<span id="dm" style="color:blue"></span> m (Alignés sur la ligne de visée)
+				</div>
+				<div class="desact_retour">
+					<label for="dm1">d<sub>m1</sub> =</label>
+					<span id="dm1" style="color:blue"></span> m
 				</div>
 				<div class="desact_retour">
 					<label for="dm2">d<sub>m2</sub> =</label>
-					<span id="dm2" style="color:blue"></span>
+					<span id="dm2" style="color:blue"></span> m
 				</div>
 				<div class="desact_retour">
 					<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>

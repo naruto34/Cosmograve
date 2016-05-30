@@ -10,10 +10,14 @@ d_L = d_m(1+z)
 
 d_A = \frac{d_m}{(1+z)}
 
-\Theta \simeq \frac{AB}{d}
+\Theta \simeq \frac{D}{d}
 
 \Theta \overset{def}{=} \frac{AB}{d_A}
 
 d_{LT} = (t_2-t_1)c
 
 l(z_2) = (\frac{1+z_1}{1+z_2})l(z_1)
+
+\rho_r = \frac{4 \sigma T^4}{c^3}, \qquad avec \sigma = \frac{2 \pi^5 k^4}{15 h^3 c^2}
+
+ds^2 = -R^2(t) [\frac{dr^2}{1-kr^2} + r^2d\theta^2 + r^2sin^2 \theta d\phi^2] + c^2dt^2
