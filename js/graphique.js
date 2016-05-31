@@ -19,6 +19,7 @@ function graphique_creation(){
 	// Adds the svg canvas
 	var svg = d3.select("#graphique")
 	.append("svg")
+	.style("font-size", "12px")
 	.attr("width", width + margin.left + margin.right)
 	.attr("height", height + margin.top + margin.bottom)
 	.append("g")
@@ -45,6 +46,7 @@ function graphique_creation(){
 	svg.append("g")
 	.attr("class", "x axis")
 	.attr("transform", "translate(0," + height + ")")
+	.style({ 'stroke': 'black', 'fill': 'none', 'stroke-width': '1px', 'shape-rendering' : 'crispEdges'})
 	.call(xAxis);
 	
 	if(document.getElementById("grille").checked == true){
@@ -56,7 +58,10 @@ function graphique_creation(){
 		.attr("x2", x)
 		.attr("y1", 0)
 		.attr("y2", 390)
-		.style("stroke", "#ccc");
+		.style("stroke", "grey")
+		.style("stroke-width", "1")
+		.style("shape-rendering", "crispEdges")
+		.style("fill", "none");
 		
 		svg.selectAll("line.y")
 		.data(y.ticks(8))
@@ -66,12 +71,16 @@ function graphique_creation(){
 		.attr("x2", 2000)
 		.attr("y1", y)
 		.attr("y2", y)
-		.style("stroke", "#ccc");
+		.style("stroke", "grey")
+		.style("stroke-width", "1")
+		.style("shape-rendering", "crispEdges")
+		.style("fill", "none");
 	}
 	
 	// Add the Y Axis
 	svg.append("g")
 	.attr("class", "y axis")
+	.style({ 'stroke': 'black', 'fill': 'none', 'stroke-width': '1px', 'shape-rendering' : 'crispEdges'})
 	.call(yAxis);
 	
 	svg.append("text")
@@ -80,6 +89,8 @@ function graphique_creation(){
 	.attr("y", -15)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(0)")
+	.style("font-weight", "bold")
+	.style("font-size", "1.3em")
 	.text("Evolution du facteur d'\351chelle r\351duit");
 	
 	svg.append("text")
@@ -88,6 +99,8 @@ function graphique_creation(){
 	.attr("y", 415)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(0)")
+	.style("font-weight", "bold")
+	.style("font-size", "1.2em")
 	.text("t (Ga)");
 	
 	svg.append("text")
@@ -96,11 +109,16 @@ function graphique_creation(){
 	.attr("y", -35)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(-90)")
+	.style("font-weight", "bold")
+	.style("font-size", "1.2em")
 	.text("a (t)");
 	
 	// Add the valueline path.
 	svg.append("path")
+	.style("stroke", "steelblue")
+	.style("stroke-width", "2")
+	.style("fill", "none")
 	.attr("class", "line")
 	.attr("d", valueline(data));
 	
-}	
+}

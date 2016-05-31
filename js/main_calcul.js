@@ -102,7 +102,7 @@ function calcul(){   // declaration de la fonction
 	u_max=1./3.*(Math.acos((1./omegam0)-1));
 	OlER_max=4.*omegam0*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI));
 	if(omegalambda0 < OlER_max){
-		while (yrunge > -0.01 && yrunge < 30.){ // permet de boucler sur une valeur de reference
+		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
 			data.push({date:age+i/H0parGan,close:yrunge});
