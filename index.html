@@ -15,6 +15,9 @@
 		<script src="./lib/d3.js"></script>
 		<script src="./lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		<script src="./lib/canvg.min.js"></script>
+		<script src="./lib/jsPDF.js"></script>
+		<script src="./lib/jspdf_addimage.js"></script>
+		<script src="./lib/FileSaver.js"></script>
 		
 		<script src="./js/rungekutta.js"></script>
 		<script src="./js/range.js"></script>
@@ -123,6 +126,7 @@
 							
 							<div>
 								<input id="grille" type="checkbox" name="grille" checked="checked">Afficher grille
+								<input id="univ_plat" type="checkbox" name="univ_plat" checked="checked">Univers plat(&Omega;<sub>k</sub> = 0)
 								
 								<select id="liste" name="type" size="1">
 									<option selected="selected">Mati&egrave;re et Lambda</option>
@@ -140,7 +144,7 @@
 						<div id="graphique">
 							<script src="js/graphique_initial.js"></script>
 						</div>
-					<canvas id="canvas_1" style="display : none;"></canvas>
+						<canvas id="canvas_1" style="display : none;"></canvas>
 						
 						<div id="information">
 							&Omega;<sub>r0</sub> = <span id="resultat_omegar0"></span><br />
@@ -149,108 +153,128 @@
 							<span id="resultat_ageunivers"></span><br />
 							<span id="resultat_bigcrunch"></span><br />
 							Durée de l'univers = <span id="resultat_dureeuniv"></span><br />
-							<a id="dl" download="Canvas.png" href="#">Enregistrer Graphique en PNG</a>
-						</div>
+							<a id="dl" download="Cosmograve.png" href="#">Enregistrer Graphique en </a><SELECT id="type" size="1">
+								<OPTION value="png">png
+									<OPTION value="bmp">bmp
+										<OPTION value="jpeg">jpeg
+											<OPTION value="pdf">pdf
+											</SELECT>
+										</div>
+										
+										<div id="modele">
+											<!--<img id="myImgId" src="./img/SCP2003SNeCMBClust-1.png" alt="modele" style="height:400px;"/>-->
+											<canvas id="canvas" width="298" height="400">
+												<p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
+											</canvas>
+										</div>
+										<script type="text/javascript">
+											<!--
+											$( "#omegam0" ).change(function() {
+												if(true == document.getElementById("univ_plat").checked){
+													document.getElementById("omegalambda0").value = 1 - document.getElementById("omegam0").value;
+												}
+											});
+											
+											canvas  = document.getElementById('canvas');
+											context = canvas.getContext('2d');
+											
+											graphique  = document.getElementById('graphique');
+											
+											
+											function dlCanvas() {
+												svg = $('svg').parent().html()
+												canvg('canvas_1', svg)
+												canvas = document.getElementById("canvas_1");
+												
+												if(document.getElementById("type").options[document.getElementById('type').selectedIndex].text == "pdf"){
+													var imgData = canvas.toDataURL("image/jpeg", 1.0);
+													var pdf = new jsPDF();
+													
+													pdf.addImage(imgData, 'JPEG', 0, 0);
+													
+													pdf.save("Cosmograve.pdf");
+													}else{
+												img = canvas.toDataURL("image/"+document.getElementById("type").options[document.getElementById('type').selectedIndex].text);
+												img = img.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
+												img = img.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Cosmograve.'+document.getElementById("type").options[document.getElementById('type').selectedIndex].text);
+												document.getElementById("dl").setAttribute("download", "Cosmograve."+document.getElementById('type').options[document.getElementById('type').selectedIndex].text);
+												this.href = img;
+												}
+											};
+											document.getElementById("dl").addEventListener('click', dlCanvas, false);
+											zozor = new Image();
+											zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
+											
+											//context.drawImage(zozor, 0, 0, 298, 400);
+										calcul();
+										
+										var myImg = document.getElementById("canvas");
+									myImg.onmousedown = GetCoordinates;
 						
-						<div id="modele">
-							<!--<img id="myImgId" src="./img/SCP2003SNeCMBClust-1.png" alt="modele" style="height:400px;"/>-->
-							<canvas id="canvas" width="298" height="400">
-								<p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
-							</canvas>
-						</div>
-						<script type="text/javascript">
-							<!--
-							canvas  = document.getElementById('canvas');
-							context = canvas.getContext('2d');
-							
-							graphique  = document.getElementById('graphique');
-							
-							
-							function dlCanvas() {
-								
-								
-								svg = $('svg').parent().html()
-								canvg('canvas_1', svg)
-								canvas = document.getElementById("canvas_1");
-								var img = canvas.toDataURL("image/png");
-								img = img.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-								img = img.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
-								this.href = img;
-							};
-							document.getElementById("dl").addEventListener('click', dlCanvas, false);
-							zozor = new Image();
-							zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
-							
-							//context.drawImage(zozor, 0, 0, 298, 400);
-							calcul();
-							
-							var myImg = document.getElementById("canvas");
-							myImg.onmousedown = GetCoordinates;
-							
-							//-->
+						//-->
 						</script>
 						
-					</div>
-				</div> 
-			</div>
-			
-			<div id="tabs-3">
-				<div id="tabs-b">
-					<ul>
+						</div>
+						</div> 
+						</div>
+						
+						<div id="tabs-3">
+						<div id="tabs-b">
+						<ul>
 						<li><a href="#tabs-b-1" title="tabs-b-1">Théorie</a></li>
 						<li><a href="#tabs-b-2" title="tabs-b-2">Simulation</a></li>
-					</ul>
-					<div id="tabs-b-1">
+						</ul>
+						<div id="tabs-b-1">
 						<object id="theorie_gravi" type="text/html" data="./sous_page/theorie_gravitation.html" width="1300" height="560"></object>
-					</div>
-					<div id="tabs-b-2">
+						</div>
+						<div id="tabs-b-2">
 						<object id="simu_gravi" type="text/html" data="./sous_page/gravitation_simulation.html" width="1300" height="560"></object>
-					</div>
-				</div>
-			</div>
-			
-			<div id="tabs-4">
-				<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
-				<p>Encadré par Mr Cordoni Jean-Pierre, Mr Reboul Henri et Mme Mougenot Isabelle sous la réponsabilité de Mr Cassagne David.</p>
-				<p><strong>Version 2016 :</strong> Alpha - 0.6<br />
-					<strong>Développé par :</strong>  Anthony Gourdin
-					& Mahuta Tamatoa
-				& Hamza Alhousseini</p>
-				
-				<p><strong>Version 2015 :</strong><br />
-					<strong>Développé par :</strong>  Thibault Jarossay
-					& Samir Loukyly
-					& Franck Malet
-				</p>
-			
-			<p><strong>Version 2014 :</strong><br />
-			<strong>Développé par :</strong>
-			</p>
-			
-			<p><strong>Version 2013 :</strong><br />
-			<strong>Développé par :</strong>  Nicolas Boulay
-			& Alexandra Grabon
-			& Dwight Smite
-			& El Hadj Modou Thiam
-			</p>
-			
-			<p><strong>Version 2009 :</strong><br />
-			<strong>Développé par :</strong>  Karim Bammou
-			& Brice Cervera
-			& Gaëlle Daste
-			</p>
-			<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
-			</div>
-			</div>
-			<script>
-			document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
-			document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
-			
-			document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
-			document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
-			
-			document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
-			document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
-			</script>
-			</body>
-			</html>																																														
+						</div>
+						</div>
+						</div>
+						
+						<div id="tabs-4">
+						<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
+						<p>Encadré par Mr Cordoni Jean-Pierre, Mr Reboul Henri et Mme Mougenot Isabelle sous la réponsabilité de Mr Cassagne David.</p>
+						<p><strong>Version 2016 :</strong> Alpha - 0.6<br />
+						<strong>Développé par :</strong>  Anthony Gourdin
+						& Mahuta Tamatoa
+						& Hamza Alhousseini</p>
+						
+						<p><strong>Version 2015 :</strong><br />
+						<strong>Développé par :</strong>  Thibault Jarossay
+						& Samir Loukyly
+						& Franck Malet
+						</p>
+						
+						<p><strong>Version 2014 :</strong><br />
+						<strong>Développé par :</strong>
+						</p>
+						
+						<p><strong>Version 2013 :</strong><br />
+						<strong>Développé par :</strong>  Nicolas Boulay
+						& Alexandra Grabon
+						& Dwight Smite
+						& El Hadj Modou Thiam
+						</p>
+						
+						<p><strong>Version 2009 :</strong><br />
+						<strong>Développé par :</strong>  Karim Bammou
+						& Brice Cervera
+						& Gaëlle Daste
+						</p>
+						<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
+						</div>
+						</div>
+						<script>
+						document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
+						document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
+						
+						document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
+						document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
+						
+						document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
+						document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
+						</script>
+						</body>
+						</html>																																																																																								
