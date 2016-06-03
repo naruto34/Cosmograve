@@ -333,7 +333,7 @@ function update_modele(){
 	w = 0;
 	while (Om<=0.5){
 		w=(1./3.)*Math.log(((1./Om)-1.)+Math.sqrt(((1./Om)-1.)*((1./Om)-1.)-1.0));
-		OlER=4.*Om*Math.cosh(w)*Math.cosh(w)*Math.cosh(w);
+		OlER=4.*Om*cosh(w)*cosh(w)*cosh(w);
 		x=Omo+Om*dtx;
 		y=Olo-(OlER*dty);
 		context.lineTo(x, y);

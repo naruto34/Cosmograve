@@ -3,14 +3,31 @@ function calcul(){   // declaration de la fonction
 	G = Number(document.getElementById("G").value);
 	h = Number(document.getElementById("h").value);
 	k = Number(document.getElementById("k").value);
+	typeannee = document.getElementById("typeannee").value;
 	
 	t0 = document.getElementById("T0").value;
 	h0 = document.getElementById("H0").value; 
 	omegam0 = Number(document.getElementById("omegam0").value);
 	omegalambda0 = Number(document.getElementById("omegalambda0").value);
 	
-	H0parGan = 0;
-	H0parsec = h0/(3.085677581*Math.pow(10, 19));
+	if(typeannee == "Sidérale"){
+		nbrjours = 365.256363051;
+	}else if(typeannee == "Julienne"){
+		nbrjours = 365.25;
+	}else if(typeannee == "Tropique (2000)"){
+		nbrjours = 365.242190517;
+	}else{
+		nbrjours = 365.2425;
+	}
+	
+	//H0parGan = h0*1.02269032*Math.pow(10, -3);
+	//H0parsec = h0/(3.085677581*Math.pow(10, 19));
+	
+	au = 149597870700;
+	H0engannee = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
+	H0parsec = H0engannee;
+	H0engannee = H0engannee*(3600*24*nbrjours)*Math.pow(10, 9);
+	
 	Or = 0;
 	if (document.getElementById("liste").options[2].selected) {
 		sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
@@ -58,11 +75,10 @@ function calcul(){   // declaration de la fonction
 		Or = 0;
 	}
 	
+	document.getElementById("resultat_omegam0").innerHTML = omegam0;
 	document.getElementById("resultat_omegar0").innerHTML = Or;
 	document.getElementById("resultat_omegarlambda0").innerHTML = omegalambda0;
 	document.getElementById("resultat_omegak0").innerHTML = omegak0;
-	
-	H0parGan = h0*1.02269032*Math.pow(10, -3);
 	
 	age = simpson(0, 1e5, 1e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
 	age_afficher = Number(age.toFixed(6));
@@ -88,7 +104,7 @@ function calcul(){   // declaration de la fonction
 	while (yrunge2 > 0 && yrunge2 < 5.){
 		if(yrunge2<0.1){pas=Math.pow(10,-6);}
 		yrunge2 = rungekutta_neg(m);
-		data.push({date:age+m/H0parGan,close:yrunge2});
+		data.push({date:age+m/H0engannee,close:yrunge2});
 		m=m-pas;
 	}
 	
@@ -110,7 +126,7 @@ function calcul(){   // declaration de la fonction
 		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0parGan,close:yrunge});
+			data.push({date:age+i/H0engannee,close:yrunge});
 			if(yrunge >= 50){alert("Univers avec Big Crunch, non calculer pour raison de stabiliter.")}
 			i=i+pas;
 		}
@@ -118,7 +134,7 @@ function calcul(){   // declaration de la fonction
 			while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0parGan,close:yrunge});
+			data.push({date:age+i/H0engannee,close:yrunge});
 			i=i+pas;
 		}
 			alert("Infiniment d\351rivable, Big Crunch sur un temps infini");
@@ -126,13 +142,13 @@ function calcul(){   // declaration de la fonction
 		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
-			data.push({date:age+i/H0parGan,close:yrunge});
+			data.push({date:age+i/H0engannee,close:yrunge});
 			i=i+pas;
 		}
 	}
 	
 	if(yrunge <= 0.){
-		tBC = i/H0parGan;
+		tBC = i/H0engannee;
 		tBC_afficher = Number(tBC.toFixed(2));
 		total = Number((age_afficher+tBC_afficher).toFixed(2));
 		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC_afficher+" Ga";

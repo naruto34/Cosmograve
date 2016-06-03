@@ -24,6 +24,7 @@
 				document.getElementById('k').value = 1.38064852e-23;
 				document.getElementById('h').value = 6.62607004e-34;
 				document.getElementById('G').value = 6.67385e-11;
+				document.getElementById('typeannee').value = "Grégorienne";
 			}
 		</script>
 	</head>
@@ -39,8 +40,16 @@
 				<label for="k">k = </label><input type="text" id="k" /> m<sup>2</sup>.kg.s<sup>-2</sup>.K<sup>-1</sup> <br />
 				<label for="h">h = </label><input type="text" id="h" /> m<sup>2</sup>.kg.s<sup>-1</sup> <br />
 				<label for="G">G = </label><input type="text" id="G" /> m<sup>3</sup>.kg<sup>-1</sup>.s<sup>-2</sup> <br /><br />
-				<button type="button" onClick="save_para()">Enregistrer</button><button type="button" onClick="reset()">Reset</button><button type="button" onClick="window.close()">Retour</button> 
-			</div>
-		</div>
-	</body>
-</html>
+				
+				<label for="typeannee">Type d'année = </label><SELECT id="typeannee" name="typeannee" size="1">
+					<OPTION value="Grégorienne">Grégorienne
+						<OPTION value="Sidérale">Sidérale
+							<OPTION value="Julienne">Julienne
+								<OPTION value="Tropique (2000)">Tropique (2000)
+								</SELECT>
+								<br /><br />
+								<button type="button" onClick="save_para()">Enregistrer</button><button type="button" onClick="reset()">Reset</button><button type="button" onClick="window.close()">Retour</button> 
+							</div>
+						</div>
+					</body>
+				</html>				

@@ -17,7 +17,7 @@ function integrale(borneInf, borneSup, nbreInterval, callback, omegam0, omegalam
 }
 
 function fonction_integrale(x, omegam0, omegalambda0, Or){
-	return (1./H0parGan)*(1./(1.+x)) * Math.pow(Or*Math.pow(1.+x, 4) + omegam0*Math.pow(1.+x, 3) - (omegalambda0 + Or + omegam0 - 1.)*Math.pow(1.+x, 2) + omegalambda0, -1./2);
+	return (1./H0engannee)*(1./(1.+x)) * Math.pow(Or*Math.pow(1.+x, 4) + omegam0*Math.pow(1.+x, 3) - (omegalambda0 + Or + omegam0 - 1.)*Math.pow(1.+x, 2) + omegalambda0, -1./2);
 }
 
 function fonction_dm(x, omegam0, omegalambda0, Or){

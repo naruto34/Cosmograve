@@ -25,7 +25,9 @@
 		<script src="./js/graphique.js"></script>
 		<script src="./js/main_calcul.js"></script>
 		<script src="./js/ouvrirPopup.js"></script>
+		<script src="./js/cosh.js"></script>
 		<script src="./js/canvas.js"></script>
+
 		<script>
 			$(function() {
 				$("#tabs-a").tabs();
@@ -103,10 +105,13 @@
 						<div id="plus"><button type="button" onClick="ouvrirPopup()">Calculs annexes</button><button id="para" type="button" onClick="ouvrirPara()">parametres</button></div>
 						<div id="temp"></div>
 						<form id="parametres" action="" method="post" autocomplete="off">
+						
 							<input type="hidden" id="c" value="299792458" />
 							<input type="hidden" id="G" value="6.67385e-11" />
 							<input type="hidden" id="h" value="6.62607004e-34" />
 							<input type="hidden" id="k" value="1.38064852e-23" />
+							<input type="hidden" id="typeannee" value="Grégorienne" />
+							
 							<div class="desact_retour">
 								<label for="T0">T<sub>0</sub> (K) =</label>
 								<input id="T0" value="2.7255" maxlength="10" type="text"> 
@@ -147,6 +152,7 @@
 						<canvas id="canvas_1" style="display : none;"></canvas>
 						
 						<div id="information">
+							&Omega;<sub>m0</sub> = <span id="resultat_omegam0"></span><br />
 							&Omega;<sub>r0</sub> = <span id="resultat_omegar0"></span><br />
 							&Omega;<sub>&Lambda;0</sub> = <span id="resultat_omegarlambda0"></span><br />
 							&Omega;<sub>k0</sub> = <span id="resultat_omegak0"></span><br />
@@ -173,6 +179,7 @@
 												if(true == document.getElementById("univ_plat").checked){
 													document.getElementById("omegalambda0").value = 1 - document.getElementById("omegam0").value;
 												}
+												document.getElementById("resultat_omegam0").innerHTML = document.getElementById("omegam0").value;
 											});
 											
 											canvas  = document.getElementById('canvas');
