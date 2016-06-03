@@ -208,43 +208,73 @@ function update_modele(){
 	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
-	context.fillStyle = "black";
+	context.fillStyle = "blue";
 	context.rotate(-0.8);
 	context.translate(-80,60);
 	context.fillText(text,55,50);
 	context.restore();
 	
+	context.save();
 	var text = 'Big Bang';
 	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
-	context.fillStyle = "black";
+	context.fillStyle = "blue";
+	context.rotate(-0.8);
+	context.translate(-100,80);
 	context.fillText(text,115,80);
+	context.restore();
 	
+	context.save();
 	var text = 'Fermé';
 	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
-	context.fillStyle = "black";
+	context.fillStyle = "red";
+	context.rotate(0.7);
+	context.translate(160,-180);
 	context.fillText(text,210,270);
+	context.restore();
 	
+	context.save();
 	var text = 'Ouvert';
 	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
-	context.fillStyle = "black";
+	context.fillStyle = "red";
+	context.rotate(0.7);
+	context.translate(160,-180);
 	context.fillText(text,110,300);
+	context.restore();
 	
+	context.save();
 	var text = 'Plat';
+	context.font = "bold 8pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "red";
+	context.rotate(0.7);
+	context.translate(160,-180);
+	context.fillText(text,170,290);
+	context.restore();
+	
+	var text = 'Big Crunch';
 	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
-	context.fillStyle = "black";
-	context.fillText(text,170,290);
+	context.fillStyle = "green";
+	context.fillText(text,170,260);
+	
+	var text = 'Pas de Big Crunch';
+	context.font = "8pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "green";
+	context.fillText(text,140,220);
 	
 	context.beginPath();
 	context.fillStyle="#F00000"
-	context.arc(PosX, PosY, 4, 0, 2 * Math.PI);
+	context.arc(PosX, PosY, 3, 0, 2 * Math.PI);
 	context.fill();
 	
 	Omo=53.;//abscisse de l'origine sur graphe canvas
@@ -252,8 +282,10 @@ function update_modele(){
 	dty=72; //un pas de 1 sur l'ordonnee du graphe canvas 112.5
 	Olo=247;//ordonnee de l'origine sur graphe canvas 338
 	
+	context.save();
 	context.beginPath();
 	context.moveTo(53, 177);
+	context.strokeStyle='red';
 	for (Om=0;Om<3;Om=Om+0.5){
 		OlCO=-Om+1.;
 		x=Omo+Om*dtx; //conversion pour correspondre au canvas
@@ -265,9 +297,12 @@ function update_modele(){
 		
 	}
 	context.stroke();
+	context.restore();
 	
+	context.save();
 	context.beginPath();
 	context.moveTo(53, 245);
+	context.strokeStyle='green';
 	Om=0.;
 	OlER=0.;
 	y=Olo;
@@ -285,9 +320,12 @@ function update_modele(){
 		Om=Om+0.01;
 	}
 	context.stroke();
+	context.restore();
 	
+	context.save();
 	context.beginPath();
 	context.moveTo(53, 177);
+	context.strokeStyle='blue';
 	x=Omo;
 	y=Olo-dty;
 	context.lineTo(x, y);
@@ -312,6 +350,7 @@ function update_modele(){
 		Om=Om+0.01;
 	}
 	context.stroke();
+	context.restore();
 }
 
 //-->

@@ -65,7 +65,7 @@ function calcul(){   // declaration de la fonction
 	H0parGan = h0*1.02269032*Math.pow(10, -3);
 	
 	age = simpson(0, 1e5, 1e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	age_afficher = Number(age.toFixed(2));
+	age_afficher = Number(age.toFixed(6));
 	
 	if(age >= 0){
 		document.getElementById("resultat_ageunivers").innerHTML = "Temps depuis le Big Bang = "+age_afficher+" Ga";
@@ -99,15 +99,29 @@ function calcul(){   // declaration de la fonction
 	ymoinsrungederiv = [1,1];
 	k = [0,0,0,0];
 	j = [0,0,0,0];
+	if(omegam0 > 1){
 	u_max=1./3.*(Math.acos((1./omegam0)-1));
-	OlER_max=4.*omegam0*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI))*Math.cos((u+(4./3.)*Math.PI));
-	if(omegalambda0 < OlER_max){
+	OlER_max=4.*omegam0*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI));
+	}else{
+		OlER_max = 0;
+	}
+	omegalambda0_bis = Number(omegalambda0);
+	if(omegalambda0_bis < OlER_max){
 		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
+			if(yrunge<0.1){pas=Math.pow(10,-6);}
+			yrunge = rungekutta(i); //position f(x) Runge-Kutta
+			data.push({date:age+i/H0parGan,close:yrunge});
+			if(yrunge >= 50){alert("Univers avec Big Crunch, non calculer pour raison de stabiliter.")}
+			i=i+pas;
+		}
+		}else if(omegalambda0_bis == OlER_max){
+			while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
 			data.push({date:age+i/H0parGan,close:yrunge});
 			i=i+pas;
 		}
+			alert("Infiniment d\351rivable, Big Crunch sur un temps infini");
 		}else{
 		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
