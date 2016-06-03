@@ -32,32 +32,42 @@ function graphique_creation(){
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
 	//d3.csv("data.csv", function(error, data) {
+	
 	data.forEach(function(d) {
 		d.date = d.date;
 		d.close = +d.close;
 	});
+	
+	
 	//alert(data);
 	// Scale the range of the data
 	x.domain(d3.extent(data, function(d) { return d.date; }));
-	y.domain([0, d3.max(data, function(d) { return d.close; })]);
+	y.domain([d3.min(data, function(d) { return d.close; }), d3.max(data, function(d) { return d.close; })]);
 	
 	// Add the valueline path.
 	svg.append("path")
 	.attr("class", "line")
 	.attr("d", valueline(data));
-	
-	// Add the X Axis
-	svg.append("g")
-	.attr("class", "x axis")
-	.attr("transform", "translate(0," + height + ")")
-	.call(xAxis);
-	
-	// Add the Y Axis
-	svg.append("g")
-	.attr("class", "y axis")
-	.call(yAxis);
 
-	svg.selectAll("line.x")
+		
+		// Add the X Axis
+		svg.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height/2 + ")")
+		.attr("fill","black")
+		.attr("stroke-width",5)
+		.call(xAxis);
+	
+		// Add the Y Axis
+		svg.append("g")
+		.attr("class", "y axis")
+		.attr("transform", "translate(" + width/2 +  ", 0 )")
+		.attr("fill","black")
+		.attr("stroke-width",5)
+		.call(yAxis);
+
+
+/*	svg.selectAll("line.x")
 			.data(x.ticks(10))
 			.enter().append("line")
 			.attr("class", "x")
@@ -84,7 +94,7 @@ function graphique_creation(){
 	.attr("y", -15)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(0)")
-	.text("Potentiel Effectif");
+	.text("Test Trajectoire");
 	
 	svg.append("text")
 	.attr("class", "legend_axe")
@@ -101,5 +111,5 @@ function graphique_creation(){
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(0)")
 	.text("V(r)");
-	
+					*/
 	}	

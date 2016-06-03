@@ -33,10 +33,13 @@ function trajectoire() {
 	E = Math.sqrt(Math.pow(vr/c,2)+(1-2*m/r0)*(1+Math.pow(L/r0,2)));
 	A_init = vr;
 	r_init = r0;
-	ri = 2*m;
+	rayon_trouNoir = 2*m;
 	rmax = eq3d(L,m,E);
 	dr = rmax/1000;
 	data1 = [];
+	temps_particule = 0; 
+	temps_observateur = 0;
+
 // Ici, les positions de départ de la particule, dans son référentiel et dans celui de l'observateur//
 	
 	if ( E > 1 ) { rmax=5*r0; }	
@@ -106,6 +109,7 @@ function trajectoire() {
 				}
 				
 				diametre_particule = 2;
+				diametre_observateur = 2;
 				
 				// La position de départ est le milieu de la fenêtre d'affichage auquel on ajoute la position initiale de la particule.     
 				
@@ -113,22 +117,34 @@ function trajectoire() {
 				
 				posY1 = (canvas.height/2.0) + y1part;
 
-				posX2 = (canvas.width/2.0) + x1part;
+				posX2 = (canvas.width/2.0) + x1obs;
 				
-				posY2 = (canvas.height/2.0) + y1part;
+				posY2 = (canvas.height/2.0) + y1obs;
+
+				posX3 = (canvas.width/2.0);
+				
+				posY3 = (canvas.height/2.0);
+				
+				
 				
 				
 				// Ici on va créer l'animation avec setinerval, laquelle prend comme paramètres la fonction animate() définie ci-après et qui calcul les coordonnées de la particule à cahque instant.    
 				
-				myInterval = setInterval(animate, 1000/300);
+				myInterval = setInterval(animate,1000/300);
 				
 				
 				
 				function animate() {
 					
+					element = document.params.traj;
 					
-					// Ici on intitialise le cadre qui contiendra le tracé.
-					//context.clearRect(0, 0, canvas.width, canvas.height);
+					if (element[1].checked) {
+			
+						diametre_particule = 8;
+						diametre_observateur = 8;
+						context.clearRect(0, 0, canvas.width, canvas.height);
+					
+					}
 					
 					
 					
@@ -142,12 +158,33 @@ function trajectoire() {
 					
 					context.fill();
 
+
+					context.beginPath();
+
+					context.fillStyle = '#FF7F50';
 					
+					context.arc(posX2, posY2, diametre_observateur/2, 0, Math.PI*2);
+					
+					context.fill();
+
+				
+					context.beginPath();
+
+					context.fillStyle = '#FF0000';
+					
+					context.arc(posX3, posY3, rayon_trouNoir*canvas.width/rmax, 0, Math.PI*2);
+					
+					context.lineWidth="1";
+
+					context.stroke();
 					
 					
 					if(r0!=0.0) {
+
+						temps_particule += dtau;
 						
 						r_part = rungekutta(dtau);
+						dt = E*dtau*(1/(1-2*m/r_part));
 						
 						if(r_part < 0.0) {
 							
@@ -157,37 +194,62 @@ function trajectoire() {
 						
 						phi = phi + (c*L*dtau/Math.pow(r_part,2));
 						
-						posX1 = x2part = 190*r_part*Math.cos(phi)/rmax+canvas.width/2;
-						posY1 = y2part = 190*r_part*Math.sin(phi)/rmax+canvas.height/2;
+						posX1 = x2part = 200*r_part*Math.cos(phi)/rmax+canvas.width/2;
+						posY1 = y2part = 200*r_part*Math.sin(phi)/rmax+canvas.height/2;
 						
-						//posX1 = (posX1 + x2part)/rmax;
-						//posY1 = (posY1 + y2part)/rmax;
 						
-						if(r2<0) {
+						temps_observateur += dt;
+						r_obs = rungekutta(dt);
 
-							r2=0;
+						//vitesse_particule = r_part/dtau;
+
+						document.getElementById("to").innerHTML = temps_observateur;
+						document.getElementById("tp").innerHTML = temps_particule;
+						//document.getElementById("vp").innerHTML = vitesse_particule;						
+
+						if(r_obs<0) {
+
+							r_obs = 0;
 
 						}
 
-						if(Double.isNaN(r2)) {
+						/*if(Double.isNaN(r_obs)) {
 
-							r2=0;
+							r_obs = 0;
+
+						}*/
+
+						phi2 = phi2 + (c*L*dt/Math.pow(r_obs,2));
+		
+						x2obs = 190*r_obs*Math.cos(phi2)/rmax;
+						y2obs = 190*r_obs*Math.sin(phi2)/rmax;
+					
+						posX2 = x2obs = 200*r_obs*Math.cos(phi2)/rmax+canvas.width/2;
+						posY2 = y2obs = 200*r_obs*Math.sin(phi2)/rmax+canvas.width/2;
+
+						if(r_part > rmax*1.1) { 
+								
+							alert("La Particule sort du champ gravitationnel du corps attractif");
+							arret(); 
 
 						}
 
-											
-						
-						
+						if(r_obs < rayon_trouNoir) { 
+							
+							arret();
+
+						}
+
 					}
 					
 			 
 					
 				}
 
-			//}	
+				
 
 
-for(r=ri;r<rmax*1.1;r+=dr) {
+for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
 
 	
 		V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c; 

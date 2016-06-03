@@ -21,7 +21,7 @@ function Calcul_potentiel(){
 
 	}
 
-graphique_creation();
+graphique_creation_pot();
 
 					}
 

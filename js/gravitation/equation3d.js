@@ -3,9 +3,9 @@ function eq3d(L,m,E) {
 	var a,b,c,d,gDelta,x,y,z,u,v,p,q,m,n,theta,k;
 
 		a=1-Math.pow(E,2);
-		b=-2*mr;
+		b=-2*m;
 		c=Math.pow(L,2);
-		d=-2*mr*Math.pow(L,2);
+		d=-2*m*Math.pow(L,2);
 		p=(c/a)-(Math.pow(b, 2.0)/(3*Math.pow(a, 2.0)));
 		q=((2*Math.pow(b, 3.0))/(27*Math.pow(a, 3.0)))-((b*c)/(3*Math.pow(a, 2.0)))+(d/a);
 		gDelta=4*Math.pow(p, 3.0)+27*Math.pow(q, 2.0);

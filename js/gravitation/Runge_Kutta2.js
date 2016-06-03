@@ -4,7 +4,7 @@ function fonction(r) {
 
 						}
 
-function calcul_J_K(pas_de_temps) {
+function calcul_J_K(pas_de_temps,a,A) {
 
 	j[0] = A*pas_de_temps;
 	j[1] =(A+k[0]/2)*pas_de_temps;
@@ -19,23 +19,15 @@ function calcul_J_K(pas_de_temps) {
 
 											}
 
-function rungekutta1(pas_de_temps) {
+function rungekutta(pas_de_temps) {
 
-	a = a + (1/6)*(j[0]+2*(j[1]+j[2])+j[3]);
+	r_init = r_init + (1/6)*(j[0]+2*(j[1]+j[2])+j[3]);				/* r1 et r2 sont les valeurs initiales à partir desquelles la métohde 
+															   de runge kutta effectue le premiers calcul puis on itère. */
+	A_init = A_init + (1/6)*(k[0]+2*(k[1]+k[2])+k[3]);
+															
+	calcul_J_K(pas_de_temps,r_init,A_init);
 
-	calcul_J_K(pas_de_temps);
-
-	return a;
-
-								}
-
-function rungekutta2(pas_de_temps) {
-
-	A = A + (1/6)*(k[0]+2*(k[1]+k[2])+k[3]);
-
-	calcul_J_K(pas_de_temps);
-
-
-	return A;
+	return r_init;
 
 								}
+

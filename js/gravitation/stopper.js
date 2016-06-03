@@ -1,0 +1,7 @@
+function arret() {
+
+	clearInterval(myInterval);
+
+				 }
+
+
