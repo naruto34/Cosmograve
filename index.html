@@ -27,7 +27,7 @@
 		<script src="./js/ouvrirPopup.js"></script>
 		<script src="./js/cosh.js"></script>
 		<script src="./js/canvas.js"></script>
-
+		
 		<script>
 			$(function() {
 				$("#tabs-a").tabs();
@@ -105,7 +105,7 @@
 						<div id="plus"><button type="button" onClick="ouvrirPopup()">Calculs annexes</button><button id="para" type="button" onClick="ouvrirPara()">parametres</button></div>
 						<div id="temp"></div>
 						<form id="parametres" action="" method="post" autocomplete="off">
-						
+							
 							<input type="hidden" id="c" value="299792458" />
 							<input type="hidden" id="G" value="6.67385e-11" />
 							<input type="hidden" id="h" value="6.62607004e-34" />
@@ -149,7 +149,7 @@
 						<div id="graphique">
 							<script src="js/graphique_initial.js"></script>
 						</div>
-						<canvas id="canvas_1" style="display : none;"></canvas>
+						<canvas id="canvas_1" style="display : none;" width="750px"></canvas>
 						
 						<div id="information">
 							&Omega;<sub>m0</sub> = <span id="resultat_omegam0"></span><br />
@@ -179,7 +179,7 @@
 												if(true == document.getElementById("univ_plat").checked){
 													document.getElementById("omegalambda0").value = 1 - document.getElementById("omegam0").value;
 												}
-												document.getElementById("resultat_omegam0").innerHTML = document.getElementById("omegam0").value;
+												//document.getElementById("resultat_omegam0").innerHTML = document.getElementById("omegam0").value;
 											});
 											
 											canvas  = document.getElementById('canvas');
@@ -192,9 +192,71 @@
 												svg = $('svg').parent().html()
 												canvg('canvas_1', svg);
 												canvas_1 = document.getElementById("canvas_1");
+												context_1 = canvas_1.getContext('2d');
 												var w = canvas_1.width;
 												var h = canvas_1.height;
-												context_1 = canvas_1.getContext('2d');
+												data = context_1.getImageData(0, 0, w, h);//
+												context_1.clearRect (0,0,w,h);//
+												canvas_1.height = 680;
+												canvas_1.width = 760;
+												context_1.putImageData(data, 0,0);//
+												var w = canvas_1.width;
+												var h = canvas_1.height;
+												
+												context_1.beginPath();
+												context_1.rect(225, 460, 275, 200);
+												context_1.stroke(); 
+												
+												var text = 'Ω';
+												context_1.font = "18pt Verdana";
+												context_1.textAlign = "left";
+												context_1.textBaseline = "top";
+												context_1.fillStyle = "black";
+												context_1.fillText(text, 260, 470);
+												context_1.font = "11pt Verdana";
+												context_1.fillText("m0", 284, 483);
+												context_1.font = "18pt Verdana";
+												context_1.fillText("= "+document.getElementById("resultat_omegam0").innerHTML, 310, 470);
+												
+												var text = 'Ω';
+												context_1.font = "18pt Verdana";
+												context_1.textAlign = "left";
+												context_1.textBaseline = "top";
+												context_1.fillStyle = "black";
+												context_1.fillText(text, 260, 495);
+												context_1.font = "11pt Verdana";
+												context_1.fillText("r0", 284, 508);
+												context_1.font = "18pt Verdana";
+												context_1.fillText("= "+document.getElementById("resultat_omegar0").innerHTML, 310, 495);
+												
+												var text = 'Ω';
+												context_1.font = "18pt Verdana";
+												context_1.textAlign = "left";
+												context_1.textBaseline = "top";
+												context_1.fillStyle = "black";
+												context_1.fillText(text, 260, 520);
+												context_1.font = "11pt Verdana";
+												context_1.fillText("Λ0", 284, 533);
+												context_1.font = "18pt Verdana";
+												context_1.fillText("= "+document.getElementById("resultat_omegarlambda0").innerHTML, 310, 520);
+												
+												var text = 'Ω';
+												context_1.font = "18pt Verdana";
+												context_1.textAlign = "left";
+												context_1.textBaseline = "top";
+												context_1.fillStyle = "black";
+												context_1.fillText(text, 260, 545);
+												context_1.font = "11pt Verdana";
+												context_1.fillText("k0", 284, 558);
+												context_1.font = "18pt Verdana";
+												context_1.fillText("= "+document.getElementById("resultat_omegak0").innerHTML, 310, 545);
+												
+												var text = 'Cosmograve 2016';
+												context_1.font = "11pt Verdana";
+												context_1.textAlign = "left";
+												context_1.textBaseline = "top";
+												context_1.fillStyle = "black";
+												context_1.fillText(text, 290, 665);
 												
 												if(document.getElementById("type").options[document.getElementById('type').selectedIndex].text == "pdf"){
 													data = context_1.getImageData(0, 0, w, h);
@@ -257,64 +319,64 @@
 							</div>
 							
 							<div id="tabs-3">
-								<div id="tabs-b">
-									<ul>
-										<li><a href="#tabs-b-1" title="tabs-b-1">Théorie</a></li>
-										<li><a href="#tabs-b-2" title="tabs-b-2">Simulation</a></li>
-									</ul>
-									<div id="tabs-b-1">
-										<object id="theorie_gravi" type="text/html" data="./sous_page/theorie_gravitation.html" width="1300" height="560"></object>
-									</div>
-									<div id="tabs-b-2">
-										<object id="simu_gravi" type="text/html" data="./sous_page/gravitation_simulation.html" width="1300" height="560"></object>
-									</div>
-								</div>
+							<div id="tabs-b">
+							<ul>
+							<li><a href="#tabs-b-1" title="tabs-b-1">Théorie</a></li>
+							<li><a href="#tabs-b-2" title="tabs-b-2">Simulation</a></li>
+							</ul>
+							<div id="tabs-b-1">
+							<object id="theorie_gravi" type="text/html" data="./sous_page/theorie_gravitation.html" width="1300" height="560"></object>
+							</div>
+							<div id="tabs-b-2">
+							<object id="simu_gravi" type="text/html" data="./sous_page/gravitation_simulation.html" width="1300" height="560"></object>
+							</div>
+							</div>
 							</div>
 							
 							<div id="tabs-4">
-								<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
-								<p>Encadré par Mr Cordoni Jean-Pierre, Mr Reboul Henri et Mme Mougenot Isabelle sous la réponsabilité de Mr Cassagne David.</p>
-								<p><strong>Version 2016 :</strong> Alpha - 0.7<br />
-									<strong>Développé par :</strong>  Anthony Gourdin
-									& Mahuta Tamatoa
-								& Hamza Alhousseini</p>
-								
-								<p><strong>Version 2015 :</strong><br />
-									<strong>Développé par :</strong>  Thibault Jarossay
-									& Samir Loukyly
-									& Franck Malet
-								</p>
-								
-								<p><strong>Version 2014 :</strong><br />
-									<strong>Développé par :</strong> Pierre Barbotin
-									& Thomas Vicario
-									& Damien Maurin
-								</p>
-								
-								<p><strong>Version 2013 :</strong><br />
-									<strong>Développé par :</strong>  Nicolas Boulay
-									& Alexandra Grabon
-									& Dwight Smite
-									& El Hadj Modou Thiam
-								</p>
-								
-								<p><strong>Version 2009 :</strong><br />
-									<strong>Développé par :</strong>  Karim Bammou
-									& Brice Cervera
-									& Gaëlle Daste
-								</p>
-								<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
+							<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
+							<p>Encadré par Mr Cordoni Jean-Pierre, Mr Reboul Henri et Mme Mougenot Isabelle sous la réponsabilité de Mr Cassagne David.</p>
+							<p><strong>Version 2016 :</strong> Alpha - 0.7<br />
+							<strong>Développé par :</strong>  Anthony Gourdin
+							& Mahuta Tamatoa
+							& Hamza Alhousseini</p>
+							
+							<p><strong>Version 2015 :</strong><br />
+							<strong>Développé par :</strong>  Thibault Jarossay
+							& Samir Loukyly
+							& Franck Malet
+							</p>
+							
+							<p><strong>Version 2014 :</strong><br />
+							<strong>Développé par :</strong> Pierre Barbotin
+							& Thomas Vicario
+							& Damien Maurin
+							</p>
+							
+							<p><strong>Version 2013 :</strong><br />
+							<strong>Développé par :</strong>  Nicolas Boulay
+							& Alexandra Grabon
+							& Dwight Smite
+							& El Hadj Modou Thiam
+							</p>
+							
+							<p><strong>Version 2009 :</strong><br />
+							<strong>Développé par :</strong>  Karim Bammou
+							& Brice Cervera
+							& Gaëlle Daste
+							</p>
+							<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
 							</div>
-						</div>
-						<script>
+							</div>
+							<script>
 							document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
-						document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
-						
-						document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
-						document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
-						
-						document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
-						document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
-						</script>
-						</body>
-						</html>																																																																																														
+							document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
+							
+							document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
+							document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
+							
+							document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
+							document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
+							</script>
+							</body>
+							</html>																																																																																																												

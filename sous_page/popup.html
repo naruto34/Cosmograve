@@ -31,15 +31,28 @@
 				G = Number(window.opener.document.getElementById("G").value);
 				h = Number(window.opener.document.getElementById("h").value);
 				k = Number(window.opener.document.getElementById("k").value);
+				typeannee = window.opener.document.getElementById("typeannee").value;
 				
 				t0 = document.getElementById("T0").value;
 				h0 = document.getElementById("H0").value; 
 				omegam0 = Number(document.getElementById("omegam0").value);
 				omegalambda0 = Number(document.getElementById("omegalambda0").value);
 				
-				H0parGan = 0;
-				H0parGan = h0*1.0245974*Math.pow(10, -3);
-				H0parsec = h0/(3.085677581*Math.pow(10, 19));
+				if(typeannee == "Sidérale"){
+					nbrjours = 365.256363051;
+					}else if(typeannee == "Julienne"){
+					nbrjours = 365.25;
+					}else if(typeannee == "Tropique (2000)"){
+					nbrjours = 365.242190517;
+					}else{
+					nbrjours = 365.2425;
+				}
+				
+				au = 149597870700;
+				H0engannee = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
+				H0parsec = H0engannee;
+				H0engannee = H0engannee*(3600*24*nbrjours)*Math.pow(10, 9);
+				
 				Or = 0;
 				if (document.getElementById("type") == "Matière, Lambda, RFC et Neutrinos") {
 					sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
@@ -60,176 +73,176 @@
 				omegak0 = 1-Or-omegam0-omegalambda0;
 				
 				z1 = document.getElementById("z1").value;
-				z2 = document.getElementById("z2").value;
-				
-				if(z1 == "inf"){
-					z1 = 1e7;
-				}
-				if(z2 == "inf"){
-					z2 = 1e7;
-				}
-				
-				integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-				integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-				integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-				
-				if (omegak0>0){
-					dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ);
-					dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_1);
-					dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_2);
-					}else if (omegak0==0){
-					dm=(c/(H0parsec) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
-					dm1=(c/(H0parsec) * simpson(0, Number(z1), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
-					dm2=(c/(H0parsec) * simpson(0, Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
-					}else{
-					dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
-					dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_1);
-					dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_2);
-				}
-				
-				dda=dm1/(1+z1);
-				dl=dm*(1+(z2-z1));
-				
-				agebetween = integrale(Number(z1), Number(z2), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-				tempsReception = integrale(Number(z1), 0, 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-				tempsEmission = tempsReception - agebetween;
-				
-				dm = Math.abs(dm);
-				dm1 = Math.abs(dm1);
-				dm2 = Math.abs(dm2);
-				
-				if(dm != 0){
-					dm = dm.toPrecision(5);
-				}
-				if(dm1 != 0){
-					dm1 = dm1.toPrecision(5);
-				}
-				if(dm2 != 0){
-					dm2 = dm2.toPrecision(5);
-				}
-				if(agebetween != 0){
-					agebetween = agebetween.toPrecision(5);
-				}
-				if(tempsReception != 0){
-					tempsReception = tempsReception.toPrecision(5);
-				}
-				if(tempsEmission != 0){
-					tempsEmission = tempsEmission.toPrecision(5);
-				}
-				
-				document.getElementById("dm").innerHTML = dm;
-				document.getElementById("dm1").innerHTML = dm1;
-				document.getElementById("dm2").innerHTML = dm2;
-				document.getElementById("agebetween").innerHTML = agebetween;
-				document.getElementById("tempsReception").innerHTML = tempsReception;
-				document.getElementById("tempsEmission").innerHTML = tempsEmission;
+			z2 = document.getElementById("z2").value;
+			
+			if(z1 == "inf"){
+			z1 = 1e7;
 			}
-		</script>
-	</head>
-	
-	<body>
-		<div id="tabs">
+			if(z2 == "inf"){
+			z2 = 1e7;
+			}
+			
+			integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+			integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+			integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+			
+			if (omegak0>0){
+			dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ);
+			dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_1);
+			dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_2);
+			}else if (omegak0==0){
+			dm=(c/(H0parsec) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+			dm1=(c/(H0parsec) * simpson(0, Number(z1), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+			dm2=(c/(H0parsec) * simpson(0, Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+			}else{
+			dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
+			dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_1);
+			dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_2);
+			}
+			
+			dda=dm1/(1+z1);
+			dl=dm*(1+(z2-z1));
+			
+			agebetween = integrale(Number(z1), Number(z2), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+			tempsReception = integrale(Number(z1), 0, 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+			tempsEmission = tempsReception - agebetween;
+			
+			dm = Math.abs(dm);
+			dm1 = Math.abs(dm1);
+			dm2 = Math.abs(dm2);
+			
+			if(dm != 0){
+			dm = dm.toPrecision(5);
+			}
+			if(dm1 != 0){
+			dm1 = dm1.toPrecision(5);
+			}
+			if(dm2 != 0){
+			dm2 = dm2.toPrecision(5);
+			}
+			if(agebetween != 0){
+			agebetween = agebetween.toPrecision(5);
+			}
+			if(tempsReception != 0){
+			tempsReception = tempsReception.toPrecision(5);
+			}
+			if(tempsEmission != 0){
+			tempsEmission = tempsEmission.toPrecision(5);
+			}
+			
+			document.getElementById("dm").innerHTML = dm;
+			document.getElementById("dm1").innerHTML = dm1;
+			document.getElementById("dm2").innerHTML = dm2;
+			document.getElementById("agebetween").innerHTML = agebetween;
+			document.getElementById("tempsReception").innerHTML = tempsReception;
+			document.getElementById("tempsEmission").innerHTML = tempsEmission;
+			}
+			</script>
+			</head>
+			
+			<body>
+			<div id="tabs">
 			
 			<ul>
-				<li><a href="#tabs-1">Calculs Annexes</a></li>
+			<li><a href="#tabs-1">Calculs Annexes</a></li>
 			</ul>
 			
 			<div id="tabs-1">
-				
-				Les paramètres cosmologiques:
-				<div>
-					<label for="T0">T<sub>0</sub> =</label>
-					<span id="T0" style="color:blue"></span> K
-				</div>
-				
-				<div>
-					<label for="H0">H<sub>0</sub> =</label>
-					<span id="H0" style="color:blue"></span> km.s<sup>-1</sup>.Mpc<sup>-1</sup>
-				</div>
-				
-				<div>
-					<label for="omegam0">&Omega;<sub>m0</sub> =</label>
-					<span id="omegam0" style="color:blue"></span>
-				</div>
-				
-				<div>
-					<label for="omegalambda0">&Omega;<sub>&Lambda;0</sub> =</label>
-					<span id="omegalambda0" style="color:blue"></span>
-				</div>
-				
-				<div>
-					<label for="resultat_omegar0">&Omega;<sub>r0</sub> =</label>
-					<span id="resultat_omegar0" style="color:blue"></span>
-				</div>
-				
-				<div class="desact_retour">
-					<label for="type">Type =</label>
-					<span id="type" style="color:blue"></span>
-				</div>
-				
-				<form id="nouvellesDonnees" action="" method="post">
-					<div class="desact_retour">
-						<label for="z1">z<sub>1</sub> =</label>
-						<input id="z1" value="0" maxlength="10" type="text">
-					</div>
-					<div class="desact_retour">
-						<label for="z2">z<sub>2</sub> =</label>
-						<input id="z2" value="0" maxlength="10" type="text"> 
-					</div>
-					<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
-						
-					</div>
-				</form>
-				<br />
-				<div>
-					<div>
-						<label for="dm">d<sub>m</sub> =</label>
-						<span id="dm" style="color:blue"></span> m (Alignés sur la ligne de visée)
-					</div>
-					<div>
-						<label for="dm1">d<sub>m1</sub> =</label>
-						<span id="dm1" style="color:blue"></span> m
-					</div>
-					<div>
-						<label for="dm2">d<sub>m2</sub> =</label>
-						<span id="dm2" style="color:blue"></span> m
-					</div>
-					<div>
-						<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
-						<span id="agebetween" style="color:blue"></span> Ga
-					</div>
-					
-					
-					
-					<div>
-						<label for="tempsEmission">t<sub>1</sub>=</label>
-						<span id="tempsEmission" style="color:blue"></span> Ga
-					</div>
-					
-					
-					<div>
-						<label for="tempsReception">t<sub>2</sub>=</label>
-						<span id="tempsReception" style="color:blue"></span> Ga
-					</div>
-					
-					
-					
-					<div>
-						<p>Les 2 calculs suivant utilise z<sub>1</sub>,</p>
-						<div class="desact_retour">
-							<label for="diametre">D =</label>
-							<input id="diametre" value="" maxlength="17" type="text">  (m)
-							<input type="button" value="--> θ" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
-						</div>
-						<div class="desact_retour">
-							<input type="button" value="D <--" onClick="window.document.getElementById('diametre').value = window.document.getElementById('pHi').value* Number(dda)">
-							<label for="pHi">θ =</label>
-							<input id="pHi" value="" maxlength="17" type="text"> (rad)
-						</div>
-					</div>
-				</div>
-				
-				<div id="plus"><button type="button" onclick="formreturn(false);">Retour</button></div>
+			
+			Les paramètres cosmologiques:
+			<div>
+			<label for="T0">T<sub>0</sub> =</label>
+			<span id="T0" style="color:blue"></span> K
 			</div>
-		</div>
-	</body></html>																
+			
+			<div>
+			<label for="H0">H<sub>0</sub> =</label>
+			<span id="H0" style="color:blue"></span> km.s<sup>-1</sup>.Mpc<sup>-1</sup>
+			</div>
+			
+			<div>
+			<label for="omegam0">&Omega;<sub>m0</sub> =</label>
+			<span id="omegam0" style="color:blue"></span>
+			</div>
+			
+			<div>
+			<label for="omegalambda0">&Omega;<sub>&Lambda;0</sub> =</label>
+			<span id="omegalambda0" style="color:blue"></span>
+			</div>
+			
+			<div>
+			<label for="resultat_omegar0">&Omega;<sub>r0</sub> =</label>
+			<span id="resultat_omegar0" style="color:blue"></span>
+			</div>
+			
+			<div class="desact_retour">
+			<label for="type">Type =</label>
+			<span id="type" style="color:blue"></span>
+			</div>
+			
+			<form id="nouvellesDonnees" action="" method="post">
+			<div class="desact_retour">
+			<label for="z1">z<sub>1</sub> =</label>
+			<input id="z1" value="0" maxlength="10" type="text">
+			</div>
+			<div class="desact_retour">
+			<label for="z2">z<sub>2</sub> =</label>
+			<input id="z2" value="0" maxlength="10" type="text"> 
+			</div>
+			<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
+			
+			</div>
+			</form>
+			<br />
+			<div>
+			<div>
+			<label for="dm">d<sub>m</sub> =</label>
+			<span id="dm" style="color:blue"></span> m (Alignés sur la ligne de visée)
+			</div>
+			<div>
+			<label for="dm1">d<sub>m1</sub> =</label>
+			<span id="dm1" style="color:blue"></span> m
+			</div>
+			<div>
+			<label for="dm2">d<sub>m2</sub> =</label>
+			<span id="dm2" style="color:blue"></span> m
+			</div>
+			<div>
+			<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
+			<span id="agebetween" style="color:blue"></span> Ga
+			</div>
+			
+			
+			
+			<div>
+			<label for="tempsEmission">t<sub>1</sub>=</label>
+			<span id="tempsEmission" style="color:blue"></span> Ga
+			</div>
+			
+			
+			<div>
+			<label for="tempsReception">t<sub>2</sub>=</label>
+			<span id="tempsReception" style="color:blue"></span> Ga
+			</div>
+			
+			
+			
+			<div>
+			<p>Les 2 calculs suivant utilise z<sub>1</sub>,</p>
+			<div class="desact_retour">
+			<label for="diametre">D =</label>
+			<input id="diametre" value="" maxlength="17" type="text">  (m)
+			<input type="button" value="--> θ" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
+			</div>
+			<div class="desact_retour">
+			<input type="button" value="D <--" onClick="window.document.getElementById('diametre').value = window.document.getElementById('pHi').value* Number(dda)">
+			<label for="pHi">θ =</label>
+			<input id="pHi" value="" maxlength="17" type="text"> (rad)
+			</div>
+			</div>
+			</div>
+			
+			<div id="plus"><button type="button" onclick="formreturn(false);">Retour</button></div>
+			</div>
+			</div>
+			</body></html>																			

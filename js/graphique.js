@@ -27,7 +27,7 @@ function graphique_creation(){
 	
 	// Define the axes
 	var xAxis = d3.svg.axis().scale(x)
-	.orient("bottom").ticks(8);
+	.orient("bottom").ticks(8).tickFormat(d3.format("d"));
 	
 	var yAxis = d3.svg.axis().scale(y)
 	.orient("left").ticks(10);
