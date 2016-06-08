@@ -6,7 +6,7 @@ function calcul(){   // declaration de la fonction
 	typeannee = document.getElementById("typeannee").value;
 	
 	t0 = document.getElementById("T0").value;
-	h0 = document.getElementById("H0").value; 
+	h0 = document.getElementById("H0").value;
 	omegam0 = Number(document.getElementById("omegam0").value);
 	omegalambda0 = Number(document.getElementById("omegalambda0").value);
 	
@@ -53,7 +53,7 @@ function calcul(){   // declaration de la fonction
 		PosY -= omegalambda0*325/4.5
 	}
 	
-	update_modele();
+	update_point();
 	
 	omegak0 = 1-Or-omegam0-omegalambda0;
 	
@@ -147,7 +147,10 @@ function calcul(){   // declaration de la fonction
 		}
 	}
 	
-	if(yrunge <= 0.){
+	if(age_afficher < 0){
+		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+Math.abs(age_afficher)+" Ga";
+		document.getElementById("resultat_dureeuniv").innerHTML = "";
+	}else if(yrunge <= 0.){
 		tBC = i/H0engannee;
 		tBC_afficher = Number(tBC.toFixed(2));
 		total = Number((age_afficher+tBC_afficher).toFixed(2));

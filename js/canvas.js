@@ -53,7 +53,7 @@ function GetCoordinates(e)
 	
 	//alert(PosX+"	"+PosY);
 	
-	update_modele();
+	//update_modele();
 	
 	PosX -= 53;
 	PosY -= 29;
@@ -75,12 +75,20 @@ function GetCoordinates(e)
 	calcul();
 }
 
+function update_point(){
+	context.clearRect (0,0,largeur,hauteur);
+	context.putImageData(image_fond_temp, 0,0);
+	context.beginPath();
+	context.fillStyle="#F00000"
+	context.arc(PosX, PosY, 3, 0, 2 * Math.PI);
+	context.fill();
+}
+
 function update_modele(){
 	canvas  = document.getElementById('canvas');
 	context = canvas.getContext('2d');
 	
 	var zozor = new Image();
-	zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
 	
 	context.beginPath();
 	context.moveTo(0, 0);
@@ -90,7 +98,6 @@ function update_modele(){
 	context.closePath();
 	context.fillStyle = "white";
 	context.fill();
-	//context.drawImage(zozor, 0, 0, 298, 400);
 	
 	context.beginPath();
 	context.moveTo(53, 29);
@@ -204,25 +211,15 @@ function update_modele(){
 	context.fillText("Λ", 32,185);
 	
 	context.save();
-	var text = 'Pas de Big Bang';
+	var text = 'Pas de BB';
 	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
 	context.fillStyle = "blue";
 	context.rotate(-0.8);
 	context.translate(-80,60);
-	context.fillText(text,55,50);
-	context.restore();
-	
-	context.save();
-	var text = 'Big Bang';
-	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "blue";
-	context.rotate(-0.8);
-	context.translate(-100,80);
-	context.fillText(text,115,80);
+	context.fillText(text,55,45);
+	context.fillText('Pas de BC',65,60);
 	context.restore();
 	
 	context.save();
@@ -257,25 +254,6 @@ function update_modele(){
 	context.translate(160,-180);
 	context.fillText(text,170,290);
 	context.restore();
-	
-	var text = 'Big Crunch';
-	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "green";
-	context.fillText(text,170,260);
-	
-	var text = 'Pas de Big Crunch';
-	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "green";
-	context.fillText(text,140,220);
-	
-	context.beginPath();
-	context.fillStyle="#F00000"
-	context.arc(PosX, PosY, 3, 0, 2 * Math.PI);
-	context.fill();
 	
 	Omo=53.;//abscisse de l'origine sur graphe canvas
 	dtx=78;//un pas de 1 sur l'abscisse du graphe canvas 225
@@ -351,6 +329,50 @@ function update_modele(){
 	}
 	context.stroke();
 	context.restore();
+	
+	largeur = canvas.width;
+	hauteur = canvas.height;
+	image_fond = context.getImageData(0, 0, largeur, hauteur);
+	
+	omegam0 = Number(document.getElementById("omegam0").value);
+	omegalambda0 = Number(document.getElementById("omegalambda0").value);
+	
+	PosX = 53+omegam0*230/3;
+	PosY = 246;
+	if(omegalambda0 >= 0){
+		PosY += -omegalambda0*325/4.5;
+		}else{
+		PosY -= omegalambda0*325/4.5
+	}
+	
+	context.save();
+	var text = 'Big Bang';
+	context.font = "8pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "blue";
+	context.rotate(-0.8);
+	context.translate(-100,80);
+	context.fillText(text,115,80);
+	context.restore();
+	
+	var text = 'Pas de BC';
+	context.font = "8pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "green";
+	context.fillText(text,140,220);
+	
+	var text = 'Big Crunch';
+	context.font = "8pt Verdana";
+	context.textAlign = "left";
+	context.textBaseline = "top";
+	context.fillStyle = "green";
+	context.fillText(text,170,260);
+	
+	image_fond_temp = context.getImageData(0, 0, largeur, hauteur);
+	
+	update_point();	
 }
 
 //-->

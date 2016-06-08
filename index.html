@@ -220,6 +220,52 @@
 												}
 											});
 											
+											$( "#H0" ).change(function() {
+												context.clearRect (0,0,largeur,hauteur);//
+												context.putImageData(image_fond, 0,0);//
+												
+												context.save();
+												if($( "#H0" ).val() >= 0){
+													var text = 'Big Bang';
+													}else{
+													var text = 'Big Crunch';
+												}
+												context.font = "8pt Verdana";
+												context.textAlign = "left";
+												context.textBaseline = "top";
+												context.fillStyle = "blue";
+												context.rotate(-0.8);
+												context.translate(-100,80);
+												context.fillText(text,115,80);
+												context.restore();
+												
+												if($( "#H0" ).val() >= 0){
+													var text = 'Pas de BC';
+													}else{
+													var text = 'Big Crunch';
+												}
+												context.font = "8pt Verdana";
+												context.textAlign = "left";
+												context.textBaseline = "top";
+												context.fillStyle = "green";
+												context.fillText(text,140,220);
+												
+												if($( "#H0" ).val() >= 0){
+													var text = 'Big Crunch';
+													}else{
+													var text = 'Pas de BC';
+												}
+												context.font = "8pt Verdana";
+												context.textAlign = "left";
+												context.textBaseline = "top";
+												context.fillStyle = "green";
+												context.fillText(text,170,260);
+												
+												image_fond_temp = context.getImageData(0, 0, largeur, hauteur);
+												
+												update_point();
+											});
+											
 											canvas  = document.getElementById('canvas');
 											context = canvas.getContext('2d');
 											
@@ -242,7 +288,7 @@
 												var h = canvas_1.height;
 												
 												context_1.beginPath();
-												context_1.rect(225, 460, 275, 200);
+												context_1.rect(125, 460, 450, 200);
 												context_1.stroke(); 
 												
 												var text = 'Ω';
@@ -250,66 +296,66 @@
 												context_1.textAlign = "left";
 												context_1.textBaseline = "top";
 												context_1.fillStyle = "black";
-												context_1.fillText(text, 260, 470);
+												context_1.fillText(text, 160, 470);
 												context_1.font = "11pt Verdana";
-												context_1.fillText("m0", 284, 483);
+												context_1.fillText("m0", 184, 483);
 												context_1.font = "18pt Verdana";
-												context_1.fillText("= "+document.getElementById("resultat_omegam0").innerHTML, 310, 470);
+												context_1.fillText("= "+document.getElementById("resultat_omegam0").innerHTML, 210, 470);
 												
 												var text = 'Ω';
 												context_1.font = "18pt Verdana";
 												context_1.textAlign = "left";
 												context_1.textBaseline = "top";
 												context_1.fillStyle = "black";
-												context_1.fillText(text, 260, 495);
+												context_1.fillText(text, 160, 495);
 												context_1.font = "11pt Verdana";
-												context_1.fillText("r0", 284, 508);
+												context_1.fillText("r0", 184, 508);
 												context_1.font = "18pt Verdana";
-												context_1.fillText("= "+document.getElementById("resultat_omegar0").innerHTML, 310, 495);
+												context_1.fillText("= "+document.getElementById("resultat_omegar0").innerHTML, 210, 495);
 												
 												var text = 'Ω';
 												context_1.font = "18pt Verdana";
 												context_1.textAlign = "left";
 												context_1.textBaseline = "top";
 												context_1.fillStyle = "black";
-												context_1.fillText(text, 260, 520);
+												context_1.fillText(text, 160, 520);
 												context_1.font = "11pt Verdana";
-												context_1.fillText("Λ0", 284, 533);
+												context_1.fillText("Λ0", 184, 533);
 												context_1.font = "18pt Verdana";
-												context_1.fillText("= "+document.getElementById("resultat_omegarlambda0").innerHTML, 310, 520);
+												context_1.fillText("= "+document.getElementById("resultat_omegarlambda0").innerHTML, 210, 520);
 												
 												var text = 'Ω';
 												context_1.font = "18pt Verdana";
 												context_1.textAlign = "left";
 												context_1.textBaseline = "top";
 												context_1.fillStyle = "black";
-												context_1.fillText(text, 260, 545);
+												context_1.fillText(text, 160, 545);
 												context_1.font = "11pt Verdana";
-												context_1.fillText("k0", 284, 558);
+												context_1.fillText("k0", 184, 558);
 												context_1.font = "18pt Verdana";
-												context_1.fillText("= "+document.getElementById("resultat_omegak0").innerHTML, 310, 545);
+												context_1.fillText("= "+document.getElementById("resultat_omegak0").innerHTML, 210, 545);
 												
 												var text = 'T';
 												context_1.font = "18pt Verdana";
 												context_1.textAlign = "left";
 												context_1.textBaseline = "top";
 												context_1.fillStyle = "black";
-												context_1.fillText(text, 260, 570);
+												context_1.fillText(text, 160, 570);
 												context_1.font = "11pt Verdana";
-												context_1.fillText("0", 284, 583);
+												context_1.fillText("0", 184, 583);
 												context_1.font = "18pt Verdana";
-												context_1.fillText("(k) = "+t0, 310, 570);
+												context_1.fillText("(K) = "+t0, 210, 570);
 												
 												var text = 'H';
 												context_1.font = "18pt Verdana";
 												context_1.textAlign = "left";
 												context_1.textBaseline = "top";
 												context_1.fillStyle = "black";
-												context_1.fillText(text, 260, 595);
+												context_1.fillText(text, 160, 595);
 												context_1.font = "11pt Verdana";
-												context_1.fillText("0", 284, 608);
+												context_1.fillText("0", 184, 608);
 												context_1.font = "18pt Verdana";
-												context_1.fillText("(Km.s-1.Mpc-1) = "+h0, 310, 595);
+												context_1.fillText("(Km.s^-1.Mpc^-1) = "+h0, 210, 595);
 												
 												var text = 'Cosmograve 2016';
 												context_1.font = "11pt Verdana";
@@ -363,9 +409,8 @@
 											};
 											document.getElementById("dl").addEventListener('click', dlCanvas, false);
 											zozor = new Image();
-											zozor.src = './img/SCP2003SNeCMBClust-1.png'; // Image de 80x80 pixels
 											
-											//context.drawImage(zozor, 0, 0, 298, 400);
+											update_modele();
 											calcul();
 											
 											var myImg = document.getElementById("canvas");
@@ -421,22 +466,22 @@
 								</p>
 								
 								<p><strong>Version 2009 :</strong><br />
-									<strong>Développé par :</strong>  Karim Bammou
-									& Brice Cervera
-									& Gaëlle Daste
+								<strong>Développé par :</strong>  Karim Bammou
+								& Brice Cervera
+								& Gaëlle Daste
 								</p>
 								<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
-							</div>
-						</div>
-						<script>
-							document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
-							document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
-							
-							document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
-							document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
-							
-							document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
-							document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
-						</script>
-					</body>
-				</html>																																																																																																																																
+								</div>
+								</div>
+								<script>
+								document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
+								document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
+								
+								document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
+								document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
+								
+								document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
+								document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
+								</script>
+								</body>
+								</html>																																																																																																																																																																
