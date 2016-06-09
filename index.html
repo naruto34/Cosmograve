@@ -65,7 +65,7 @@
 			</ul>
 			
 			<div id="tabs-1">
-				<p style="text-align: center; font-size:16px">Cosmograve est une application à but pédagogique créer dans le cadre du Projet tuteuré du Master de Physique Numérique de l'Université de Montpellier.<br />Le programme est composé de 2 parties :<br /><br />- l'évolution des paramètres cosmologique de Friedmann-lemaître<br />- trajectoire d'une particule au voisinage d'un trou noir.</p>
+				<p style="text-align: center; font-size:16px">Cosmograve est une application à but pédagogique créée dans le cadre de projets tuteurés du Master de Physique Numérique de l'Université de Montpellier.<br />Le programme est composé de 2 parties :<br /><br />- évolution des paramètres cosmologiques des univers de Friedmann-Lemaître<br />- trajectoires d'une particule libre en espace-temps de Schwarzschild.</p>
 				<p style="text-align: center;">
 					<img src='./img/separatrice.png' style="display: inline;" height="250px">
 					<img src='./img/univers_plat.png' style="display: none;" height="250px" >
@@ -175,7 +175,7 @@
 										</div>
 										<script type="text/javascript">
 											<!--
-											$( "#omegam0, #univ_plat" ).change(function() {
+											$( "#omegam0, #univ_plat, #liste" ).change(function() {
 												if(true == document.getElementById("univ_plat").checked){
 													Or_pre = 0;
 													c = Number(document.getElementById("c").value);
@@ -195,6 +195,7 @@
 														} else {
 													}
 													document.getElementById("omegalambda0").value = 1 - Number(document.getElementById("omegam0").value) - Number(Or_pre);
+													update_point();
 												}
 											});
 											
@@ -221,8 +222,8 @@
 											});
 											
 											$( "#H0" ).change(function() {
-												context.clearRect (0,0,largeur,hauteur);//
-												context.putImageData(image_fond, 0,0);//
+												context.clearRect (0,0,largeur,hauteur);
+												context.putImageData(image_fond, 0,0);
 												
 												context.save();
 												if($( "#H0" ).val() >= 0){
@@ -440,10 +441,10 @@
 							
 							<div id="tabs-4">
 								<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
-								<p>Encadré par Mr Cordoni Jean-Pierre, Mr Reboul Henri et Mme Mougenot Isabelle sous la réponsabilité de Mr Cassagne David.</p>
-								<p><strong>Version 2016 :</strong> Alpha - 0.7<br />
+								<p>Encadré par Jean-Pierre Cordoni, Isabelle Mougenot et Henri Reboul  sous la réponsabilité de David Cassagne.</p>
+								<p><strong>Version 2016 :</strong> Alpha - 0.8<br />
 									<strong>Développé par :</strong>  Anthony Gourdin
-									& Mahuta Tamatoa
+									& Tamatoa Mahuta
 								& Hamza Alhousseini</p>
 								
 								<p><strong>Version 2015 :</strong><br />

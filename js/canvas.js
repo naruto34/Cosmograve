@@ -19,6 +19,11 @@ function FindPosition(oElement)
 
 function GetCoordinates(e)
 {
+	
+	if(document.getElementById("univ_plat").checked == true){
+		document.getElementById("univ_plat").checked = false;
+	}
+	
 	PosX = 0;
 	PosY = 0;
 	var ImgPos;
@@ -211,7 +216,7 @@ function update_modele(){
 	context.fillText("Λ", 32,185);
 	
 	context.save();
-	var text = 'Pas de BB';
+	var text = 'Ni Big Bang';
 	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
@@ -219,7 +224,7 @@ function update_modele(){
 	context.rotate(-0.8);
 	context.translate(-80,60);
 	context.fillText(text,55,45);
-	context.fillText('Pas de BC',65,60);
+	context.fillText('Ni Big Crunch',65,60);
 	context.restore();
 	
 	context.save();
@@ -246,7 +251,7 @@ function update_modele(){
 	
 	context.save();
 	var text = 'Plat';
-	context.font = "bold 8pt Verdana";
+	context.font = "8pt Verdana";
 	context.textAlign = "left";
 	context.textBaseline = "top";
 	context.fillStyle = "red";

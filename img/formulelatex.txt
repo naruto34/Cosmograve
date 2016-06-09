@@ -21,3 +21,11 @@ l(z_2) = (\frac{1+z_1}{1+z_2})l(z_1)
 \rho_r = \frac{4 \sigma T^4}{c^3}, \qquad avec \sigma = \frac{2 \pi^5 k^4}{15 h^3 c^2}
 
 ds^2 = -R^2(t) [\frac{dr^2}{1-kr^2} + r^2d\theta^2 + r^2sin^2 \theta d\phi^2] + c^2dt^2
+
+- \frac{k}{R^2}- \frac{\dot R^2}{c^2R^2} - \frac{2\ddot R}{Rc^2} + \Lambda = \frac{8 \pi G p}{c^4}
+
+\frac{k}{R^2} + \frac{\dot R^2}{c^2R^2} - \frac{\Lambda}{3} = \frac{8 \pi G \rho}{3c^2}
+
+\Omega_m (t) + \Omega_r (t) + \Omega_\Lambda (t) + \Omega_k (t) = 1 \quad \forall t
+
+\frac{H}{H_0} = E^\frac{1}{2} (z)\; ,\quad \frac{\Omega_r}{\Omega_{r0}} = \frac{(1+z)^4}{E(z)} \;, \quad\frac{\Omega_m}{\Omega_{m0}} = \frac{(1+z)^3}{E(z)}\;, \quad \frac{\Omega_\Lambda}{\Omega_{\Lambda0}} = \frac{1}{E(z)} \quad et\quad \frac{\Omega_k}{\Omega_{k0}} = \frac{(1+z)^2}{E(z)}

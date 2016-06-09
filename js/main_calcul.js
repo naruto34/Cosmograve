@@ -24,9 +24,9 @@ function calcul(){   // declaration de la fonction
 	//H0parsec = h0/(3.085677581*Math.pow(10, 19));
 	
 	au = 149597870700;
-	H0engannee = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
-	H0parsec = H0engannee;
-	H0engannee = H0engannee*(3600*24*nbrjours)*Math.pow(10, 9);
+	H0parsec = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
+	H0enannee = H0parsec*(3600*24*nbrjours);
+	H0engannee = H0parsec*(3600*24*nbrjours)*Math.pow(10, 9);
 	
 	Or = 0;
 	if (document.getElementById("liste").options[2].selected) {
@@ -80,8 +80,10 @@ function calcul(){   // declaration de la fonction
 	document.getElementById("resultat_omegarlambda0").innerHTML = omegalambda0;
 	document.getElementById("resultat_omegak0").innerHTML = omegak0;
 	
-	age = simpson(0, 1e5, 1e6, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	age_afficher = Number(age.toFixed(6));
+	age = simpson(0, 1e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	age = age*(1./H0parsec);
+	age = age/((3600*24*nbrjours)*Math.pow(10, 9));
+	age_afficher = Number(age.toFixed(7));
 	
 	if(age >= 0){
 		document.getElementById("resultat_ageunivers").innerHTML = "Temps depuis le Big Bang = "+age_afficher+" Ga";
@@ -124,10 +126,10 @@ function calcul(){   // declaration de la fonction
 	omegalambda0_bis = Number(omegalambda0);
 	if(omegalambda0_bis < OlER_max){
 		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
-			if(yrunge<0.1){pas=Math.pow(10,-6);}
+			if(yrunge<0.25){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
 			data.push({date:age+i/H0engannee,close:yrunge});
-			if(yrunge >= 50){alert("Univers avec Big Crunch, non calculer pour raison de stabiliter.")}
+			if(yrunge >= 50){alert("Univers avec Big Crunch, non calculer enti\350rement pour raison de stabilit\351.")}
 			i=i+pas;
 		}
 		}else if(omegalambda0_bis == OlER_max){

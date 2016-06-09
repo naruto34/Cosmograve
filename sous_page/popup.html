@@ -104,8 +104,8 @@
 			dl=dm*(1+(z2-z1));
 			
 			agebetween = integrale(Number(z1), Number(z2), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-			tempsReception = integrale(Number(z1), 0, 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-			tempsEmission = tempsReception - agebetween;
+			tempsReception = integrale(0, Number(z2), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+			tempsEmission = integrale(0, Number(z1), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
 			
 			dm = Math.abs(dm);
 			dm1 = Math.abs(dm1);
@@ -228,7 +228,7 @@
 			
 			
 			<div>
-			<p>Les 2 calculs suivant utilise z<sub>1</sub>,</p>
+			<p>Les 2 calculs suivants utilisent z<sub>1</sub>,</p>
 			<div class="desact_retour">
 			<label for="diametre">D =</label>
 			<input id="diametre" value="" maxlength="17" type="text">  (m)
