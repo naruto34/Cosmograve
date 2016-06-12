@@ -82,18 +82,18 @@
 			z2 = 1e7;
 			}
 			
-			integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-			integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-			integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+			integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+			integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+			integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
 			
 			if (omegak0>0){
 			dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ);
 			dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_1);
 			dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_2);
 			}else if (omegak0==0){
-			dm=(c/(H0parsec) * simpson(Number(z1), Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
-			dm1=(c/(H0parsec) * simpson(0, Number(z1), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
-			dm2=(c/(H0parsec) * simpson(0, Number(z2), 1e5, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+			dm=(c/(H0parsec) * simpson(Number(z1), Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+			dm1=(c/(H0parsec) * simpson(0, Number(z1), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+			dm2=(c/(H0parsec) * simpson(0, Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
 			}else{
 			dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
 			dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_1);
@@ -232,12 +232,12 @@
 			<div class="desact_retour">
 			<label for="diametre">D =</label>
 			<input id="diametre" value="" maxlength="17" type="text">  (m)
-			<input type="button" value="--> θ" onClick="window.document.getElementById('pHi').value = window.document.getElementById('diametre').value/ Number(dda)">
+			<input type="button" value="--> θ" onClick="window.document.getElementById('pHi').value = 206265*window.document.getElementById('diametre').value/ Number(dda)">
 			</div>
 			<div class="desact_retour">
-			<input type="button" value="D <--" onClick="window.document.getElementById('diametre').value = window.document.getElementById('pHi').value* Number(dda)">
+			<input type="button" value="D <--" onClick="window.document.getElementById('diametre').value = (window.document.getElementById('pHi').value/206265)* Number(dda)">
 			<label for="pHi">θ =</label>
-			<input id="pHi" value="" maxlength="17" type="text"> (rad)
+			<input id="pHi" value="" maxlength="17" type="text"> (Seconde d'arc)
 			</div>
 			</div>
 			</div>

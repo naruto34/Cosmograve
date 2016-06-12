@@ -59,8 +59,8 @@
 			
 			<ul>
 				<li><a href="#tabs-1">Accueil</a></li>
-				<li><a href="#tabs-2">Cosmologie</a></li>
-				<li><a href="#tabs-3">Gravitation</a></li>
+				<li><a href="#tabs-2">Univers</a></li>
+				<li><a href="#tabs-3">Trajectoires</a></li>
 				<li><a href="#tabs-4">A propos</a></li>
 			</ul>
 			
@@ -262,6 +262,15 @@
 												context.fillStyle = "green";
 												context.fillText(text,170,260);
 												
+												if($( "#H0" ).val() < 0){
+													var text = 'H0 < 0';
+													context.font = "bold 8pt Verdana";
+													context.textAlign = "left";
+													context.textBaseline = "top";
+													context.fillStyle = "black";
+													context.fillText(text, 15, 15);
+												}
+												
 												image_fond_temp = context.getImageData(0, 0, largeur, hauteur);
 												
 												update_point();
@@ -357,6 +366,13 @@
 												context_1.fillText("0", 184, 608);
 												context_1.font = "18pt Verdana";
 												context_1.fillText("(Km.s^-1.Mpc^-1) = "+h0, 210, 595);
+												
+												var text = document.getElementById("resultat_ageunivers").innerHTML;
+												context_1.font = "18pt Verdana";
+												context_1.textAlign = "left";
+												context_1.textBaseline = "top";
+												context_1.fillStyle = "black";
+												context_1.fillText(text, 160, 620);
 												
 												var text = 'Cosmograve 2016';
 												context_1.font = "11pt Verdana";
