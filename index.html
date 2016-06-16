@@ -7,51 +7,29 @@
 		<meta http-equiv="Content-Language" content="fr-FR" />
 		<title>Cosmograve</title>
 		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./lib/jquery-ui-1.11.4/jquery-ui.min.css">
-		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./css/style.css">
+		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./css/style_min.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="./css/mobile.css" />
 		
 		<script src="./lib/jquery-1.12.3.min.js"></script>
-		<script src="./lib/math.js"></script>
-		<script src="./lib/d3.js"></script>
+		<script src="./lib/math.min.js"></script>
+		<script src="./lib/d3_min.js"></script>
 		<script src="./lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		<script src="./lib/canvg.min.js"></script>
 		<script src="./lib/jsPDF.js"></script>
-		<script src="./lib/jspdf_addimage.js"></script>
-		<script src="./lib/FileSaver.js"></script>
+		<script src="./lib/jspdf_addimage_min.js"></script>
+		<script src="./lib/FileSaver_min.js"></script>
 		
-		<script src="./js/rungekutta.js"></script>
-		<script src="./js/range.js"></script>
+		<script src="./js/rungekutta_min.js"></script>
+		<script src="./js/range_min.js"></script>
 		<script src="./js/integrale.js"></script>
-		<script src="./js/graphique.js"></script>
+		<script src="./js/graphique_min.js"></script>
 		<script src="./js/main_calcul.js"></script>
-		<script src="./js/ouvrirPopup.js"></script>
-		<script src="./js/cosh.js"></script>
-		<script src="./js/canvas.js"></script>
-		
-		<script>
-			$(function() {
-				$("#tabs-a").tabs();
-				$("#tabs-b").tabs();
-				$( "#tabs" ).tabs();
-			});
-			
-			$(function() {
-				$( "#para" ).button({
-					icons: {
-						primary: "ui-icon-gear"
-					},
-					text: false
-				});
-			});
-			
-			var largeur_fenetre = $(window).width();
-			var hauteur_fenetre = $(window).height();
-			
-			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-				alert("ces un mobile");
-			}
-		</script>
-		
+		<script src="./js/ouvrirPopup_min.js"></script>
+		<script src="./js/cosh_min.js"></script>
+		<script src="./js/canvas_min.js"></script>
+		<script src="./js/initialisation_index_min.js"></script>
+		<script src="./js/defiler_image_min.js"></script>
+		<script src="./js/ddl_canvas_min.js"></script>
 	</head>
 	
 	<body>
@@ -74,20 +52,10 @@
 				</p>
 				
 				<script type="text/javascript">
+					//pour faire defiler les images
 					I = 0 ;
 					Imax = document.images.length - 1 ;
-					setTimeout(suivante, 2000) ;
-					
-					function suivante()
-					{
-						document.images[I].style.display = "none" ;
-						if ( I < Imax )
-						I++;
-						else
-						I=0;    
-						document.images[I].style.display = "inline";
-						setTimeout(suivante, 3000) ;
-					}
+					suivante();
 				</script> 
 				<p style="text-align: center;"><img src="./img/logo.png" height="200px" /></p>
 			</div>
@@ -147,7 +115,6 @@
 						</form>
 						
 						<div id="graphique">
-							<script src="js/graphique_initial.js"></script>
 						</div>
 						<canvas id="canvas_1" style="display : none;" width="750px"></canvas>
 						
@@ -168,272 +135,27 @@
 										</div>
 										
 										<div id="modele">
-											<!--<img id="myImgId" src="./img/SCP2003SNeCMBClust-1.png" alt="modele" style="height:400px;"/>-->
 											<canvas id="canvas" width="298" height="400">
 												<p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
 											</canvas>
 										</div>
+										<script src="./js/univers_plat_min.js"></script>
+										<script src="./js/canvas_h0neg_min.js"></script>
 										<script type="text/javascript">
-											<!--
-											$( "#omegam0, #univ_plat, #liste" ).change(function() {
-												if(true == document.getElementById("univ_plat").checked){
-													Or_pre = 0;
-													c = Number(document.getElementById("c").value);
-													G = Number(document.getElementById("G").value);
-													h = Number(document.getElementById("h").value);
-													k = Number(document.getElementById("k").value);
-													if (document.getElementById("liste").options[2].selected) {
-														sigma_pre = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
-														rho_r_pre = (4*sigma_pre*Math.pow(t0, 4))/(Math.pow(c, 3));
-														Or_pre =(8*Math.PI*G*rho_r_pre)/(3*Math.pow(H0parsec, 2));
-														Or_pre=1.68*Or_pre;
-														} else if (document.getElementById("liste").options[1].selected) {
-														sigma_pre = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
-														
-														rho_r_pre = (4*sigma_pre*Math.pow(t0, 4))/(Math.pow(c, 3));
-														Or_pre =(8*Math.PI*G*rho_r_pre)/(3*Math.pow(H0parsec, 2));
-														} else {
-													}
-													document.getElementById("omegalambda0").value = 1 - Number(document.getElementById("omegam0").value) - Number(Or_pre);
-													update_point();
-												}
-											});
-											
-											$( "#omegalambda0" ).change(function() {
-												if(true == document.getElementById("univ_plat").checked){
-													Or_pre = 0;
-													c = Number(document.getElementById("c").value);
-													G = Number(document.getElementById("G").value);
-													h = Number(document.getElementById("h").value);
-													k = Number(document.getElementById("k").value);
-													if (document.getElementById("liste").options[2].selected) {
-														sigma_pre = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
-														rho_r_pre = (4*sigma_pre*Math.pow(t0, 4))/(Math.pow(c, 3));
-														Or_pre =(8*Math.PI*G*rho_r_pre)/(3*Math.pow(H0parsec, 2));
-														Or_pre=1.68*Or_pre;
-														} else if (document.getElementById("liste").options[1].selected) {
-														sigma_pre = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
-														rho_r_pre = (4*sigma_pre*Math.pow(t0, 4))/(Math.pow(c, 3));
-														Or_pre =(8*Math.PI*G*rho_r_pre)/(3*Math.pow(H0parsec, 2));
-														} else {
-													}
-													document.getElementById("omegam0").value = 1 - Number(document.getElementById("omegalambda0").value) - Or_pre;
-												}
-											});
-											
-											$( "#H0" ).change(function() {
-												context.clearRect (0,0,largeur,hauteur);
-												context.putImageData(image_fond, 0,0);
-												
-												context.save();
-												if($( "#H0" ).val() >= 0){
-													var text = 'Big Bang';
-													}else{
-													var text = 'Big Crunch';
-												}
-												context.font = "8pt Verdana";
-												context.textAlign = "left";
-												context.textBaseline = "top";
-												context.fillStyle = "blue";
-												context.rotate(-0.8);
-												context.translate(-100,80);
-												context.fillText(text,115,80);
-												context.restore();
-												
-												if($( "#H0" ).val() >= 0){
-													var text = 'Pas de BC';
-													}else{
-													var text = 'Big Crunch';
-												}
-												context.font = "8pt Verdana";
-												context.textAlign = "left";
-												context.textBaseline = "top";
-												context.fillStyle = "green";
-												context.fillText(text,140,220);
-												
-												if($( "#H0" ).val() >= 0){
-													var text = 'Big Crunch';
-													}else{
-													var text = 'Pas de BC';
-												}
-												context.font = "8pt Verdana";
-												context.textAlign = "left";
-												context.textBaseline = "top";
-												context.fillStyle = "green";
-												context.fillText(text,170,260);
-												
-												if($( "#H0" ).val() < 0){
-													var text = 'H0 < 0';
-													context.font = "bold 8pt Verdana";
-													context.textAlign = "left";
-													context.textBaseline = "top";
-													context.fillStyle = "black";
-													context.fillText(text, 15, 15);
-												}
-												
-												image_fond_temp = context.getImageData(0, 0, largeur, hauteur);
-												
-												update_point();
-											});
-											
 											canvas  = document.getElementById('canvas');
 											context = canvas.getContext('2d');
 											
 											graphique  = document.getElementById('graphique');
 											
-											
-											function dlCanvas() {
-												svg = $('svg').parent().html()
-												canvg('canvas_1', svg);
-												canvas_1 = document.getElementById("canvas_1");
-												context_1 = canvas_1.getContext('2d');
-												var w = canvas_1.width;
-												var h = canvas_1.height;
-												data = context_1.getImageData(0, 0, w, h);//
-												context_1.clearRect (0,0,w,h);//
-												canvas_1.height = 680;
-												canvas_1.width = 760;
-												context_1.putImageData(data, 0,0);//
-												var w = canvas_1.width;
-												var h = canvas_1.height;
-												
-												context_1.beginPath();
-												context_1.rect(125, 460, 450, 200);
-												context_1.stroke(); 
-												
-												var text = 'Ω';
-												context_1.font = "18pt Verdana";
-												context_1.textAlign = "left";
-												context_1.textBaseline = "top";
-												context_1.fillStyle = "black";
-												context_1.fillText(text, 160, 470);
-												context_1.font = "11pt Verdana";
-												context_1.fillText("m0", 184, 483);
-												context_1.font = "18pt Verdana";
-												context_1.fillText("= "+document.getElementById("resultat_omegam0").innerHTML, 210, 470);
-												
-												var text = 'Ω';
-												context_1.font = "18pt Verdana";
-												context_1.textAlign = "left";
-												context_1.textBaseline = "top";
-												context_1.fillStyle = "black";
-												context_1.fillText(text, 160, 495);
-												context_1.font = "11pt Verdana";
-												context_1.fillText("r0", 184, 508);
-												context_1.font = "18pt Verdana";
-												context_1.fillText("= "+document.getElementById("resultat_omegar0").innerHTML, 210, 495);
-												
-												var text = 'Ω';
-												context_1.font = "18pt Verdana";
-												context_1.textAlign = "left";
-												context_1.textBaseline = "top";
-												context_1.fillStyle = "black";
-												context_1.fillText(text, 160, 520);
-												context_1.font = "11pt Verdana";
-												context_1.fillText("Λ0", 184, 533);
-												context_1.font = "18pt Verdana";
-												context_1.fillText("= "+document.getElementById("resultat_omegarlambda0").innerHTML, 210, 520);
-												
-												var text = 'Ω';
-												context_1.font = "18pt Verdana";
-												context_1.textAlign = "left";
-												context_1.textBaseline = "top";
-												context_1.fillStyle = "black";
-												context_1.fillText(text, 160, 545);
-												context_1.font = "11pt Verdana";
-												context_1.fillText("k0", 184, 558);
-												context_1.font = "18pt Verdana";
-												context_1.fillText("= "+document.getElementById("resultat_omegak0").innerHTML, 210, 545);
-												
-												var text = 'T';
-												context_1.font = "18pt Verdana";
-												context_1.textAlign = "left";
-												context_1.textBaseline = "top";
-												context_1.fillStyle = "black";
-												context_1.fillText(text, 160, 570);
-												context_1.font = "11pt Verdana";
-												context_1.fillText("0", 184, 583);
-												context_1.font = "18pt Verdana";
-												context_1.fillText("(K) = "+t0, 210, 570);
-												
-												var text = 'H';
-												context_1.font = "18pt Verdana";
-												context_1.textAlign = "left";
-												context_1.textBaseline = "top";
-												context_1.fillStyle = "black";
-												context_1.fillText(text, 160, 595);
-												context_1.font = "11pt Verdana";
-												context_1.fillText("0", 184, 608);
-												context_1.font = "18pt Verdana";
-												context_1.fillText("(Km.s^-1.Mpc^-1) = "+h0, 210, 595);
-												
-												var text = document.getElementById("resultat_ageunivers").innerHTML;
-												context_1.font = "18pt Verdana";
-												context_1.textAlign = "left";
-												context_1.textBaseline = "top";
-												context_1.fillStyle = "black";
-												context_1.fillText(text, 160, 620);
-												
-												var text = 'Cosmograve 2016';
-												context_1.font = "11pt Verdana";
-												context_1.textAlign = "left";
-												context_1.textBaseline = "top";
-												context_1.fillStyle = "black";
-												context_1.fillText(text, 290, 665);
-												
-												if(document.getElementById("type").options[document.getElementById('type').selectedIndex].text == "pdf"){
-													data = context_1.getImageData(0, 0, w, h);
-													var compositeOperation = context_1.globalCompositeOperation;
-													context_1.globalCompositeOperation = "destination-over";
-													context_1.fillStyle = "white";
-													context_1.fillRect(0,0,w,h);
-													
-													var imgData = canvas_1.toDataURL("image/jpeg", 1.0);
-													var pdf = new jsPDF();
-													
-													context_1.clearRect (0,0,w,h);
-													context_1.putImageData(data, 0,0);
-													context.globalCompositeOperation = compositeOperation;
-													
-													pdf.addImage(imgData, 'JPEG', 0, 0);
-													
-													pdf.save("Cosmograve.pdf");
-													}else if(document.getElementById("type").options[document.getElementById('type').selectedIndex].text == "png"){
-													img = canvas_1.toDataURL("image/"+document.getElementById("type").options[document.getElementById('type').selectedIndex].text);
-													img = img.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-													img = img.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Cosmograve.'+document.getElementById("type").options[document.getElementById('type').selectedIndex].text);
-													document.getElementById("dl").setAttribute("download", "Cosmograve."+document.getElementById('type').options[document.getElementById('type').selectedIndex].text);
-													this.href = img;
-													}else{
-													data = context_1.getImageData(0, 0, w, h);
-													var compositeOperation = context_1.globalCompositeOperation;
-													context_1.globalCompositeOperation = "destination-over";
-													context_1.fillStyle = "white";
-													context_1.fillRect(0,0,w,h);
-													
-													img = canvas_1.toDataURL("image/"+document.getElementById("type").options[document.getElementById('type').selectedIndex].text);
-													
-													context_1.clearRect (0,0,w,h);
-													context_1.putImageData(data, 0,0);
-													context.globalCompositeOperation = compositeOperation;
-													
-													img = img.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-													img = img.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Cosmograve.'+document.getElementById("type").options[document.getElementById('type').selectedIndex].text);
-													document.getElementById("dl").setAttribute("download", "Cosmograve."+document.getElementById('type').options[document.getElementById('type').selectedIndex].text);
-													
-													this.href = img;
-												}
-											};
 											document.getElementById("dl").addEventListener('click', dlCanvas, false);
-											zozor = new Image();
 											
+											//genere le premier graphique des generatrices et lance le 1er calcul
 											update_modele();
 											calcul();
 											
+											//lance la fonction qui actualise le graph des generatrices et les valeurs des omega r et lambda lorque l'on click dessus
 											var myImg = document.getElementById("canvas");
 											myImg.onmousedown = GetCoordinates;
-											
-											//-->
 										</script>
 										
 									</div>
@@ -450,55 +172,56 @@
 										<object id="theorie_gravi" type="text/html" data="./sous_page/theorie_gravitation.html" width="1300" height="560"></object>
 									</div>
 									<div id="tabs-b-2">
-										<object id="simu_gravi" type="text/html" data="./sous_page/gravitation_simulation.html" width="1300" height="560"></object>
+									<object id="simu_gravi" type="text/html" data="./sous_page/gravitation_simulation.html" width="1300" height="560"></object>
 									</div>
-								</div>
-							</div>
-							
-							<div id="tabs-4">
-								<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
-								<p>Encadré par Jean-Pierre Cordoni, Isabelle Mougenot et Henri Reboul  sous la réponsabilité de David Cassagne.</p>
-								<p><strong>Version 2016 :</strong> Alpha - 0.8<br />
+									</div>
+									</div>
+									
+									<div id="tabs-4">
+									<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
+									<p>Encadré par Jean-Pierre Cordoni, Isabelle Mougenot et Henri Reboul  sous la réponsabilité de David Cassagne.</p>
+									<p><strong>Version 2016 :</strong> Alpha - 0.9<br />
 									<strong>Développé par :</strong>  Anthony Gourdin
 									& Tamatoa Mahuta
-								& Hamza Alhousseini</p>
-								
-								<p><strong>Version 2015 :</strong><br />
+									& Hamza Alhousseini</p>
+									
+									<p><strong>Version 2015 :</strong><br />
 									<strong>Développé par :</strong>  Thibault Jarossay
 									& Samir Loukyly
 									& Franck Malet
-								</p>
-								
-								<p><strong>Version 2014 :</strong><br />
+									</p>
+									
+									<p><strong>Version 2014 :</strong><br />
 									<strong>Développé par :</strong> Pierre Barbotin
 									& Thomas Vicario
 									& Damien Maurin
-								</p>
-								
-								<p><strong>Version 2013 :</strong><br />
+									</p>
+									
+									<p><strong>Version 2013 :</strong><br />
 									<strong>Développé par :</strong>  Nicolas Boulay
 									& Alexandra Grabon
 									& Dwight Smite
 									& El Hadj Modou Thiam
-								</p>
-								
-								<p><strong>Version 2009 :</strong><br />
-								<strong>Développé par :</strong>  Karim Bammou
-								& Brice Cervera
-								& Gaëlle Daste
-								</p>
-								<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
-								</div>
-								</div>
-								<script>
-								document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
-								document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
-								
-								document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
-								document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
-								
-								document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
-								document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
-								</script>
-								</body>
-								</html>																																																																																																																																																																
+									</p>
+									
+									<p><strong>Version 2009 :</strong><br />
+									<strong>Développé par :</strong>  Karim Bammou
+									& Brice Cervera
+									& Gaëlle Daste
+									</p>
+									<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
+									</div>
+									</div>
+									<script type="text/javascript">
+									//adapte la taille des onglets qui sont sous forme d'objet
+									document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);
+									document.getElementById("theorie").setAttribute("height", hauteur_fenetre-80);
+									
+									document.getElementById("theorie_gravi").setAttribute("width", largeur_fenetre-70);
+									document.getElementById("theorie_gravi").setAttribute("height", hauteur_fenetre-80);
+									
+									document.getElementById("simu_gravi").setAttribute("width", largeur_fenetre-70);
+									document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
+									</script>
+									</body>
+									</html>																																																																																																																																																																									

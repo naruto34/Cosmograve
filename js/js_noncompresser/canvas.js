@@ -1,6 +1,4 @@
-﻿<!--
-
-function FindPosition(oElement)
+﻿function FindPosition(oElement)
 {
 	if(typeof( oElement.offsetParent ) != "undefined")
 	{
@@ -93,8 +91,6 @@ function update_modele(){
 	canvas  = document.getElementById('canvas');
 	context = canvas.getContext('2d');
 	
-	var zozor = new Image();
-	
 	context.beginPath();
 	context.moveTo(0, 0);
 	context.lineTo(298, 0);
@@ -133,16 +129,10 @@ function update_modele(){
 	
 	var text = '2';
 	context.font = "12pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "black";
 	context.fillText(text,204,362);
 	
 	var text = '0';
 	context.font = "12pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "black";
 	context.fillText(text, 47, 362);
 	
 	context.beginPath();
@@ -153,9 +143,6 @@ function update_modele(){
 	
 	var text = '0';
 	context.font = "12pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "black";
 	context.fillText(text, 40, 240);
 	
 	context.beginPath();
@@ -166,9 +153,6 @@ function update_modele(){
 	
 	var text = '-1';
 	context.font = "12pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "black";
 	context.fillText(text, 35, 312);
 	
 	context.beginPath();
@@ -179,9 +163,6 @@ function update_modele(){
 	
 	var text = '1';
 	context.font = "12pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "black";
 	context.fillText(text, 40, 168);
 	
 	context.beginPath();
@@ -192,25 +173,16 @@ function update_modele(){
 	
 	var text = '2';
 	context.font = "12pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "black";
 	context.fillText(text, 40, 95);
 	
 	var text = 'Ω';
 	context.font = "23pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "black";
 	context.fillText(text,140,362);
 	context.font = "16pt Verdana";
 	context.fillText("m", 164,375);
 	
 	var text = 'Ω';
 	context.font = "23pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
-	context.fillStyle = "black";
 	context.fillText(text,10,172);
 	context.font = "16pt Verdana";
 	context.fillText("Λ", 32,185);
@@ -218,8 +190,6 @@ function update_modele(){
 	context.save();
 	var text = 'Ni Big Bang';
 	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
 	context.fillStyle = "blue";
 	context.rotate(-0.8);
 	context.translate(-80,60);
@@ -230,8 +200,6 @@ function update_modele(){
 	context.save();
 	var text = 'Fermé';
 	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
 	context.fillStyle = "red";
 	context.rotate(0.7);
 	context.translate(160,-180);
@@ -241,8 +209,6 @@ function update_modele(){
 	context.save();
 	var text = 'Ouvert';
 	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
 	context.fillStyle = "red";
 	context.rotate(0.7);
 	context.translate(160,-180);
@@ -252,8 +218,6 @@ function update_modele(){
 	context.save();
 	var text = 'Plat';
 	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
 	context.fillStyle = "red";
 	context.rotate(0.7);
 	context.translate(160,-180);
@@ -276,8 +240,6 @@ function update_modele(){
 		
 		//alert(x+"	"+y);
 		context.lineTo(x, y);
-		
-		
 	}
 	context.stroke();
 	context.restore();
@@ -325,7 +287,7 @@ function update_modele(){
 	Om=0.5;
 	v = 0;
 	while (Om<=1.4){
-		v =(1./3.)*Math.acos((1./Om)-1.) ;
+		v =(1./3.)*Math.acos((1./Om)-1.);
 		OlER=4.*Om*Math.cos(v)*Math.cos(v)*Math.cos(v);
 		x=Omo+Om*dtx;
 		y=Olo-(OlER*dty);
@@ -353,8 +315,6 @@ function update_modele(){
 	context.save();
 	var text = 'Big Bang';
 	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
 	context.fillStyle = "blue";
 	context.rotate(-0.8);
 	context.translate(-100,80);
@@ -363,15 +323,11 @@ function update_modele(){
 	
 	var text = 'Pas de BC';
 	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
 	context.fillStyle = "green";
 	context.fillText(text,140,220);
 	
 	var text = 'Big Crunch';
 	context.font = "8pt Verdana";
-	context.textAlign = "left";
-	context.textBaseline = "top";
 	context.fillStyle = "green";
 	context.fillText(text,170,260);
 	
@@ -379,5 +335,3 @@ function update_modele(){
 	
 	update_point();	
 }
-
-//-->

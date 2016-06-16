@@ -6,139 +6,23 @@
 		<meta name="description" content="Cosmograve, partie cosmo, programme qui permet de déterminer l'age de l'univers ainsi que tracer son evolution" />
 		<meta http-equiv="Content-Language" content="fr-FR" />
 		<title>Calculs</title>
-		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../css/style_min.css">
 		<link rel="stylesheet" href="../lib/jquery-ui-1.11.4/jquery-ui.min.css">
 		<script src="../lib/jquery-1.12.3.min.js"></script>
-		<script src="../lib/math.js"></script>
-		<script src="../lib/d3.js"></script>
+		<script src="../lib/math.min.js"></script>
 		<script src="../lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		
 		<script src="../js/integrale.js"></script>
-		<script src="../js/init.js"></script>
-		<script src="../js/formreturn.js"></script>
-		<script src="../js/calculDpHi.js"></script>
+		<script src="../js/init_min.js"></script>
+		<script src="../js/formreturn_min.js"></script>
+		<script src="../js/calculDpTheta_min.js"></script>
+		<script src="../js/calcul_annexe.js"></script>
 		<script>window.onload=init;</script>
 		
 		<script>
 			$(function() {
 				$( "#tabs" ).tabs();
 			});
-		</script>
-		
-		<script>
-			function calcu(){
-				c = Number(window.opener.document.getElementById("c").value);
-				G = Number(window.opener.document.getElementById("G").value);
-				h = Number(window.opener.document.getElementById("h").value);
-				k = Number(window.opener.document.getElementById("k").value);
-				typeannee = window.opener.document.getElementById("typeannee").value;
-				
-				t0 = document.getElementById("T0").value;
-				h0 = document.getElementById("H0").value; 
-				omegam0 = Number(document.getElementById("omegam0").value);
-				omegalambda0 = Number(document.getElementById("omegalambda0").value);
-				
-				if(typeannee == "Sidérale"){
-					nbrjours = 365.256363051;
-					}else if(typeannee == "Julienne"){
-					nbrjours = 365.25;
-					}else if(typeannee == "Tropique (2000)"){
-					nbrjours = 365.242190517;
-					}else{
-					nbrjours = 365.2425;
-				}
-				
-				au = 149597870700;
-				H0engannee = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
-				H0parsec = H0engannee;
-				H0engannee = H0engannee*(3600*24*nbrjours)*Math.pow(10, 9);
-				
-				Or = 0;
-				if (document.getElementById("type") == "Matière, Lambda, RFC et Neutrinos") {
-					sigma = (2*Math.pow(Math.PI, 5)*Math.pow(k, 4))/(15*Math.pow(h, 3)*Math.pow(c, 2));
-					rho_r = (4*sigma*Math.pow(t0, 4))/(Math.pow(c, 3));
-					Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-					//Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
-					Or=1.68*Or;
-					Or = Or.toExponential();
-					} else if (document.getElementById("type") == "Matière, Lambda et RFC") {
-					Or =(8*Math.PI*G*rho_r)/(3*Math.pow(H0parsec, 2));
-					//Or=(1.412171e-41)*Math.pow(t0,4)/(3*Math.pow(h0/(3.085678e19),2));
-					Or = Or.toExponential();
-					} else {
-				}
-				
-				omegalambda0 = omegalambda0.toExponential();
-				
-				omegak0 = 1-Or-omegam0-omegalambda0;
-				
-				z1 = document.getElementById("z1").value;
-				z2 = document.getElementById("z2").value;
-				
-				if(z1 == "inf"){
-					z1 = 1e7;
-				}
-				if(z2 == "inf"){
-					z2 = 1e7;
-				}
-				
-				if (omegak0>0){
-					integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-					integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-					integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-					dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ);
-					dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_1);
-					dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_2);
-					}else if (omegak0==0){
-					dm=(c/(H0parsec) * simpson(Number(z1), Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
-					dm1=(c/(H0parsec) * simpson(0, Number(z1), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
-					dm2=(c/(H0parsec) * simpson(0, Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
-					}else{
-					integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-					integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-					integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e7, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-					dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
-					dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_1);
-					dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_2);
-				}
-				
-				dda=dm1/(1+z1);
-				dl=dm*(1+(z2-z1));
-				
-				agebetween = integrale(Number(z1), Number(z2), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-				tempsReception = integrale(0, Number(z2), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-				tempsEmission = integrale(0, Number(z1), 1e7, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-				
-				dm = Math.abs(dm);
-				dm1 = Math.abs(dm1);
-				dm2 = Math.abs(dm2);
-				
-				if(dm != 0){
-					dm = dm.toPrecision(5);
-				}
-				if(dm1 != 0){
-					dm1 = dm1.toPrecision(5);
-				}
-				if(dm2 != 0){
-					dm2 = dm2.toPrecision(5);
-				}
-				if(agebetween != 0){
-					agebetween = agebetween.toPrecision(5);
-				}
-				if(tempsReception != 0){
-					tempsReception = tempsReception.toPrecision(5);
-				}
-				if(tempsEmission != 0){
-					tempsEmission = tempsEmission.toPrecision(5);
-				}
-				
-				document.getElementById("dm").innerHTML = dm;
-				document.getElementById("dm1").innerHTML = dm1;
-				document.getElementById("dm2").innerHTML = dm2;
-				document.getElementById("agebetween").innerHTML = agebetween;
-				document.getElementById("tempsReception").innerHTML = tempsReception;
-				document.getElementById("tempsEmission").innerHTML = tempsEmission;
-			}
 		</script>
 	</head>
 	
@@ -234,12 +118,12 @@
 						<div class="desact_retour">
 							<label for="diametre">D =</label>
 							<input id="diametre" value="" maxlength="17" type="text">  (m)
-							<input type="button" value="--> θ" onClick="window.document.getElementById('pHi').value = 206265*window.document.getElementById('diametre').value/ Number(dda)">
+							<input type="button" value="--> θ" onClick="calcultheta();">
 						</div>
 						<div class="desact_retour">
-							<input type="button" value="D <--" onClick="window.document.getElementById('diametre').value = (window.document.getElementById('pHi').value/206265)* Number(dda)">
-							<label for="pHi">θ =</label>
-							<input id="pHi" value="" maxlength="17" type="text"> (Seconde d'arc)
+							<input type="button" value="D <--" onClick="calculD();">
+							<label for="theta">θ =</label>
+							<input id="theta" value="" maxlength="17" type="text"> (Seconde d'arc)
 						</div>
 					</div>
 				</div>
