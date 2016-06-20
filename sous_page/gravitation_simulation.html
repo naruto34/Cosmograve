@@ -7,7 +7,7 @@
 		<link rel="stylesheet" media="screen and (min-width: 800px)" href="../css/gravitation/style.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="../css/gravitation/mobile.css" />
 		<script src="../lib/jquery-1.12.3.min.js"></script>
-		<script src="../lib/math.js"></script>
+		<script src="../lib/math.min.js"></script>
 		<script src="../lib/d3.js"></script>
 		<script src="../lib/snap.svg.js"></script>
 		<script src="../lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
@@ -16,6 +16,7 @@
 		<script src="../js/gravitation/Runge_Kutta2.js"></script>
 		<script src="../js/gravitation/graphique2.js"></script>
 		<script src="../js/gravitation/stopper.js"></script>
+		<script src="../js/gravitation/stop_clig.js"></script>
 		<script src="../js/gravitation/potentiel1.js"></script>
 		<script src="../js/gravitation/graphe_potentiel.js"></script>
 		
@@ -24,25 +25,22 @@
 	<body>	
 			<div id="formulaire">
 				<form name="params" id="parametres" action="" method="post" autocomplete="off">
-					<fieldset>
-
-						 <legend id="legende"> Saisie des Paramètres : </legend>
 
 									<span id="masse">
 										<label for="M">M =</label>
-										<input id="M" value="1.15e26" size="3" align="left" maxlength="10" type="text">
+										<input id="M" value="1.15e26" align="left" maxlength="10" type="text">
 									</span>
 									<span id="rayon">
 										<label for="r0">r<sub>0</sub> =</label>
-										<input id="r0" value="11" size="3" align="left" maxlength="10" type="text">
+										<input id="r0" value="11" align="left" maxlength="10" type="text">
 									</span>
 									<span id="vitesse1">
 										<label for="vphi">V<sub>&Phi;</sub> =</label>
-										<input id="vphi" value="9.9e6" size="3" maxlength="10" type="text">
+										<input id="vphi" value="9.9e6" maxlength="10" type="text">
 									</span>
 									<span id="vitesse2">
 										<label for="vr">V<sub>r</sub> =</label>
-										<input id="vr" value="8e6" size="3" maxlength="10" type="text">
+										<input id="vr" value="8e6" maxlength="10" type="text">
 									</span>
 
 									<span id="bouton" onclick="trajectoire()">
@@ -52,33 +50,51 @@
 									<span id="bouton" onclick="arret()">
 										<button type="button">Stop</button>
 									</span>
+
+									<span>
+      									<input type="button" id="clear" value="Reset">
+    								</span>
+	
+									<span id="plusvite">
+										<button type="button">Plus</button>
+									</span>
+
+									<span id="moinsvite">
+										<button type="button">Moins</button>
+									</span>
 									
 									<span id="radio_button">
 										 <input type="radio" name="traj" value="complet" checked >Trajectoire complete 
   										 <input type="radio" name="traj" value="simple" >Trajectoire simple
 									</span>
-									<span>
+									
+								<!--	<span>
 										<input id="axe" type="checkbox" name="axe" checked="checked">Afficher Axes
-									</span>
-					</fieldset>
+									</span>  -->
 						
 				</form>
 			</div>
+			<div id="canvas">
 				<canvas id="myCanvas" width="500" height="500" style="border:1px withe;">
 			
 					Votre navigateur ne supporte pas canvas.
 			
 				</canvas>				
-				
+			</div>
+	
 				<div id="graphique2">
 				</div>
 
 				<div id="information">
 
 							Vitesse de la particule = <span id="vp"></span> m/s<br />
-							Gradient d'accélération = <span id="ga"></span>g/m<br />
+							Gradient d'accélération = <span id="ga"></span>g/m  <span id="DivClignotante" style="visibility:hidden;" ><font color= "red">Danger Gravité intense</font></span><br/>
 							Temps écoulé pour la particule = <span id="tp"></span>s<br />
-							Temps écoulé pour l'observateur = <span id="to"></span>s<br />
+							<!--Temps écoulé pour l'observateur = <span id="to"></span>s<br />-->
+							E = <span id="E"></span><br />
+							m = <span id="m"></span>m<br />
+							L = <span id="L"></span>m<br />
+							
 				</div>
 
 

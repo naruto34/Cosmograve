@@ -7,79 +7,40 @@ body {
 label{
 	font-weight 	:	bold;
 }
-fieldset {
-	padding			:	0 20px 20px 20px;
-	margin-bottom	:	10px;
-	border			:	3px solid #008B8B;
-	border-radius	:	12px;
-	width			:	500px;
-	background		:	#66CDAA;
-	margin-left		:	20px;
-}
-#lengende{
-	color			:	#DF3F3F;
- 	font-weight		:	bold;
-}
-#information{
-	margin-top		:	-650px;
-	margin-left		:	730px;
-	/*margin-bottom	:	270px;*/
-	border			:	4px ridge black;
-	border-radius	:	12px;
-	padding			:	10px;
-	width			:	450px;
-	height			:	100px;
-	font-family		:	Zapf Chancery, cursive;
-	font-size		:	18px;
-}
-#formulaire{
-	width	:	600px;
-}
-#myCanvas {
-	margin-left	: 30px;
-	margin-top	: 30px;
-}
-.masse{
-	display			:	inline;
-	font-family:
-}
-.rayon{
-	display			:	inline;
-	font-family:
-	
-}
-.vitesse1{
-	display			:	inline;
-	font-family:
-}
-.vitesse2{
-	display			:	inline;
-	font-family:
-}
-.bouton{
+.desact_retour{
 	display			:	inline-block;
-	font-family:
 }
-#parametres{Auteur 	
-tatsu 	
-# 25 Mar 2009, 15:00:54
-Citer
-23 Posts
-	margin-top		:	5px;
+#parametres{
 	text-align		:	center;
 }
 #graphique2{
-	margin-left		:	680px;
-	margin-top		:	-458px;
-	}
-
-#axe{
-	text-align		:	center;
-	display			:	inline;
-	margin-top 		:	17px;
+	margin-right	:	50px;
+	margin-top		:	2%;
+	float			:	right;
+}
+#information{
+	margin-top		:	38%;
+	margin-left		:	39%;
+	/*margin-bottom	:	270px;*/
+	border			:	1px black solid;
+	padding			:	10px;
+	width			:	350px;
+}
+#canvas{
+	float			:	left;
+	margin-top		:	1%;
+	margin-left		:	20px;
+	
+	/*border			:	1px black solid;*/
+}
+#plus{
+	float			:	right;
+}
+#plus button{
+	font-weight 	:	bold;
 }
 path { 
-	stroke			:	DarkCyan;
+	stroke			:	steelblue;
 	stroke-width	:	2;
 	fill			:	none;
 }
@@ -94,8 +55,20 @@ svg{
 }
 .legend_axe{
 	font-weight		:	bold;
+	font-size		:	1.2em;
 }
 .legend_titre{
 	font-weight		:	bold;
-	font-size		:	1.2em;
+	font-size		:	1.3em;
+}
+#tabs-2{
+	margin			:	0px;
+	padding			:	0px;
+}
+#tabs-3{
+	margin			:	0px;
+	padding			:	0px;
+}
+#tabs-a{
+	height			:	700px;
 }

@@ -39,7 +39,7 @@ function trajectoire() {
 	data1 = [];
 	temps_particule = 0; 
 	temps_observateur = 0;
-
+	bool = true;
 // Ici, les positions de départ de la particule, dans son référentiel et dans celui de l'observateur//
 	
 	if ( E > 1 ) { rmax=5*r0; }	
@@ -92,11 +92,11 @@ function trajectoire() {
 					
 				}
 
-				if(document.getElementById("axe").checked == true) {
+				/*if(document.getElementById("axe").checked == true) {
 				
 				context.beginPath();
 				context.moveTo(0, canvas.height/2.0);
-				context.lineTo(canvas.width, canvas.height/2.0);
+				context.lineTo(canvas.width, canvas.height/2);
 				context.closePath();
 				context.stroke();
 				
@@ -104,9 +104,9 @@ function trajectoire() {
 				context.moveTo(canvas.width/2, 0);
 				context.lineTo(canvas.width/2, canvas.height);
 				context.closePath();
-				context.stroke();
+				context.stroke();*/
 				
-				}
+				//}
 				
 				diametre_particule = 2;
 				diametre_observateur = 2;
@@ -126,8 +126,9 @@ function trajectoire() {
 				posY3 = (canvas.height/2.0);
 				
 				
+
 				
-				
+
 				// Ici on va créer l'animation avec setinerval, laquelle prend comme paramètres la fonction animate() définie ci-après et qui calcul les coordonnées de la particule à cahque instant.    
 				
 				myInterval = setInterval(animate,1000/300);
@@ -140,8 +141,8 @@ function trajectoire() {
 					
 					if (element[1].checked) {
 			
-						diametre_particule = 8;
-						diametre_observateur = 8;
+						diametre_particule = 10;
+						diametre_observateur = 10;
 						context.clearRect(0, 0, canvas.width, canvas.height);
 					
 					}
@@ -155,17 +156,19 @@ function trajectoire() {
 					context.fillStyle = '#008B8B';
 					
 					context.arc(posX1, posY1, diametre_particule/2, 0, Math.PI*2);
+
+					context.lineWidth="1";
 					
 					context.fill();
 
 
-					context.beginPath();
+					/*context.beginPath();
 
 					context.fillStyle = '#FF7F50';
 					
 					context.arc(posX2, posY2, diametre_observateur/2, 0, Math.PI*2);
 					
-					context.fill();
+					context.fill();*/
 
 				
 					context.beginPath();
@@ -180,11 +183,31 @@ function trajectoire() {
 					
 					
 					if(r0!=0.0) {
+						
+						document.getElementById('plusvite').addEventListener('click', function() {
+
+						var nbClick = 0;
+						var nbClickMax = 2;
+						
+						nbClick++;
+						
+						if (nbClick <= nbClickMax) {
+							if (nbClick == 1) {
+							dtau = temps_chute_libre/500;
+							}
+							else if (nbClick == nbClickMax) {
+							dtau = temps_chute_libre/400;
+							}
+						}	 
+
+					
+			 			}, false);
 
 						temps_particule += dtau;
 						
+
 						r_part = rungekutta(dtau);
-						dt = E*dtau*(1/(1-2*m/r_part));
+						
 						
 						if(r_part < 0.0) {
 							
@@ -197,35 +220,89 @@ function trajectoire() {
 						posX1 = x2part = 200*r_part*Math.cos(phi)/rmax+canvas.width/2;
 						posY1 = y2part = 200*r_part*Math.sin(phi)/rmax+canvas.height/2;
 						
-						
+						dt = E*dtau*(1/(1-2*m/r_part));
 						temps_observateur += dt;
-						r_obs = rungekutta(dt);
+						
+						
+						vrm=Math.pow(c*E,2)-Math.pow(c,2)*(1-2*m/r_part)*(1+Math.pow(L/r_part,2));
+						vpm=Math.pow(c*L/r_part,2);
+						vm=Math.sqrt(vrm+vpm);
+						// Test en fonction de r à faire.
+						// Si r plus petit que 10 metres plus de Warning.
+						gm=-Math.pow(c,2)*(2*m/Math.pow(r_part,2)-2*Math.pow(L,2)/Math.pow(r_part,3)+6*m*Math.pow(L,2)/Math.pow(r_part,4))/2;
+						gmp=-Math.pow(c,2)*(2*m/Math.pow(r_part+1,2)-2*Math.pow(L,2)/Math.pow(r_part+1,3)+6*m*Math.pow(L,2)/Math.pow(r_part+1,4))/2;
+						fm=Math.abs(gm-gmp);
+
+						// Ici le code pour l'alerte quand la gravité devient trop importante.
+						
+						
+						
+							
+						clignotement = function(){
+
+	   						if (document.getElementById('DivClignotante').style.visibility=='visible') {
+
+		 						document.getElementById('DivClignotante').style.visibility='hidden';
+
+							}
+							
+							else {
+								
+									document.getElementById('DivClignotante').style.visibility='visible';
+									
+							}
+						}; 
+							
+
+					
+
+						periode = setInterval(clignotement, 2000);
+
+						
+
+								
+						//Ici le bout de code pour le bouton Reset, quand on clique dessus, la fonction appelé efface le canvas en entier.
+
+						document.getElementById('clear').addEventListener('click', function() {
+
+				
+							context.clearRect(0, 0, canvas.width, canvas.height);
+							arret();
+							
+
+			 			}, false);
 
 						//vitesse_particule = r_part/dtau;
 
-						document.getElementById("to").innerHTML = temps_observateur;
-						document.getElementById("tp").innerHTML = temps_particule;
-						//document.getElementById("vp").innerHTML = vitesse_particule;						
+						//document.getElementById("to").innerHTML = temps_observateur.toExponential(4);
+						document.getElementById("tp").innerHTML = temps_particule.toExponential(4);
+						document.getElementById("vp").innerHTML = vm.toExponential(3);						
+						document.getElementById("ga").innerHTML = fm.toExponential(3);
+						document.getElementById("m").innerHTML = m.toExponential(3);
+						document.getElementById("L").innerHTML = L.toExponential(3);
+						document.getElementById("E").innerHTML = E.toExponential(3);
 
-						if(r_obs<0) {
-
-							r_obs = 0;
-
-						}
-
-						/*if(Double.isNaN(r_obs)) {
+						//r_obs = rungekutta(dt);
+						/*if(r_obs<0) {
 
 							r_obs = 0;
 
 						}*/
 
+						/*if(Double.isNaN(r_obs)) {
+
+							r_obs = 0;
+
+						}
+						
+						
 						phi2 = phi2 + (c*L*dt/Math.pow(r_obs,2));
 		
 						x2obs = 190*r_obs*Math.cos(phi2)/rmax;
 						y2obs = 190*r_obs*Math.sin(phi2)/rmax;
 					
 						posX2 = x2obs = 200*r_obs*Math.cos(phi2)/rmax+canvas.width/2;
-						posY2 = y2obs = 200*r_obs*Math.sin(phi2)/rmax+canvas.width/2;
+						posY2 = y2obs = 200*r_obs*Math.sin(phi2)/rmax+canvas.width/2; */
 
 						if(r_part > rmax*1.1) { 
 								
@@ -234,11 +311,11 @@ function trajectoire() {
 
 						}
 
-						if(r_obs < rayon_trouNoir) { 
+						/*if(r_obs < rayon_trouNoir) { 
 							
 							arret();
 
-						}
+						}*/
 
 					}
 					

@@ -17,7 +17,7 @@
 
 function GetCoordinates(e)
 {
-	
+	//decoche univers plat si cocher
 	if(document.getElementById("univ_plat").checked == true){
 		document.getElementById("univ_plat").checked = false;
 	}
@@ -42,6 +42,7 @@ function GetCoordinates(e)
 	PosX = PosX - ImgPos[0];
 	PosY = PosY - ImgPos[1];
 	
+	//permet de fixer les limites du canvas pour pas sortir du cadre
 	if(PosX < 53){
 		PosX = 53;
 		}else if(PosX > 283){
@@ -53,14 +54,10 @@ function GetCoordinates(e)
 		}else if(PosY < 29){
 		PosY = 29;
 	}
-	
-	//alert(PosX+"	"+PosY);
-	
-	//update_modele();
-	
 	PosX -= 53;
 	PosY -= 29;
 	
+	//convertion
 	PosX = PosX*3/230;
 	if(PosY >= 217){
 		PosY -= 217;
@@ -69,15 +66,19 @@ function GetCoordinates(e)
 		PosY = 217-PosY;
 		PosY = PosY*4.5/325
 	}
+	//on evite d'avoir trop de decimale
 	PosX = PosX.toFixed(3);
 	PosY = PosY.toFixed(3);
 	
+	//on renseigne les nouveau omegam et omega lambda
 	document.getElementById("omegam0").value = PosX;
 	document.getElementById("omegalambda0").value = PosY;
 	
+	//on relance les calculs de simulation
 	calcul();
 }
 
+//mise a jour de la position du point sur la canvas
 function update_point(){
 	context.clearRect (0,0,largeur,hauteur);
 	context.putImageData(image_fond_temp, 0,0);
@@ -87,6 +88,7 @@ function update_point(){
 	context.fill();
 }
 
+//genere le fond et les courbes des generatrices comme image de fond
 function update_modele(){
 	canvas  = document.getElementById('canvas');
 	context = canvas.getContext('2d');
@@ -229,6 +231,8 @@ function update_modele(){
 	dty=72; //un pas de 1 sur l'ordonnee du graphe canvas 112.5
 	Olo=247;//ordonnee de l'origine sur graphe canvas 338
 	
+	
+	//generatrice ouvert fermer
 	context.save();
 	context.beginPath();
 	context.moveTo(53, 177);
@@ -244,6 +248,7 @@ function update_modele(){
 	context.stroke();
 	context.restore();
 	
+	//generatrice big crunch pas de BC
 	context.save();
 	context.beginPath();
 	context.moveTo(53, 245);
@@ -267,6 +272,7 @@ function update_modele(){
 	context.stroke();
 	context.restore();
 	
+	//generatrice BB, pas de BB
 	context.save();
 	context.beginPath();
 	context.moveTo(53, 177);
@@ -297,13 +303,16 @@ function update_modele(){
 	context.stroke();
 	context.restore();
 	
+	//on conserve cette image comme fond pour lorque l'on change pour h0 negatif
 	largeur = canvas.width;
 	hauteur = canvas.height;
 	image_fond = context.getImageData(0, 0, largeur, hauteur);
 	
+	//on recupere omegam et omegalambda
 	omegam0 = Number(document.getElementById("omegam0").value);
 	omegalambda0 = Number(document.getElementById("omegalambda0").value);
 	
+	//on convertie en pixel
 	PosX = 53+omegam0*230/3;
 	PosY = 246;
 	if(omegalambda0 >= 0){
@@ -312,6 +321,7 @@ function update_modele(){
 		PosY -= omegalambda0*325/4.5
 	}
 	
+	//on rajoute les reste pour h0 positif par defaut
 	context.save();
 	var text = 'Big Bang';
 	context.font = "8pt Verdana";
@@ -332,6 +342,6 @@ function update_modele(){
 	context.fillText(text,170,260);
 	
 	image_fond_temp = context.getImageData(0, 0, largeur, hauteur);
-	
+	//on execute la fonction de mise a jour de la position du point sur le canvas
 	update_point();	
 }

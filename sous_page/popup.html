@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="../css/style_min.css">
 		<link rel="stylesheet" href="../lib/jquery-ui-1.11.4/jquery-ui.min.css">
 		<script src="../lib/jquery-1.12.3.min.js"></script>
-		<script src="../lib/math.min.js"></script>
+	<!--<script src="../lib/math.min.js"></script>-->
 		<script src="../lib/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 		
 		<script src="../js/integrale.js"></script>
@@ -61,6 +61,11 @@
 					<span id="resultat_omegar0" style="color:blue"></span>
 				</div>
 				
+				<div>
+					<label for="resultat_omegak0">&Omega;<sub>k0</sub> =</label>
+					<span id="resultat_omegak0" style="color:blue"></span>
+				</div>
+				
 				<div class="desact_retour">
 					<label for="type">Type =</label>
 					<span id="type" style="color:blue"></span>
@@ -75,23 +80,37 @@
 						<label for="z2">z<sub>2</sub> =</label>
 						<input id="z2" value="0" maxlength="10" type="text"> 
 					</div>
-					<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
+					<script type="text/javascript">
+						$( "#z1" ).change(function() {
+							if(document.getElementById("z1").value > 5e6){
+								alert("La valeur maximale du décalage spectral z1 est de 5e6, elle a été redéfinie à 5e6.");
+								document.getElementById("z1").value = 5e6;
+							}
+						});
 						
+						$( "#z2" ).change(function() {
+							if(document.getElementById("z2").value > 5e6){
+								alert("La valeur maximale du décalage spectral z2 est de 5e6, elle a été redéfinie à 5e6.");
+								document.getElementById("z2").value = 5e6;
+							}
+						});
+					</script>
+					<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
 					</div>
 				</form>
 				<br />
 				<div>
 					<div>
 						<label for="dm">d<sub>m</sub> =</label>
-						<span id="dm" style="color:blue"></span> m (Alignés sur la ligne de visée)
+						<span id="dm" style="color:blue"></span> m = <span id="dm_pc" style="color:blue"></span> pc (Alignés sur la ligne de visée)
 					</div>
 					<div>
 						<label for="dm1">d<sub>m1</sub> =</label>
-						<span id="dm1" style="color:blue"></span> m
+						<span id="dm1" style="color:blue"></span> m = <span id="dm1_pc" style="color:blue"></span> pc
 					</div>
 					<div>
 						<label for="dm2">d<sub>m2</sub> =</label>
-						<span id="dm2" style="color:blue"></span> m
+						<span id="dm2" style="color:blue"></span> m = <span id="dm2_pc" style="color:blue"></span> pc
 					</div>
 					<div>
 						<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>

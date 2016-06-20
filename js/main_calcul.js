@@ -81,7 +81,7 @@ function calcul(){   // fonction principale de cosmograve
 	document.getElementById("resultat_omegak0").innerHTML = omegak0;
 	
 	//calcul de l'age de l'univers
-	age = simpson(0, 1e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	age = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
 	age = age*(1./H0parsec);
 	//on le passe en gigaannees
 	age = age/((3600*24*nbrjours)*Math.pow(10, 9));
@@ -105,7 +105,7 @@ function calcul(){   // fonction principale de cosmograve
 	ymoinsrungederiv = [1,1];
 	k = [0,0,0,0];
 	j = [0,0,0,0];
-	pas = 0.00001;
+	pas = 0.0001;
 	m = 0;
 	yrunge = 1;
 	yrunge2 = 1;
@@ -113,6 +113,8 @@ function calcul(){   // fonction principale de cosmograve
 	while (yrunge2 > 0 && yrunge2 < 5.){
 		if(yrunge2<0.1){pas=Math.pow(10,-6);}
 		yrunge2 = rungekutta_neg(m);
+		ymoinsrunge[0] = ymoinsrunge[1];
+		ymoinsrungederiv[0] = ymoinsrungederiv[1];
 		data.push({date:age+m/H0engannee,close:yrunge2});
 		m=m-pas;
 	}

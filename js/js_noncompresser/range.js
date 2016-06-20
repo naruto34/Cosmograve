@@ -1,3 +1,4 @@
+//fonction range disponible dans n'importe quelle langage
 function range(start, stop, step) {
 	if (typeof stop == 'undefined') {
 		// one param defined

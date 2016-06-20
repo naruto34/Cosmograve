@@ -79,6 +79,10 @@ function calcu(){
 	dm1 = Math.abs(dm1);
 	dm2 = Math.abs(dm2);
 	
+	dm_pc = dm*3.2407557442396*Math.pow(10,-17);
+	dm1_pc = dm1*3.2407557442396*Math.pow(10,-17);
+	dm2_pc = dm2*3.2407557442396*Math.pow(10,-17);
+	
 	//on ajuste le nombre de decimale apres la virgule
 	if(dm != 0){
 		dm = dm.toPrecision(5);
@@ -103,6 +107,9 @@ function calcu(){
 	document.getElementById("dm").innerHTML = dm;
 	document.getElementById("dm1").innerHTML = dm1;
 	document.getElementById("dm2").innerHTML = dm2;
+	document.getElementById("dm_pc").innerHTML = dm_pc;
+	document.getElementById("dm1_pc").innerHTML = dm1_pc;
+	document.getElementById("dm2_pc").innerHTML = dm2_pc;
 	document.getElementById("agebetween").innerHTML = agebetween;
 	document.getElementById("tempsReception").innerHTML = tempsReception;
 	document.getElementById("tempsEmission").innerHTML = tempsEmission;

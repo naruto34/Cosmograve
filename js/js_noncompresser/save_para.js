@@ -1,3 +1,4 @@
+//fonction qui permet de sauvegarder les nouvelles constantes
 function save_para(){
 	window.opener.document.getElementById("c").value = document.getElementById('c').value;
 	window.opener.document.getElementById("k").value = document.getElementById('k').value;
