@@ -27,7 +27,8 @@ function calcu(){
 	au = 149597870700;
 	H0parsec = h0*1000/((au*(180*3600))/Math.PI*Math.pow(10, 6));
 	H0parsec = H0parsec;
-	H0engannee = H0parsec*(3600*24*nbrjours)*Math.pow(10, 9);
+	H0enannee = H0parsec*(3600*24*nbrjours);
+	H0engannee = H0enannee*Math.pow(10, 9);
 	
 	//calcul de omegak
 	omegak0 = 1-Or-omegam0-omegalambda0;
@@ -70,9 +71,17 @@ function calcu(){
 	dl=dm*(1+(z2-z1));
 	
 	//agebetween = (1./H0engannee)*simpson(Number(z1), Number(z2), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	tempsReception = (1./H0engannee)*simpson(0, Number(z2), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	tempsEmission = (1./H0engannee)*simpson(0, Number(z1), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	tempsReception = simpson(0, Number(z2), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	tempsEmission = simpson(0, Number(z1), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	
+	tempsReception_sec = (1./H0parsec)*tempsReception;
+	tempsEmission_sec = (1./H0parsec)*tempsEmission;
+	
+	tempsReception = (1./H0enannee)*tempsReception;
+	tempsEmission = (1./H0enannee)*tempsEmission;
+	
 	agebetween = tempsReception - tempsEmission;
+	agebetween_sec = tempsReception_sec - tempsEmission_sec;
 	
 	//les distances sont positives
 	dm = Math.abs(dm);
@@ -102,6 +111,15 @@ function calcu(){
 	if(tempsEmission != 0){
 		tempsEmission = tempsEmission.toPrecision(9);
 	}
+	if(agebetween_sec != 0){
+		agebetween_sec = agebetween_sec.toPrecision(9);
+	}
+	if(tempsReception_sec != 0){
+		tempsReception_sec = tempsReception_sec.toPrecision(9);
+	}
+	if(tempsEmission_sec != 0){
+		tempsEmission_sec = tempsEmission_sec.toPrecision(9);
+	}
 	
 	//on change les champs pour informer l'utilisateur des resultats trouver
 	document.getElementById("dm").innerHTML = dm;
@@ -113,4 +131,7 @@ function calcu(){
 	document.getElementById("agebetween").innerHTML = agebetween;
 	document.getElementById("tempsReception").innerHTML = tempsReception;
 	document.getElementById("tempsEmission").innerHTML = tempsEmission;
+	document.getElementById("agebetween_sec").innerHTML = agebetween_sec;
+	document.getElementById("tempsReception_sec").innerHTML = tempsReception_sec;
+	document.getElementById("tempsEmission_sec").innerHTML = tempsEmission_sec;
 }

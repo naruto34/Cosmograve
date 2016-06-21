@@ -81,12 +81,13 @@ function calcul(){   // fonction principale de cosmograve
 	document.getElementById("resultat_omegak0").innerHTML = omegak0;
 	
 	//calcul de l'age de l'univers
-	age = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	age = age*(1./H0parsec);
+	age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	age_sec = age_sec*(1./H0parsec);
 	//on le passe en gigaannees
-	age = age/((3600*24*nbrjours)*Math.pow(10, 9));
+	age = age_sec/((3600*24*nbrjours)*Math.pow(10, 9));
 	//on creer une variable limite en nombre de decimal pour l'affichage
 	age_afficher = Number(age.toFixed(7));
+	age_sec_afficher = Number(age_sec.toFixed(7));
 	
 	//on réinitialise les 3 champs pour eviter les erreurs d'affichage
 	document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
@@ -94,7 +95,7 @@ function calcul(){   // fonction principale de cosmograve
 	document.getElementById("resultat_dureeuniv").innerHTML = "";
 	
 	if(age >= 0){
-		document.getElementById("resultat_ageunivers").innerHTML = "Temps depuis le Big Bang = "+age_afficher+" Ga";
+		document.getElementById("resultat_ageunivers").innerHTML = "\302ge de l'univers = "+age_afficher+" Ga = "+age_sec_afficher+" s";
 	}else{
 		document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
 		age = 0;
