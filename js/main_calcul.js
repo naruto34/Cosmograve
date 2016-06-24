@@ -5,6 +5,7 @@ function calcul(){   // fonction principale de cosmograve
 	h = Number(document.getElementById("h").value);
 	k = Number(document.getElementById("k").value);
 	typeannee = document.getElementById("typeannee").value;
+	nbr_precision = document.getElementById("nbr_precision").value;
 	
 	t0 = document.getElementById("T0").value;
 	h0 = document.getElementById("H0").value;
@@ -86,8 +87,8 @@ function calcul(){   // fonction principale de cosmograve
 	//on le passe en gigaannees
 	age = age_sec/((3600*24*nbrjours)*Math.pow(10, 9));
 	//on creer une variable limite en nombre de decimal pour l'affichage
-	age_afficher = Number(age.toFixed(7));
-	age_sec_afficher = Number(age_sec.toFixed(7));
+	age_afficher = Number(age).toExponential(nbr_precision);
+	age_sec_afficher = Number(age_sec).toExponential(nbr_precision);
 	
 	//on réinitialise les 3 champs pour eviter les erreurs d'affichage
 	document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
@@ -173,8 +174,8 @@ function calcul(){   // fonction principale de cosmograve
 		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+Math.abs(age_afficher)+" Ga";
 	}else if(yrunge <= 0.){
 		tBC = i/H0engannee;
-		tBC_afficher = Number(tBC.toFixed(2));
-		total = Number((age_afficher+tBC_afficher).toFixed(2));
+		tBC_afficher = Number(tBC).toExponential(nbr_precision);
+		total = (Number(age_afficher)+Number(tBC_afficher)).toExponential(nbr_precision);
 		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC_afficher+" Ga";
 		document.getElementById("resultat_dureeuniv").innerHTML = (total)+" Ga";
 	}else if(h0<0 && yrunge2 <= 0.){

@@ -5,6 +5,7 @@ function calcu(){
 	h = Number(window.opener.document.getElementById("h").value);
 	k = Number(window.opener.document.getElementById("k").value);
 	typeannee = window.opener.document.getElementById("typeannee").value;
+	nbr_precision = window.opener.document.getElementById("nbr_precision").value;
 	t0 = document.getElementById("T0").value;
 	h0 = document.getElementById("H0").value; 
 	omegam0 = Number(document.getElementById("omegam0").value);
@@ -94,31 +95,42 @@ function calcu(){
 	
 	//on ajuste le nombre de decimale apres la virgule
 	if(dm != 0){
-		dm = dm.toPrecision(5);
+		dm = dm.toExponential(nbr_precision);
 	}
 	if(dm1 != 0){
-		dm1 = dm1.toPrecision(5);
+		dm1 = dm1.toExponential(nbr_precision);
 	}
 	if(dm2 != 0){
-		dm2 = dm2.toPrecision(5);
+		dm2 = dm2.toExponential(nbr_precision);
 	}
+	/*
+	if(dm_pc != 0){
+		dm_pc = dm_pc.toExponential(4);
+	}
+	if(dm1_pc != 0){
+		dm1_pc = dm1_pc.toExponential(4);
+	}
+	if(dm2_pc != 0){
+		dm2_pc = dm2_pc.toExponential(4);
+	}
+	*/
 	if(agebetween != 0){
-		agebetween = agebetween.toPrecision(9);
+		agebetween = agebetween.toExponential(nbr_precision);
 	}
 	if(tempsReception != 0){
-		tempsReception = tempsReception.toPrecision(9);
+		tempsReception = tempsReception.toExponential(nbr_precision);
 	}
 	if(tempsEmission != 0){
-		tempsEmission = tempsEmission.toPrecision(9);
+		tempsEmission = tempsEmission.toExponential(nbr_precision);
 	}
 	if(agebetween_sec != 0){
-		agebetween_sec = agebetween_sec.toPrecision(9);
+		agebetween_sec = agebetween_sec.toExponential(nbr_precision);
 	}
 	if(tempsReception_sec != 0){
-		tempsReception_sec = tempsReception_sec.toPrecision(9);
+		tempsReception_sec = tempsReception_sec.toExponential(nbr_precision);
 	}
 	if(tempsEmission_sec != 0){
-		tempsEmission_sec = tempsEmission_sec.toPrecision(9);
+		tempsEmission_sec = tempsEmission_sec.toExponential(nbr_precision);
 	}
 	
 	//on change les champs pour informer l'utilisateur des resultats trouver

@@ -6,4 +6,5 @@ function save_para(){
 	window.opener.document.getElementById("G").value = document.getElementById('G').value;
 	
 	window.opener.document.getElementById("typeannee").value = document.getElementById('typeannee').value;
+	window.opener.document.getElementById("nbr_precision").value = document.getElementById('nbr_precision').value;
 }

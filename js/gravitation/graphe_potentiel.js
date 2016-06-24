@@ -102,5 +102,13 @@ function graphique_creation_pot(){
 	svg.append("path")
 	.attr("class", "line")
 	.attr("d", valueline(data1));
+
+	/*svg.append("line")
+	.attr("x1",-height)
+	.attr("y1",0)
+	.attr("x2",10)
+	.attr("y2",10)
+	.attr("stroke","red");*/
+
 	
 }	

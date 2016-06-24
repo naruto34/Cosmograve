@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-		<title>Cosmograve - Constantes</title>
+		<title>Cosmograve - Constantes et paramètres</title>
 		<link rel="stylesheet" href="../lib/jquery-ui-1.11.4/jquery-ui.min.css">
 		<link rel="stylesheet" href="../css/style.css">
 		<script src="../lib/jquery-1.12.3.min.js"></script>
@@ -24,6 +24,7 @@
 				document.getElementById('h').value = 6.62607004e-34;
 				document.getElementById('G').value = 6.67385e-11;
 				document.getElementById('typeannee').value = "Grégorienne";
+				document.getElementById('nbr_precision').value = "4";
 			}
 		</script>
 	</head>
@@ -31,7 +32,7 @@
 		<div id="tabs">
 			
 			<ul>
-				<li><a href="#tabs-1">Constantes</a></li>
+				<li><a href="#tabs-1">Constantes et paramètres</a></li>
 			</ul>
 			
 			<div id="tabs-1">
@@ -47,8 +48,22 @@
 								<OPTION value="Tropique (2000)">Tropique (2000)
 								</SELECT>
 								<br /><br />
-								<button type="button" onClick="save_para()">Enregistrer</button><button type="button" onClick="reset()">Reset</button><button type="button" onClick="window.close()">Retour</button> 
-							</div>
-						</div>
-					</body>
-				</html>				
+								
+								<label for="nbr_precision">Nombre de chiffre après la virgule = </label><SELECT id="nbr_precision" name="nbr_precision" size="1">
+									<OPTION value="0">0
+										<OPTION value="1">1
+											<OPTION value="2">2
+												<OPTION value="3">3
+													<OPTION value="4">4
+														<OPTION value="5">5
+															<OPTION value="6">6
+																<OPTION value="7">7
+																	<OPTION value="8">8
+																		<OPTION value="9">9
+																		</SELECT>
+																		<br /><br />
+																		<button type="button" onClick="save_para()">Enregistrer</button><button type="button" onClick="reset()">Reset</button><button type="button" onClick="window.close()">Retour</button> 
+																	</div>
+																</div>
+															</body>
+											</html>															

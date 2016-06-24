@@ -25,4 +25,5 @@ function getData_para(){
 	document.getElementById("h").value = parent.window.opener.document.getElementById('h').value;
 	document.getElementById("G").value = parent.window.opener.document.getElementById('G').value;
 	document.getElementById("typeannee").value = parent.window.opener.document.getElementById('typeannee').value;
+	document.getElementById("nbr_precision").value = parent.window.opener.document.getElementById('nbr_precision').value;
 }

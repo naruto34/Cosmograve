@@ -16,8 +16,6 @@
 		<script src="../js/gravitation/Runge_Kutta2.js"></script>
 		<script src="../js/gravitation/graphique2.js"></script>
 		<script src="../js/gravitation/stopper.js"></script>
-		<script src="../js/gravitation/stop_clig.js"></script>
-		<script src="../js/gravitation/potentiel1.js"></script>
 		<script src="../js/gravitation/graphe_potentiel.js"></script>
 		
 	</head>
@@ -67,36 +65,32 @@
 										 <input type="radio" name="traj" value="complet" checked >Trajectoire complete 
   										 <input type="radio" name="traj" value="simple" >Trajectoire simple
 									</span>
-									
-								<!--	<span>
-										<input id="axe" type="checkbox" name="axe" checked="checked">Afficher Axes
-									</span>  -->
-						
+							
 				</form>
 			</div>
+			
+			<div id="information">
+
+							Vitesse de la particule = <span id="vp"></span> m/s<br />
+							Gradient d'accélération = <span id="ga"></span>g/m  <span id="DivClignotante"></span><br/>
+							Temps écoulé pour la particule = <span id="tp"></span>s<br />
+							E = <span id="E"></span><br />
+							<i>m</i> = <span id="m"></span>m<br />
+							L = <span id="L"></span>m<br />
+							
+			</div>
+
 			<div id="canvas">
-				<canvas id="myCanvas" width="500" height="500" style="border:1px withe;">
+				<canvas id="myCanvas" width="400" height="400" style="border:1px withe;">
 			
 					Votre navigateur ne supporte pas canvas.
 			
 				</canvas>				
 			</div>
 	
-				<div id="graphique2">
-				</div>
+			<div id="graphique2">
+			</div>
 
-				<div id="information">
-
-							Vitesse de la particule = <span id="vp"></span> m/s<br />
-							Gradient d'accélération = <span id="ga"></span>g/m  <span id="DivClignotante" style="visibility:hidden;" ><font color= "red">Danger Gravité intense</font></span><br/>
-							Temps écoulé pour la particule = <span id="tp"></span>s<br />
-							<!--Temps écoulé pour l'observateur = <span id="to"></span>s<br />-->
-							E = <span id="E"></span><br />
-							m = <span id="m"></span>m<br />
-							L = <span id="L"></span>m<br />
-							
-				</div>
-
-
+				
 	</body>
 </html>
