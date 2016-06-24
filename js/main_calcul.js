@@ -102,6 +102,20 @@ function calcul(){   // fonction principale de cosmograve
 		age = 0;
 	}
 	
+	//on regarde si on proche de la separatrice
+	w = 0;
+	v = 0;
+	if(omegam0 <= 0.5){
+		w=(1./3.)*Math.log(((1./omegam0)-1.)+Math.sqrt(((1./omegam0)-1.)*((1./omegam0)-1.)-1.0));
+		OlER=4.*omegam0*cosh(w)*cosh(w)*cosh(w);
+	}else{
+		v =(1./3.)*Math.acos((1./omegam0)-1.);
+		OlER=4.*omegam0*Math.cos(v)*Math.cos(v)*Math.cos(v);
+	}
+	if(Math.abs(omegalambda0 - OlER) < 0.01){
+		alert("on est proche de la s\351paratrice");
+	}
+	
 	//on fait appel a la methode de rungekutta pour calculer les points de la courbe
 	ymoinsrunge = [1,1];
 	ymoinsrungederiv = [1,1];
