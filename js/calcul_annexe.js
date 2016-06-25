@@ -72,8 +72,8 @@ function calcu(){
 	dl=dm*(1+(z2-z1));
 	
 	//agebetween = (1./H0engannee)*simpson(Number(z1), Number(z2), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	tempsReception = simpson(0, Number(z2), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	tempsEmission = simpson(0, Number(z1), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	tempsReception = simpson(Number(z2), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	tempsEmission = simpson(Number(z1), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
 	
 	tempsReception_sec = (1./H0parsec)*tempsReception;
 	tempsEmission_sec = (1./H0parsec)*tempsEmission;
@@ -103,7 +103,7 @@ function calcu(){
 	if(dm2 != 0){
 		dm2 = dm2.toExponential(nbr_precision);
 	}
-	/*
+	
 	if(dm_pc != 0){
 		dm_pc = dm_pc.toExponential(4);
 	}
@@ -113,7 +113,7 @@ function calcu(){
 	if(dm2_pc != 0){
 		dm2_pc = dm2_pc.toExponential(4);
 	}
-	*/
+	
 	if(agebetween != 0){
 		agebetween = agebetween.toExponential(nbr_precision);
 	}

@@ -26,8 +26,13 @@ function graphique_creation(){
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
 	// Define the axes
-	var xAxis = d3.svg.axis().scale(x)
-	.orient("bottom").ticks(8).tickFormat(d3.format("d"));
+	if(!proche_bleu){
+		var xAxis = d3.svg.axis().scale(x)
+		.orient("bottom").ticks(8).tickFormat(d3.format("d"));
+	}else{
+		var xAxis = d3.svg.axis().scale(x)
+		.orient("bottom").ticks(0).tickFormat(d3.format("d"));
+	}
 	
 	var yAxis = d3.svg.axis().scale(y)
 	.orient("left").ticks(10);
@@ -54,27 +59,27 @@ function graphique_creation(){
 		.data(x.ticks(10))
 		.enter().append("line")
 		.attr("class", "x")
-		.attr("x1", x)
-		.attr("x2", x)
-		.attr("y1", 0)
-		.attr("y2", 390)
-		.style("stroke", "grey")
-		.style("stroke-width", "1")
-		.style("shape-rendering", "crispEdges")
-		.style("fill", "none");
-		
-		svg.selectAll("line.y")
-		.data(y.ticks(8))
-		.enter().append("line")
-		.attr("class", "y")
-		.attr("x1", 0)
-		.attr("x2", 2000)
-		.attr("y1", y)
-		.attr("y2", y)
-		.style("stroke", "grey")
-		.style("stroke-width", "1")
-		.style("shape-rendering", "crispEdges")
-		.style("fill", "none");
+	.attr("x1", x)
+	.attr("x2", x)
+	.attr("y1", 0)
+	.attr("y2", 390)
+	.style("stroke", "grey")
+	.style("stroke-width", "1")
+	.style("shape-rendering", "crispEdges")
+	.style("fill", "none");
+	
+	svg.selectAll("line.y")
+	.data(y.ticks(8))
+	.enter().append("line")
+	.attr("class", "y")
+	.attr("x1", 0)
+	.attr("x2", 2000)
+	.attr("y1", y)
+	.attr("y2", y)
+	.style("stroke", "grey")
+	.style("stroke-width", "1")
+	.style("shape-rendering", "crispEdges")
+	.style("fill", "none");
 	}
 	
 	// Add the Y Axis

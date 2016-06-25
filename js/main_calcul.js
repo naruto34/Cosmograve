@@ -112,8 +112,10 @@ function calcul(){   // fonction principale de cosmograve
 		v =(1./3.)*Math.acos((1./omegam0)-1.);
 		OlER=4.*omegam0*Math.cos(v)*Math.cos(v)*Math.cos(v);
 	}
-	if(Math.abs(omegalambda0 - OlER) < 0.01){
+	proche_bleu = Math.abs(omegalambda0 - OlER) < 0.01;
+	if(proche_bleu){
 		alert("on est proche de la s\351paratrice");
+		document.getElementById("grille").checked = false;
 	}
 	
 	//on fait appel a la methode de rungekutta pour calculer les points de la courbe
