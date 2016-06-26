@@ -1,17 +1,17 @@
 function calcu(){
 	//recuperation des valeurs
-	c = Number(window.opener.document.getElementById("c").value);
-	G = Number(window.opener.document.getElementById("G").value);
-	h = Number(window.opener.document.getElementById("h").value);
-	k = Number(window.opener.document.getElementById("k").value);
-	typeannee = window.opener.document.getElementById("typeannee").value;
-	nbr_precision = window.opener.document.getElementById("nbr_precision").value;
-	t0 = document.getElementById("T0").value;
-	h0 = document.getElementById("H0").value; 
-	omegam0 = Number(document.getElementById("omegam0").value);
-	omegalambda0 = Number(document.getElementById("omegalambda0").value);
+	c = Number(document.getElementById("c").value);
+	G = Number(document.getElementById("G").value);
+	h = Number(document.getElementById("h").value);
+	k = Number(document.getElementById("k").value);
+	typeannee = document.getElementById("typeannee").value;
+	nbr_precision = document.getElementById("nbr_precision").value;
+	t0 = document.getElementById("T0_annexes").value;
+	h0 = document.getElementById("H0_annexes").value; 
+	omegam0 = Number(document.getElementById("omegam0_annexes").value);
+	omegalambda0 = Number(document.getElementById("omegalambda0_annexes").value);
 	omegalambda0 = omegalambda0.toExponential();
-	Or = document.getElementById("resultat_omegar0").innerHTML;
+	Or = document.getElementById("resultat_omegar0_annexes").innerHTML;
 	
 	//definition du type d'annee
 	if(typeannee == "Sidérale"){

@@ -7,7 +7,7 @@
 		<meta http-equiv="Content-Language" content="fr-FR" />
 		<title>Cosmograve</title>
 		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./lib/jquery-ui-1.11.4/jquery-ui.min.css">
-		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./css/style_min.css">
+		<link rel="stylesheet" media="screen and (min-width: 800px)" href="./css/style.css">
 		<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" title="mobile" href="./css/mobile.css" />
 		
 		<script src="./lib/jquery-1.12.3.min.js"></script>
@@ -31,9 +31,12 @@
 		<script src="./js/initialisation_index_min.js"></script>
 		<script src="./js/defiler_image_min.js"></script>
 		<script src="./js/ddl_canvas_min.js"></script>
+		<script src="./js/calculDpTheta_min.js"></script>
+		<script src="./js/calcul_annexe.js"></script>
 	</head>
 	
 	<body>
+	<div id="masquer">
 		<div id="tabs">
 			
 			<ul>
@@ -71,7 +74,7 @@
 						<object id="theorie" type="text/html" data="./sous_page/theorie_cosmologie.html" width="1300" height="560"></object>
 					</div>
 					<div id="tabs-a-2">
-						<div id="plus"><button type="button" onClick="ouvrirPopup()">Calculs annexes</button><button id="para" type="button" onClick="ouvrirPara()">parametres</button></div>
+						<div id="plus"><button type="button" onClick="document.getElementById('masquer').style.opacity = 0.3; document.getElementById('annexes').style.display = 'inline'; getDonnee();">Calculs annexes</button><button id="para" type="button" onClick="ouvrirPara()">parametres</button></div>
 						<div id="temp"></div>
 						<form id="parametres" action="" method="post" autocomplete="off">
 							
@@ -214,6 +217,150 @@
 									<p><strong>Licence :</strong> CC-BY-NC-SA </p><p><object type="image/svg+xml" data="./img/by-nc-sa.eu.svg" width="180" height="50">Le navigateur ne peut lire ce kiwi</object></p>
 									</div>
 									</div>
+						</div>
+						
+						<div id="annexes">
+							<div id="tabs_annexes">
+			
+			<ul>
+				<li><a href="#tabs-1">Calculs Annexes</a></li>
+			</ul>
+			
+			<div id="tabs-1">
+				
+				Les paramètres cosmologiques:
+				<div>
+					<label for="T0_annexes">T<sub>0</sub> =</label>
+					<span id="T0_annexes" style="color:blue"></span> K
+				</div>
+				
+				<div>
+					<label for="H0_annexes">H<sub>0</sub> =</label>
+					<span id="H0_annexes" style="color:blue"></span> km.s<sup>-1</sup>.Mpc<sup>-1</sup>
+				</div>
+				
+				<div>
+					<label for="omegam0_annexes">&Omega;<sub>m0</sub> =</label>
+					<span id="omegam0_annexes" style="color:blue"></span>
+				</div>
+				
+				<div>
+					<label for="omegalambda0_annexes">&Omega;<sub>&Lambda;0</sub> =</label>
+					<span id="omegalambda0_annexes" style="color:blue"></span>
+				</div>
+				
+				<div>
+					<label for="resultat_omegar0_annexes">&Omega;<sub>r0</sub> =</label>
+					<span id="resultat_omegar0_annexes" style="color:blue"></span>
+				</div>
+				
+				<div>
+					<label for="resultat_omegak0_annexes">&Omega;<sub>k0</sub> =</label>
+					<span id="resultat_omegak0_annexes" style="color:blue"></span>
+				</div>
+				
+				<div class="desact_retour">
+					<label for="type_annexes">Type =</label>
+					<span id="type_annexes" style="color:blue"></span>
+				</div>
+				
+				<form id="nouvellesDonnees" action="" method="post">
+					<div class="desact_retour">
+						<label for="z1">z<sub>1</sub> =</label>
+						<input id="z1" value="0" maxlength="13" type="text">
+					</div>
+					<div class="desact_retour">
+						<label for="z2">z<sub>2</sub> =</label>
+						<input id="z2" value="0" maxlength="13" type="text"> 
+					</div>
+					<script type="text/javascript">
+					function getDonnee(){
+   document.getElementById("T0_annexes").innerHTML = document.getElementById("T0").value;
+   document.getElementById("H0_annexes").innerHTML = document.getElementById("H0").value;
+   document.getElementById("omegam0_annexes").innerHTML = document.getElementById("omegam0").value;
+   document.getElementById("resultat_omegar0_annexes").innerHTML = document.getElementById("resultat_omegar0").innerHTML;
+   document.getElementById("resultat_omegak0_annexes").innerHTML = document.getElementById("resultat_omegak0").innerHTML;
+   document.getElementById("omegalambda0_annexes").innerHTML = document.getElementById("omegalambda0").value;
+   document.getElementById("type_annexes").innerHTML = document.getElementById("liste").value;
+   
+   document.getElementById("T0_annexes").value = document.getElementById('T0').value;
+   document.getElementById("H0_annexes").value = document.getElementById('H0').value;
+   document.getElementById("omegam0_annexes").value = document.getElementById('omegam0').value;
+   document.getElementById("omegalambda0_annexes").value = document.getElementById('omegalambda0').value;
+   document.getElementById("resultat_omegak0_annexes").value = document.getElementById('resultat_omegak0').value;
+}
+					
+						$( "#z1" ).change(function() {
+							if(document.getElementById("z1").value > 5e6){
+								alert("La valeur maximale du décalage spectral z1 est de 5e6, elle a été redéfinie à 5e6.");
+								document.getElementById("z1").value = 5e6;
+							}
+						});
+						
+						$( "#z2" ).change(function() {
+							if(document.getElementById("z2").value > 5e6){
+								alert("La valeur maximale du décalage spectral z2 est de 5e6, elle a été redéfinie à 5e6.");
+								document.getElementById("z2").value = 5e6;
+							}
+						});
+					</script>
+					<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
+					</div>
+				</form>
+				<br />
+				<div>
+					<div>
+						<label for="dm">d<sub>m</sub> =</label>
+						<span id="dm" style="color:blue"></span> m = <span id="dm_pc" style="color:blue"></span> pc (Alignés sur la ligne de visée)
+					</div>
+					<div>
+						<label for="dm1">d<sub>m1</sub> =</label>
+						<span id="dm1" style="color:blue"></span> m = <span id="dm1_pc" style="color:blue"></span> pc
+					</div>
+					<div>
+						<label for="dm2">d<sub>m2</sub> =</label>
+						<span id="dm2" style="color:blue"></span> m = <span id="dm2_pc" style="color:blue"></span> pc
+					</div>
+					<div>
+						<label for="agebetween">t<sub>2</sub>-t<sub>1</sub> =</label>
+						<span id="agebetween" style="color:blue"></span> a = <span id="agebetween_sec" style="color:blue"></span> s
+					</div>
+					
+					
+					
+					<div>
+						<label for="tempsEmission">t<sub>1</sub>=</label>
+						<span id="tempsEmission" style="color:blue"></span> a = <span id="tempsEmission_sec" style="color:blue"></span> s
+					</div>
+					
+					
+					<div>
+						<label for="tempsReception">t<sub>2</sub>=</label>
+						<span id="tempsReception" style="color:blue"></span> a = <span id="tempsReception_sec" style="color:blue"></span> s
+					</div>
+					
+					
+					
+					<div>
+						<p>Les 2 calculs suivants utilisent z<sub>1</sub>,</p>
+						<div class="desact_retour">
+							<label for="diametre">D =</label>
+							<input id="diametre" value="" maxlength="17" type="text">  (m)
+							<input type="button" value="--> θ" onClick="calcultheta();">
+						</div>
+						<div class="desact_retour">
+							<input type="button" value="D <--" onClick="calculD();">
+							<label for="theta">θ =</label>
+							<input id="theta" value="" maxlength="17" type="text"> (Seconde d'arc)
+						</div>
+					</div>
+				</div>
+				
+				<div id="plus"><button type="button" onclick="document.getElementById('masquer').style.opacity = 1; document.getElementById('annexes').style.display = 'none';">Retour</button></div>
+			</div>
+		</div>
+						</div>
+						
 									<script type="text/javascript">
 									//adapte la taille des onglets qui sont sous forme d'objet
 									document.getElementById("theorie").setAttribute("width", largeur_fenetre-70);

@@ -72,3 +72,16 @@ svg{
 #tabs-a{
 	height			:	700px;
 }
+#masquer{
+}
+#tabs{
+	z-index			:	2;
+}
+#annexes{
+	display			:	none;
+	z-index			:	1;
+	position		:	absolute;
+	top				:	200px;
+	left			:	320px;
+	background-color:	#FAFAFA;
+}

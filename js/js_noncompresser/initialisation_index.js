@@ -3,6 +3,7 @@ $(function() {
 	$("#tabs-a").tabs();
 	$("#tabs-b").tabs();
 	$( "#tabs" ).tabs();
+	$( "#tabs_annexes" ).tabs();
 });
 
 //fait apparaitre le bouton avec la roue dentele
