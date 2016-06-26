@@ -1,10 +1,10 @@
 //fonction qui permet de sauvegarder les nouvelles constantes
 function save_para(){
-	window.opener.document.getElementById("c").value = document.getElementById('c').value;
-	window.opener.document.getElementById("k").value = document.getElementById('k').value;
-	window.opener.document.getElementById("h").value = document.getElementById('h').value;
-	window.opener.document.getElementById("G").value = document.getElementById('G').value;
+	document.getElementById("c").value = document.getElementById('c_para').value;
+	document.getElementById("k").value = document.getElementById('k_para').value;
+	document.getElementById("h").value = document.getElementById('h_para').value;
+	document.getElementById("G").value = document.getElementById('G_para').value;
 	
-	window.opener.document.getElementById("typeannee").value = document.getElementById('typeannee').value;
-	window.opener.document.getElementById("nbr_precision").value = document.getElementById('nbr_precision').value;
+	document.getElementById("typeannee").value = document.getElementById('typeannee_para').value;
+	document.getElementById("nbr_precision").value = document.getElementById('nbr_precision_para').value;
 }

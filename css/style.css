@@ -85,3 +85,12 @@ svg{
 	left			:	320px;
 	background-color:	#FAFAFA;
 }
+#parametres_popup{
+	display			:	none;
+	z-index			:	1;
+	position		:	absolute;
+	top				:	200px;
+	left			:	320px;
+	background-color:	#FAFAFA;
+	width			:	400px;
+}
