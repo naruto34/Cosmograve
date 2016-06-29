@@ -75,11 +75,13 @@ function calcul(){   // fonction principale de cosmograve
 		Or = 0;
 	}
 	
+	omegak0_afficher = Number(omegak0).toFixed(6);
+	
 	//affiche les imformations sur les paramètres cosmologique de la simulation
 	document.getElementById("resultat_omegam0").innerHTML = omegam0;
 	document.getElementById("resultat_omegar0").innerHTML = Or;
 	document.getElementById("resultat_omegarlambda0").innerHTML = omegalambda0;
-	document.getElementById("resultat_omegak0").innerHTML = omegak0;
+	document.getElementById("resultat_omegak0").innerHTML = Number(omegak0_afficher).toExponential();
 	
 	//calcul de l'age de l'univers
 	age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
@@ -123,13 +125,17 @@ function calcul(){   // fonction principale de cosmograve
 	ymoinsrungederiv = [1,1];
 	k = [0,0,0,0];
 	j = [0,0,0,0];
-	pas = 0.0001;
+	pas = 0.001;
 	m = 0;
 	yrunge = 1;
 	yrunge2 = 1;
 	data = [];
 	while (yrunge2 > 0 && yrunge2 < 5.){
+	if(omegam0 != 0 && omegalambda0 != 1){
 		if(yrunge2<0.1){pas=Math.pow(10,-6);}
+	}else{
+		//alert(age+m/H0engannee+"	"+yrunge2);
+	}
 		yrunge2 = rungekutta_neg(m);
 		ymoinsrunge[0] = ymoinsrunge[1];
 		ymoinsrungederiv[0] = ymoinsrungederiv[1];
@@ -137,7 +143,7 @@ function calcul(){   // fonction principale de cosmograve
 		m=m-pas;
 	}
 	data.reverse();
-	
+	//alert("passe");
 	//on refait appel à rungekutta pour la deuxieme partie
 	i = 0;
 	pas = 0.00001;
@@ -146,7 +152,7 @@ function calcul(){   // fonction principale de cosmograve
 	k = [0,0,0,0];
 	j = [0,0,0,0];
 	//permet de recuperer la valeur de la generatrice
-	if(omegam0 > 1){
+	if(omegam0 >= 1){
 	u_max=1./3.*(Math.acos((1./omegam0)-1));
 	OlER_max=4.*omegam0*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI));
 	}else{
@@ -155,7 +161,7 @@ function calcul(){   // fonction principale de cosmograve
 	omegalambda0_bis = Number(omegalambda0);
 	//suite rungekutta avec rajout du cas ou l'on serait sur la generatrice
 	if(omegalambda0_bis < OlER_max){
-		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
+		while (yrunge > 0.005 && yrunge < 50.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.25){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
 			data.push({date:age+i/H0engannee,close:yrunge});
