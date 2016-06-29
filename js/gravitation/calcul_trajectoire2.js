@@ -111,7 +111,7 @@ function trajectoire() {
 					
 					if (element[1].checked) {
 			
-						diametre_particule = 20;
+						diametre_particule = 5;
 						diametre_observateur = 10;
 						context.clearRect(0, 0, canvas.width, canvas.height);
 					
@@ -125,7 +125,7 @@ function trajectoire() {
 
 					context.fillStyle = '#008B8B';
 					
-					context.arc(posX1, posY1, diametre_particule/2, 0, Math.PI*2);
+					context.arc(posX1, posY1+diametre_particule/2, diametre_particule/2, 0, Math.PI*2);
 
 					context.lineWidth="1";
 					

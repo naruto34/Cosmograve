@@ -15,11 +15,11 @@ function calcul(){   // fonction principale de cosmograve
 	//on recupere le bon nombre de jour par an.
 	if(typeannee == "Sidérale"){
 		nbrjours = 365.256363051;
-	}else if(typeannee == "Julienne"){
+		}else if(typeannee == "Julienne"){
 		nbrjours = 365.25;
-	}else if(typeannee == "Tropique (2000)"){
+		}else if(typeannee == "Tropique (2000)"){
 		nbrjours = 365.242190517;
-	}else{
+		}else{
 		nbrjours = 365.2425;
 	}
 	
@@ -83,14 +83,19 @@ function calcul(){   // fonction principale de cosmograve
 	document.getElementById("resultat_omegarlambda0").innerHTML = omegalambda0;
 	document.getElementById("resultat_omegak0").innerHTML = Number(omegak0_afficher).toExponential();
 	
-	//calcul de l'age de l'univers
-	age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	age_sec = age_sec*(1./H0parsec);
-	//on le passe en gigaannees
-	age = age_sec/((3600*24*nbrjours)*Math.pow(10, 9));
-	//on creer une variable limite en nombre de decimal pour l'affichage
-	age_afficher = Number(age).toExponential(nbr_precision);
-	age_sec_afficher = Number(age_sec).toExponential(nbr_precision);
+	if(omegam0 != 0 && omegalambda0 != 1){
+		//calcul de l'age de l'univers
+		age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+		age_sec = age_sec*(1./H0parsec);
+		//on le passe en gigaannees
+		age = age_sec/((3600*24*nbrjours)*Math.pow(10, 9));
+		//on creer une variable limite en nombre de decimal pour l'affichage
+		age_afficher = Number(age).toExponential(nbr_precision);
+		age_sec_afficher = Number(age_sec).toExponential(nbr_precision);
+		}else{
+		age = NaN;
+		age_aficher = NaN;
+	}
 	
 	//on réinitialise les 3 champs pour eviter les erreurs d'affichage
 	document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
@@ -99,7 +104,7 @@ function calcul(){   // fonction principale de cosmograve
 	
 	if(age >= 0){
 		document.getElementById("resultat_ageunivers").innerHTML = "\302ge de l'univers = "+age_afficher+" Ga = "+age_sec_afficher+" s";
-	}else{
+		}else{
 		document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
 		age = 0;
 	}
@@ -110,7 +115,7 @@ function calcul(){   // fonction principale de cosmograve
 	if(omegam0 <= 0.5){
 		w=(1./3.)*Math.log(((1./omegam0)-1.)+Math.sqrt(((1./omegam0)-1.)*((1./omegam0)-1.)-1.0));
 		OlER=4.*omegam0*cosh(w)*cosh(w)*cosh(w);
-	}else{
+		}else{
 		v =(1./3.)*Math.acos((1./omegam0)-1.);
 		OlER=4.*omegam0*Math.cos(v)*Math.cos(v)*Math.cos(v);
 	}
@@ -130,17 +135,32 @@ function calcul(){   // fonction principale de cosmograve
 	yrunge = 1;
 	yrunge2 = 1;
 	data = [];
-	while (yrunge2 > 0 && yrunge2 < 5.){
-	if(omegam0 != 0 && omegalambda0 != 1){
-		if(yrunge2<0.1){pas=Math.pow(10,-6);}
-	}else{
-		//alert(age+m/H0engannee+"	"+yrunge2);
-	}
-		yrunge2 = rungekutta_neg(m);
-		ymoinsrunge[0] = ymoinsrunge[1];
-		ymoinsrungederiv[0] = ymoinsrungederiv[1];
-		data.push({date:age+m/H0engannee,close:yrunge2});
-		m=m-pas;
+	if(omegam0 == 0 && omegalambda0 == 1){
+		while (yrunge2 > 0.01 && yrunge2 < 5.){
+			if(omegam0 != 0 && omegalambda0 != 1){
+				if(yrunge2<0.1){pas=Math.pow(10,-6);}
+				}else{
+				//alert(age+m/H0engannee+"	"+yrunge2);
+			}
+			yrunge2 = rungekutta_neg(m);
+			ymoinsrunge[0] = ymoinsrunge[1];
+			ymoinsrungederiv[0] = ymoinsrungederiv[1];
+			data.push({date:age+m/H0engannee,close:yrunge2});
+			m=m-pas;
+		}
+		}else{
+		while (yrunge2 > 0 && yrunge2 < 5.){
+			if(omegam0 != 0 && omegalambda0 != 1){
+				if(yrunge2<0.1){pas=Math.pow(10,-6);}
+				}else{
+				//alert(age+m/H0engannee+"	"+yrunge2);
+			}
+			yrunge2 = rungekutta_neg(m);
+			ymoinsrunge[0] = ymoinsrunge[1];
+			ymoinsrungederiv[0] = ymoinsrungederiv[1];
+			data.push({date:age+m/H0engannee,close:yrunge2});
+			m=m-pas;
+		}
 	}
 	data.reverse();
 	//alert("passe");
@@ -153,9 +173,9 @@ function calcul(){   // fonction principale de cosmograve
 	j = [0,0,0,0];
 	//permet de recuperer la valeur de la generatrice
 	if(omegam0 >= 1){
-	u_max=1./3.*(Math.acos((1./omegam0)-1));
-	OlER_max=4.*omegam0*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI));
-	}else{
+		u_max=1./3.*(Math.acos((1./omegam0)-1));
+		OlER_max=4.*omegam0*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI));
+		}else{
 		OlER_max = 0;
 	}
 	omegalambda0_bis = Number(omegalambda0);
@@ -169,13 +189,13 @@ function calcul(){   // fonction principale de cosmograve
 			i=i+pas;
 		}
 		}else if(omegalambda0_bis == OlER_max){
-			while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
+		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
 			data.push({date:age+i/H0engannee,close:yrunge});
 			i=i+pas;
 		}
-			alert("Infiniment d\351rivable, Big Crunch sur un temps infini");
+		alert("Infiniment d\351rivable, Big Crunch sur un temps infini");
 		}else{
 		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
@@ -194,15 +214,15 @@ function calcul(){   // fonction principale de cosmograve
 	//liste les differents cas pour afficher a l'utilisateur les informations
 	if(age_afficher < 0){
 		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+Math.abs(age_afficher)+" Ga";
-	}else if(yrunge <= 0.){
+		}else if(yrunge <= 0.){
 		tBC = i/H0engannee;
 		tBC_afficher = Number(tBC).toExponential(nbr_precision);
 		total = (Number(age_afficher)+Number(tBC_afficher)).toExponential(nbr_precision);
 		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC_afficher+" Ga";
 		document.getElementById("resultat_dureeuniv").innerHTML = (total)+" Ga";
-	}else if(h0<0 && yrunge2 <= 0.){
+		}else if(h0<0 && yrunge2 <= 0.){
 		document.getElementById("resultat_bigcrunch").innerHTML = "Big Crunch &agrave; calculer";
-	}else{
+		}else{
 		document.getElementById("resultat_bigcrunch").innerHTML = "Pas de Big Crunch";
 	}
 	

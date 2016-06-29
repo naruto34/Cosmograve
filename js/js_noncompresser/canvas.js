@@ -84,7 +84,7 @@ function update_point(){
 	context.putImageData(image_fond_temp, 0,0);
 	context.beginPath();
 	context.fillStyle="#F00000"
-	context.arc(PosX, PosY, 3, 0, 2 * Math.PI);
+	context.arc(PosX+1.5, PosY+1.5, 3, 0, 2 * Math.PI);
 	context.fill();
 }
 
