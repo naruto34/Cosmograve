@@ -36,6 +36,11 @@ function graphique_creation_pot(){
 		d.date = d.date;
 		d.close = +d.close;
 	});
+	
+	data2.forEach(function(d) {
+		d.date = d.date;
+		d.close = +d.close;
+	});
 	//alert(data);
 	// Scale the range of the data
 	x.domain(d3.extent(data1, function(d) { return d.date; }));
@@ -101,7 +106,23 @@ function graphique_creation_pot(){
 	// Add the valueline path.
 	svg.append("path")
 	.attr("class", "line")
-	.attr("d", valueline(data1));
+	.attr("d", valueline(data1))
+	.attr('stroke', 'steelblue')
+  .attr('stroke-width', 2)
+  .attr('fill', 'none');
+	
+	var point = svg.append("g")
+        .attr("class", "line");
+
+		//alert(data2[0].date);
+        point.selectAll('circle')
+        .data(data2)
+        .enter().append('circle')
+        .attr("cx", x(data2[0].date))
+         .attr("cy", y(data2[0].close))
+         .attr("r", 4)
+         .style("fill", "orange")
+		 .attr('stroke', 'orange');
 
 	/*svg.append("line")
 	.attr("x1",-height)
