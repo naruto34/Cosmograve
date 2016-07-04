@@ -85,7 +85,11 @@ function calcul(){   // fonction principale de cosmograve
 	
 	if(omegam0 != 0 && omegalambda0 != 1){
 		//calcul de l'age de l'univers
-		age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+		if(Or != 0 && t0 >= 2){
+			age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or)) + (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)));
+		}else{
+			age_sec = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+		}
 		age_sec = age_sec*(1./H0parsec);
 		//on le passe en gigaannees
 		age = age_sec/((3600*24*nbrjours)*Math.pow(10, 9));

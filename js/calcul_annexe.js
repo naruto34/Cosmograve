@@ -48,32 +48,41 @@ function calcu(){
 	
 	//détermine quelle formule sont utile pour la distance metrique, omegak positif 0 ou negatif
 	if (omegak0>0){
-		integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+		//integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
 		integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
 		integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-		dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ);
+		//dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ);
 		dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_1);
 		dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sin(integ_2);
 		}else if (omegak0==0){
-		dm=(c/(H0parsec) * simpson(Number(z1), Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
+		//dm=(c/(H0parsec) * simpson(Number(z1), Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
 		dm1=(c/(H0parsec) * simpson(0, Number(z1), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
 		dm2=(c/(H0parsec) * simpson(0, Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or)));
 		}else{
-		integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
+		//integ = Math.sqrt( Math.abs(omegak0)) * simpson(Number(z1), Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
 		integ_1 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z1), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
 		integ_2 = Math.sqrt( Math.abs(omegak0)) * simpson(0, Number(z2), 1e8, fonction_dm, omegam0, Number(omegalambda0), Number(Or));
-		dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
+		//dm=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ);
 		dm1=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_1);
 		dm2=(c/(H0parsec*Math.sqrt( Math.abs(omegak0) ))) * Math.sinh(integ_2);
 	}
 	
+	dm = dm2 - dm1;
 	//calcul de la distance du diametre apparent et distance lumiere
 	dda=dm1/(1+z1);
 	dl=dm*(1+(z2-z1));
 	
 	//agebetween = (1./H0engannee)*simpson(Number(z1), Number(z2), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	tempsReception = simpson(Number(z2), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	tempsEmission = simpson(Number(z1), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	if(z2 <= 5e6){
+		tempsReception = simpson(Number(z2), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	}else{
+		tempsReception = (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(z2, 2)));
+	}
+	if(z1 <= 5e6){
+		tempsEmission = simpson(Number(z1), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	}else{
+		tempsEmission = (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(z1, 2)));
+	}
 	
 	tempsReception_sec = (1./H0parsec)*tempsReception;
 	tempsEmission_sec = (1./H0parsec)*tempsEmission;

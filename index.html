@@ -292,15 +292,15 @@
 											}
 											
 											$( "#z1" ).change(function() {
-												if(document.getElementById("z1").value > 5e6){
-													alert("La valeur maximale du décalage spectral z1 est de 5e6, elle a été redéfinie à 5e6.");
+												if(document.getElementById("z1").value > 5e6 && !(document.getElementById("liste").options[2].selected || document.getElementById("liste").options[1].selected)){
+													alert("La valeur maximale du décalage spectral z1 est de 5e6 sans radiation, elle a été redéfinie à 5e6.");
 													document.getElementById("z1").value = 5e6;
 												}
 											});
 											
 											$( "#z2" ).change(function() {
-												if(document.getElementById("z2").value > 5e6){
-													alert("La valeur maximale du décalage spectral z2 est de 5e6, elle a été redéfinie à 5e6.");
+												if(document.getElementById("z2").value > 5e6 && !(document.getElementById("liste").options[2].selected || document.getElementById("liste").options[1].selected)){
+													alert("La valeur maximale du décalage spectral z2 est de 5e6 sans radiation, elle a été redéfinie à 5e6.");
 													document.getElementById("z2").value = 5e6;
 												}
 											});
