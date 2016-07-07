@@ -60,6 +60,8 @@ function calcul(){   // fonction principale de cosmograve
 	Or = parseFloat(Or).toFixed(10);
 	omegak0 = omegak0.toFixed(10);
 	
+	$('#graphique').empty();
+	
 	//donne les variables sous forme d'exposant si differente de 0
 	if(omegalambda0 != 0){
 		omegalambda0 = omegalambda0.toExponential();
@@ -107,7 +109,7 @@ function calcul(){   // fonction principale de cosmograve
 	document.getElementById("resultat_dureeuniv").innerHTML = "";
 	
 	if(age >= 0){
-		document.getElementById("resultat_ageunivers").innerHTML = "\302ge de l'univers = "+age_afficher+" Ga = "+age_sec_afficher+" s";
+		document.getElementById("resultat_ageunivers").innerHTML = "Temps depuis le Big Bang = "+age_afficher+" Ga = "+age_sec_afficher+" s";
 		}else{
 		document.getElementById("resultat_ageunivers").innerHTML = "Pas de Big Bang";
 		age = 0;
@@ -124,9 +126,21 @@ function calcul(){   // fonction principale de cosmograve
 		OlER=4.*omegam0*Math.cos(v)*Math.cos(v)*Math.cos(v);
 	}
 	proche_bleu = Math.abs(omegalambda0 - OlER) < 0.01;
+	
+	//permet de recuperer la valeur de la separatrice verte
+	if(omegam0 >= 1){
+		u_max=1./3.*(Math.acos((1./omegam0)-1));
+		OlER_max=4.*omegam0*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI));
+		}else{
+		OlER_max = 0;
+	}
+	proche_vert = Math.abs(omegalambda0 - OlER_max) < 0.01;
+	
 	if(proche_bleu){
 		alert("on est proche de la s\351paratrice");
 		document.getElementById("grille").checked = false;
+	}else if(proche_vert){
+		alert("on est proche de la s\351paratrice");
 	}
 	
 	//on fait appel a la methode de rungekutta pour calculer les points de la courbe
@@ -141,11 +155,9 @@ function calcul(){   // fonction principale de cosmograve
 	data = [];
 	if(omegam0 == 0 && omegalambda0 == 1){
 		while (yrunge2 > 0.01 && yrunge2 < 5.){
-			if(omegam0 != 0 && omegalambda0 != 1){
+			
 				if(yrunge2<0.1){pas=Math.pow(10,-6);}
-				}else{
-				//alert(age+m/H0engannee+"	"+yrunge2);
-			}
+				
 			yrunge2 = rungekutta_neg(m);
 			ymoinsrunge[0] = ymoinsrunge[1];
 			ymoinsrungederiv[0] = ymoinsrungederiv[1];
@@ -154,11 +166,8 @@ function calcul(){   // fonction principale de cosmograve
 		}
 		}else{
 		while (yrunge2 > 0 && yrunge2 < 5.){
-			if(omegam0 != 0 && omegalambda0 != 1){
-				if(yrunge2<0.1){pas=Math.pow(10,-6);}
-				}else{
-				//alert(age+m/H0engannee+"	"+yrunge2);
-			}
+				if(yrunge2<0.2){pas=Math.pow(10,-6);}
+				
 			yrunge2 = rungekutta_neg(m);
 			ymoinsrunge[0] = ymoinsrunge[1];
 			ymoinsrungederiv[0] = ymoinsrungederiv[1];
@@ -175,17 +184,10 @@ function calcul(){   // fonction principale de cosmograve
 	ymoinsrungederiv = [1,1];
 	k = [0,0,0,0];
 	j = [0,0,0,0];
-	//permet de recuperer la valeur de la generatrice
-	if(omegam0 >= 1){
-		u_max=1./3.*(Math.acos((1./omegam0)-1));
-		OlER_max=4.*omegam0*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI))*Math.cos((u_max+(4./3.)*Math.PI));
-		}else{
-		OlER_max = 0;
-	}
 	omegalambda0_bis = Number(omegalambda0);
 	//suite rungekutta avec rajout du cas ou l'on serait sur la generatrice
 	if(omegalambda0_bis < OlER_max){
-		while (yrunge > 0.005 && yrunge < 50.){ // permet de boucler sur une valeur de reference
+		while (yrunge > -0.01 && yrunge < 50.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.25){pas=Math.pow(10,-6);}
 			yrunge = rungekutta(i); //position f(x) Runge-Kutta
 			data.push({date:age+i/H0engannee,close:yrunge});
@@ -199,7 +201,7 @@ function calcul(){   // fonction principale de cosmograve
 			data.push({date:age+i/H0engannee,close:yrunge});
 			i=i+pas;
 		}
-		alert("Infiniment d\351rivable, Big Crunch sur un temps infini");
+		alert("Proche s\351paratrice");
 		}else{
 		while (yrunge > -0.01 && yrunge < 5.){ // permet de boucler sur une valeur de reference
 			if(yrunge<0.1){pas=Math.pow(10,-6);}
@@ -217,13 +219,15 @@ function calcul(){   // fonction principale de cosmograve
 	
 	//liste les differents cas pour afficher a l'utilisateur les informations
 	if(age_afficher < 0){
-		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+Math.abs(age_afficher)+" Ga";
+		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+Math.abs(age_afficher)+" Ga = "+Math.abs(age_sec_afficher)+" s";
 		}else if(yrunge <= 0.){
 		tBC = i/H0engannee;
+		tBC_sec = Number(i/H0parsec).toExponential(nbr_precision);
 		tBC_afficher = Number(tBC).toExponential(nbr_precision);
 		total = (Number(age_afficher)+Number(tBC_afficher)).toExponential(nbr_precision);
-		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC_afficher+" Ga";
-		document.getElementById("resultat_dureeuniv").innerHTML = (total)+" Ga";
+		total_sec = (Number(age_sec_afficher)+Number(tBC_sec)).toExponential(nbr_precision);
+		document.getElementById("resultat_bigcrunch").innerHTML = "Temps avant le Big Crunch = "+tBC_afficher+" Ga = "+tBC_sec+" s";
+		document.getElementById("resultat_dureeuniv").innerHTML = (total)+" Ga = "+total_sec+" s";
 		}else if(h0<0 && yrunge2 <= 0.){
 		document.getElementById("resultat_bigcrunch").innerHTML = "Big Crunch &agrave; calculer";
 		}else{
