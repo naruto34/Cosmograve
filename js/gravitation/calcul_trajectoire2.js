@@ -237,67 +237,40 @@ function trajectoire() {
 			document.getElementById("L").innerHTML = L.toExponential(3);
 			document.getElementById("E").innerHTML = E.toExponential(3);
 			
-			
-			if ( fm <= 1 ) {
+			if ( Number(fm) <= 1 ) {
 				
-				document.getElementById('DivClignotante').innerHTML = "force de marée faible";
+				document.getElementById('DivClignotante').innerHTML = " Force de marée";
 				document.getElementById('DivClignotante').style.color="green";
-			}
-			
-			
-			else if ( 1 < fm < 10) {
+			}else if ( 1 < Number(fm) && Number(fm) < 5) {
 				
-				document.getElementById('DivClignotante').innerHTML = "force de marée élevée"
+				document.getElementById('DivClignotante').innerHTML = " Force de marée"
 				document.getElementById('DivClignotante').style.color="yellow";
-			}
-			
-			
-			else if ( fm >= 10 ) { 
+			}else if ( Number(fm) >= 5 ) { 
 				
-				document.getElementById('DivClignotante').innerHTML = "force de marée mortelle"
+				document.getElementById('DivClignotante').innerHTML = " Force de marée"
 				document.getElementById('DivClignotante').style.color="red";
-			}
-			
-			
-			else {
+			}else{
 				
-				document.getElementById('DivClignotante').innerHTML = "erreur";
+				document.getElementById('DivClignotante').innerHTML = " Erreur";
 			}
-			
-			
 			
 			//Ici le bout de code pour le bouton Reset, quand on clique dessus, la fonction appelé efface le canvas en entier.
 			
 			document.getElementById('clear').addEventListener('click', function() {
-				
-				
 				context.clearRect(0, 0, canvas.width, canvas.height);
-				
-				
-				
 			}, false);
 			
-			
-			if(r_part > rmax*1.1) { 
-				
+			if(r_part > rmax*1.1) {
 				alert("La Particule sort du champ gravitationnel du corps attractif");
 				arret(); 
 				
 			}
 			
-			
-			
 		}
-		
-		
 		
 	}
 	
-	
-	
-	
 	for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
-		
 		
 		V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
 		data1.push({date:r,close:V});
@@ -307,7 +280,5 @@ function trajectoire() {
 	data2.push({date:rmax,close:V});
 	
 	graphique_creation_pot();
-	
-	
+		
 }
-

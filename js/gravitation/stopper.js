@@ -1,7 +1,9 @@
  function arret() {
 	
-	clearInterval(myInterval);
+	clearInterval(myInterval);	
+}
+
+function pause(){
 	
-				 }
-
-
+	
+}

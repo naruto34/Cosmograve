@@ -52,6 +52,7 @@ function calcul(){   // fonction principale de cosmograve
 		}else{
 		PosY -= omegalambda0*325/4.5
 	}
+	
 	update_point();
 	
 	//on calcule omegak
@@ -176,7 +177,7 @@ function calcul(){   // fonction principale de cosmograve
 		}
 	}
 	data.reverse();
-	//alert("passe");
+	
 	//on refait appel à rungekutta pour la deuxieme partie
 	i = 0;
 	pas = 0.00001;

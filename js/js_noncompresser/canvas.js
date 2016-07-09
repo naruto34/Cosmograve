@@ -57,6 +57,9 @@ function GetCoordinates(e)
 	PosX -= 53;
 	PosY -= 29;
 	
+	PosX -= 1.5;
+	PosY -= 1.5;
+	
 	//convertion
 	PosX = PosX*3/230;
 	if(PosY >= 217){
@@ -66,6 +69,7 @@ function GetCoordinates(e)
 		PosY = 217-PosY;
 		PosY = PosY*4.5/325
 	}
+	
 	//on evite d'avoir trop de decimale
 	PosX = PosX.toFixed(3);
 	PosY = PosY.toFixed(3);

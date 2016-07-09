@@ -48,7 +48,8 @@
 				</ul>
 				
 				<div id="tabs-1">
-					<p style="text-align: center; font-size:16px">Cosmograve est une application à but pédagogique créée dans le cadre de projets tuteurés du Master de Physique Numérique de l'Université de Montpellier.<br />Le programme est composé de 2 parties :<br /><br />- évolution des paramètres cosmologiques des univers de Friedmann-Lemaître<br />- trajectoires d'une particule libre en espace-temps de Schwarzschild.</p>
+					<p style="color : orange; font-weight: bold; text-align: center; font-size:16px">Version Beta</p>
+					<p style="text-align: center; font-size:16px">Le programme est composé de 2 parties :<br /><br />- évolution des paramètres cosmologiques des univers de Friedmann-Lemaître<br />- trajectoires d'une particule libre en espace-temps de Schwarzschild.</p>
 					<p style="text-align: center;">
 						<img src='./img/separatrice.png' style="display: inline;" height="250px">
 						<img src='./img/univers_plat.png' style="display: none;" height="250px" >
@@ -118,8 +119,37 @@
 									</div>
 									
 								</div>
-							</form>
-							
+							</form>							
+							<script type="text/javascript">
+								//Limiter imposer pour les donnees d'entrees
+								$( "#T0" ).change(function() {
+									if(document.getElementById("T0").value > 1e99){
+										alert("La valeur maximale de T0 est de 1e99, elle a été redéfinie à 1e99.");
+										document.getElementById("T0").value = 1e99;
+									}
+								});
+								
+								$( "#H0" ).change(function() {
+									if(document.getElementById("H0").value > 1e99){
+										alert("La valeur maximale de H0 est de 1e99, elle a été redéfinie à 1e99.");
+										document.getElementById("H0").value = 1e99;
+									}
+								});
+								
+								$( "#omegam0" ).change(function() {
+									if(document.getElementById("omegam0").value > 1e99){
+										alert("La valeur maximale de \u03A9_m0 est de 1e99, elle a été redéfinie à 1e99.");
+										document.getElementById("omegam0").value = 1e99;
+									}
+								});
+								
+								$( "#omegalambda0" ).change(function() {
+									if(document.getElementById("omegalambda0").value > 1e99){
+										alert("La valeur maximale de \u03A9_\u039B 0 est de 1e99, elle a été redéfinie à 1e99.");
+										document.getElementById("omegalambda0").value = 1e99;
+									}
+								});
+							</script>
 							<div id="graphique">
 							</div>
 							<canvas id="canvas_1" style="display : none;" width="750px"></canvas>
@@ -184,9 +214,11 @@
 								</div>
 								
 								<div id="tabs-4">
-									<p>Programme réalisé par des étudiants en 1er année de Master Physique Numérique (anciennement Physique Info.).</p>
-									<p>Encadré par Jean-Pierre Cordoni, Isabelle Mougenot et Henri Reboul  sous la réponsabilité de David Cassagne.</p>
-									<p><strong>Version 2016 :</strong> Alpha - 0.9<br />
+									<p>Cosmograve est une application à but pédagogique créée dans le cadre de projets tuteurés de 1er année du Master de Physique Numérique de l'Université de Montpellier.</p>
+									<p>Encadré par Jean-Pierre Cordoni, Isabelle Mougenot, Henri Reboul et David Cassagne.</p>
+									
+									<p><strong>Version 2016 :</strong> Beta - 0.9n (20160709)<br />
+										<strong>Finalisé par :</strong> Anthony GOURDIN<br />
 										<strong>Développé par :</strong>  Anthony Gourdin
 										& Tamatoa Mahuta
 									& Hamza Alhousseini</p>
@@ -322,7 +354,7 @@
 											<label for="dm">d<sub>m2</sub> - d<sub>m1</sub> =</label>
 											<span id="dm" style="color:blue"></span> m = <span id="dm_pc" style="color:blue"></span> pc
 										</div>
-					
+										
 										<div>
 											<label for="tempsEmission">t<sub>1</sub>=</label>
 											<span id="tempsEmission" style="color:blue"></span> a = <span id="tempsEmission_sec" style="color:blue"></span> s
@@ -430,4 +462,4 @@
 																document.getElementById("simu_gravi").setAttribute("height", hauteur_fenetre-80);
 															</script>
 														</body>
-													</html>																																																																																																																																																																																															
+													</html>																																																																																																																																																																																																												

@@ -100,3 +100,25 @@ svg{
 	font-weight		:	bold;
 	font-size		:	1.2em;
 }
+#masquer{
+}
+#tabs{
+	z-index			:	2;
+}
+#annexes{
+	display			:	none;
+	z-index			:	1;
+	position		:	absolute;
+	top				:	200px;
+	left			:	320px;
+	background-color:	#FAFAFA;
+}
+#parametres_popup{
+	display			:	none;
+	z-index			:	1;
+	position		:	absolute;
+	top				:	200px;
+	left			:	320px;
+	background-color:	#FAFAFA;
+	width			:	400px;
+}
