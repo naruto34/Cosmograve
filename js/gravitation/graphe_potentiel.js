@@ -8,8 +8,8 @@ function graphique_creation_pot(){
 	height = 450 - margin.top - margin.bottom;
 	
 	// Set the ranges
-	var x = d3.scale.linear().range([0, width]);
-	var y = d3.scale.linear().range([height, 0]);
+	x = d3.scale.linear().range([0, width]);
+	y = d3.scale.linear().range([height, 0]);
 	
 	// Define the line
 	var valueline = d3.svg.line()
@@ -53,25 +53,25 @@ function graphique_creation_pot(){
 	.call(xAxis);
 	
 	
-		svg.selectAll("line.x")
-		.data(x.ticks(10))
-		.enter().append("line")
-		.attr("class", "x")
-		.attr("x1", x)
-		.attr("x2", x)
-		.attr("y1", 0)
-		.attr("y2", 390)
-		.style("stroke", "#ccc");
-		
-		svg.selectAll("line.y")
-		.data(y.ticks(8))
-		.enter().append("line")
-		.attr("class", "y")
-		.attr("x1", 0)
-		.attr("x2", 2000)
-		.attr("y1", y)
-		.attr("y2", y)
-		.style("stroke", "#ccc");
+	svg.selectAll("line.x")
+	.data(x.ticks(10))
+	.enter().append("line")
+	.attr("class", "x")
+	.attr("x1", x)
+	.attr("x2", x)
+	.attr("y1", 0)
+	.attr("y2", 390)
+	.style("stroke", "#ccc");
+	
+	svg.selectAll("line.y")
+	.data(y.ticks(8))
+	.enter().append("line")
+	.attr("class", "y")
+	.attr("x1", 0)
+	.attr("x2", 2000)
+	.attr("y1", y)
+	.attr("y2", y)
+	.style("stroke", "#ccc");
 	
 	
 	// Add the Y Axis
@@ -108,28 +108,32 @@ function graphique_creation_pot(){
 	.attr("class", "line")
 	.attr("d", valueline(data1))
 	.attr('stroke', 'steelblue')
-  .attr('stroke-width', 2)
-  .attr('fill', 'none');
+	.attr('stroke-width', 2)
+	.attr('fill', 'none');
 	
-	var point = svg.append("g")
-        .attr("class", "line");
-
-		//alert(data2[0].date);
-        point.selectAll('circle')
-        .data(data2)
-        .enter().append('circle')
-        .attr("cx", x(data2[0].date))
-         .attr("cy", y(data2[0].close))
-         .attr("r", 4)
-         .style("fill", "orange")
-		 .attr('stroke', 'orange');
-
-	/*svg.append("line")
-	.attr("x1",-height)
-	.attr("y1",0)
-	.attr("x2",10)
-	.attr("y2",10)
-	.attr("stroke","red");*/
-
+	point = svg.append("g")
+	.attr("class", "line-point");
 	
+	point.selectAll('circle')
+	.data(data2)
+	.enter().append('circle')
+	.attr("cx", x(data2[0].date))
+	.attr("cy", y(data2[0].close))
+	.attr("r", 4)
+	.style("fill", "orange")
+	.attr('stroke', 'orange');
 }	
+
+function update_graphique_2(){
+	
+	$('.line-point').empty();
+	
+	point.selectAll('circle')
+	.data(data2)
+	.enter().append('circle')
+	.attr("cx", x(data2[0].date))
+	.attr("cy", y(data2[0].close))
+	.attr("r", 4)
+	.style("fill", "orange")
+	.attr('stroke', 'orange');
+}
