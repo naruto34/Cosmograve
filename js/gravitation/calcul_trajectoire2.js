@@ -79,8 +79,7 @@ function animate(){
 		
 		if(r_part > rmax*1.1) {
 			alert("La Particule sort du champ gravitationnel du corps attractif");
-			arret(); 
-			
+			arret();
 		}
 		
 	}
@@ -154,6 +153,8 @@ function trajectoire() {
 			return;
 		}
 		
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		
 		diametre_particule = 2;
 		
 		// La position de départ est le milieu de la fenêtre d'affichage auquel on ajoute la position initiale de la particule.     
@@ -222,19 +223,41 @@ function trajectoire() {
 		}, false);
 	
 	// Tracé du Rayon de Schwarzchild.
-	context.beginPath();
-	context.fillStyle = '#FF0000';
-	context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
 	context.lineWidth="1";
+	context.fillStyle = '#000000';
+	if((((760*m/rmax)+4)/2) < 5){
+	context.beginPath();
+	context.moveTo(posX3-10,posY3);
+	context.lineTo(posX3+10,posY3);
 	context.stroke();
+	context.beginPath();
+	context.moveTo(posX3,posY3-10);
+	context.lineTo(posX3,posY3+10);
+	context.stroke();
+	}else{
+	context.beginPath();
+	context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
+	context.stroke();
+	}
 	
 	$( document.params.traj[0] ).change(function() {
 	// Tracé du Rayon de Schwarzchild si on change en cours de simulation
-	context.beginPath();
-	context.fillStyle = '#FF0000';
-	context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
 	context.lineWidth="1";
+	context.fillStyle = '#000000';
+	if((((760*m/rmax)+4)/2) < 5){
+	context.beginPath();
+	context.moveTo(posX3-10,posY3);
+	context.lineTo(posX3+10,posY3);
 	context.stroke();
+	context.beginPath();
+	context.moveTo(posX3,posY3-10);
+	context.lineTo(posX3,posY3+10);
+	context.stroke();
+	}else{
+	context.beginPath();
+	context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
+	context.stroke();
+	}
 	});
 	
 	document.getElementById("m").innerHTML = m.toExponential(3);

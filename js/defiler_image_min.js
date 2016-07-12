@@ -1,1 +1,1 @@
-function suivante(){document.images[I].style.display="none";I<Imax?I++:I=0;document.images[I].style.display="inline";setTimeout(suivante,4E3)};
+function suivante(){document.getElementById("image_defile").getElementsByTagName("img")[I].style.display="none";I<Imax?I++:I=0;document.getElementById("image_defile").getElementsByTagName("img")[I].style.display="inline";setTimeout(suivante,4E3)};

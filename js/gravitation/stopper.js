@@ -1,5 +1,6 @@
 function arret() {
 	pause = true;
+	//alert("on s'arrete");
 	clearInterval(myInterval);
 }
 function pau(){

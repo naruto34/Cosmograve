@@ -48,9 +48,10 @@
 				</ul>
 				
 				<div id="tabs-1">
+					<p style="text-align : center;"><img src="./img/image1.png" height="125px" /></p>
 					<p style="color : orange; font-weight: bold; text-align: center; font-size:16px">Version Beta</p>
 					<p style="text-align: center; font-size:16px">Le programme est composé de 2 parties :<br /><br />- évolution des paramètres cosmologiques des univers de Friedmann-Lemaître<br />- trajectoires d'une particule libre en espace-temps de Schwarzschild.</p>
-					<p style="text-align: center;">
+					<p id="image_defile" style="text-align: center;">
 						<img src='./img/separatrice.png' style="display: inline;" height="250px">
 						<img src='./img/univers_plat.png' style="display: none;" height="250px" >
 						<img src='./img/separa.png' style="display: none;" height="250px" >
@@ -62,7 +63,7 @@
 					<script type="text/javascript">
 						//pour faire defiler les images
 						I = 0 ;
-						Imax = document.images.length - 1 ;
+						Imax = document.getElementById("image_defile").getElementsByTagName('img').length - 1 ;
 						suivante();
 					</script> 
 					<p style="text-align: center;"><img src="./img/logo.png" height="200px" /></p>
@@ -219,7 +220,7 @@
 									<p>Cosmograve est une application à but pédagogique créée dans le cadre de projets tuteurés de 1er année du Master de Physique Numérique de l'Université de Montpellier.</p>
 									<p>Encadré par Jean-Pierre Cordoni, Isabelle Mougenot, Henri Reboul et David Cassagne.</p>
 									
-									<p><strong>Version 2016 :</strong> Beta - 0.9r (20160709)<br />
+									<p><strong>Version 2016 :</strong> Beta - 0.9s (20160712)<br />
 										<strong>Finalisé par :</strong> Anthony GOURDIN<br />
 										<strong>Développé par :</strong>  Anthony Gourdin
 										& Tamatoa Mahuta
