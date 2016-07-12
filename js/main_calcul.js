@@ -53,6 +53,9 @@ function calcul(){   // fonction principale de cosmograve
 		PosY -= omegalambda0*325/4.5
 	}
 	
+	PosX -= 1.5;
+	PosY -= 1.5;
+	
 	update_point();
 	
 	//on calcule omegak

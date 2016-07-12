@@ -43,16 +43,16 @@ function GetCoordinates(e)
 	PosY = PosY - ImgPos[1];
 	
 	//permet de fixer les limites du canvas pour pas sortir du cadre
-	if(PosX < 53){
-		PosX = 53;
-		}else if(PosX > 283){
-		PosX = 283;
+	if(PosX < 54.5){
+		PosX = 54.5;
+		}else if(PosX > 284.5){
+		PosX = 284.5;
 	}
 	
-	if(PosY > 354){
-		PosY = 354;
-		}else if(PosY < 29){
-		PosY = 29;
+	if(PosY > 355.5){
+		PosY = 355.5;
+		}else if(PosY < 30.5){
+		PosY = 30.5;
 	}
 	PosX -= 53;
 	PosY -= 29;

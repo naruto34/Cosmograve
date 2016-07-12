@@ -10,6 +10,8 @@ function animate(){
 		context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
 		context.lineWidth="1";
 		context.stroke();
+		
+		diametre_particule = 4;
 	}
 	
 	//Tracé de la particule
@@ -60,15 +62,15 @@ function animate(){
 		
 		if ( Number(fm) <= 1 ) {
 			
-			document.getElementById('DivClignotante').innerHTML = " Force de marée";
+			document.getElementById('DivClignotante').innerHTML = " <img src='./../img/diodever.gif' height='14px' />";
 			document.getElementById('DivClignotante').style.color="green";
 			}else if ( 1 < Number(fm) && Number(fm) < 5) {
 			
-			document.getElementById('DivClignotante').innerHTML = " Force de marée"
+			document.getElementById('DivClignotante').innerHTML = " <img src='./../img/diodejaune.gif' height='14px' />"
 			document.getElementById('DivClignotante').style.color="yellow";
 			}else if ( Number(fm) >= 5 ) { 
 			
-			document.getElementById('DivClignotante').innerHTML = " Force de marée"
+			document.getElementById('DivClignotante').innerHTML = " <img src='./../img/dioderouge.gif' height='14px' />"
 			document.getElementById('DivClignotante').style.color="red";
 			}else{
 			
@@ -175,36 +177,42 @@ function trajectoire() {
 			var nbClickMax = 2;
 			
 			nbClick++;
-			
-			if (nbClick <= nbClickMax) {
-				if (nbClick == 1) {
-					dtau = temps_chute_libre/450;
+			if (nbClick <= nbClickMax){
+				if (nbClick == 1){
+					dtau *= 2;
 				}
-				else if (nbClick == nbClickMax) {
-					dtau = temps_chute_libre/400;
+				else if (nbClick == nbClickMax){
+					dtau *= 2;
 				}
-				}else{
-				nbClick = nbClickMax-1;
+				
+				if(nbClick_m > 0){
+				nbClick_m -= 1;
+				}
+			}else{
+				nbClick--;
 			}
-			
+			//alert(nbClick+"	"+nbClick_m);
 		}, false);
 		
-		document.getElementById('moinsvite').addEventListener('click', function() {
+		document.getElementById('moinsvite').addEventListener('click', function(){
 			var nbClickMax = 2;
 			
 			nbClick_m++;
 			
-			if (nbClick_m <= nbClickMax) {
+			if (nbClick_m <= nbClickMax){
 				if (nbClick_m == 1) {
-					dtau = temps_chute_libre;
+					dtau *= 0.5;
 				}
-				else if (nbClick_m == nbClickMax) {
-					dtau = temps_chute_libre*1.5;
+				else if (nbClick_m == nbClickMax){
+					dtau *= 0.5;
 				}
-				}else{
-				nbClick_m = nbClickMax-1;
+				if(nbClick > 0){
+				nbClick -= 1;
+				}
+			}else{
+				nbClick_m--;
 			}
-			
+			//alert(nbClick+"	"+nbClick_m);
 		}, false);
 		
 		//Ici le bout de code pour le bouton Reset, quand on clique dessus, la fonction appelé efface le canvas en entier.
@@ -212,38 +220,38 @@ function trajectoire() {
 			arret();
 			context.clearRect(0, 0, canvas.width, canvas.height);
 		}, false);
-		
-		// Tracé du Rayon de Schwarzchild.
-		context.beginPath();
-		context.fillStyle = '#FF0000';
-		context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
-		context.lineWidth="1";
-		context.stroke();
-		
-		$( document.params.traj[0] ).change(function() {
-			// Tracé du Rayon de Schwarzchild si on change en cours de simulation
-			context.beginPath();
-			context.fillStyle = '#FF0000';
-			context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
-			context.lineWidth="1";
-			context.stroke();
-		});
-		
-		document.getElementById("m").innerHTML = m.toExponential(3);
-		document.getElementById("L").innerHTML = L.toExponential(3);
-		document.getElementById("E").innerHTML = E.toExponential(3);
-		
-		for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
-			
-			V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
-			data1.push({date:r,close:V});
-			
-		}
-		V=(1-(2*m)/rmax)*(1+Math.pow(L/rmax,2))/c*c;
-		data2.push({date:rmax,close:V});
-		
-		graphique_creation_pot();
-		}else{
-		myInterval = setInterval(animate,1000/300);
+	
+	// Tracé du Rayon de Schwarzchild.
+	context.beginPath();
+	context.fillStyle = '#FF0000';
+	context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
+	context.lineWidth="1";
+	context.stroke();
+	
+	$( document.params.traj[0] ).change(function() {
+	// Tracé du Rayon de Schwarzchild si on change en cours de simulation
+	context.beginPath();
+	context.fillStyle = '#FF0000';
+	context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
+	context.lineWidth="1";
+	context.stroke();
+	});
+	
+	document.getElementById("m").innerHTML = m.toExponential(3);
+	document.getElementById("L").innerHTML = L.toExponential(3);
+	document.getElementById("E").innerHTML = E.toExponential(3);
+	
+	for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
+	
+	V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
+	data1.push({date:r,close:V});
+	
 	}
-}
+	V=(1-(2*m)/rmax)*(1+Math.pow(L/rmax,2))/c*c;
+	data2.push({date:rmax,close:V});
+	
+	graphique_creation_pot();
+	}else{
+	myInterval = setInterval(animate,1000/300);
+	}
+	}	
