@@ -7,11 +7,13 @@ function animate(){
 		// Tracé du Rayon de Schwarzchild.
 		context.beginPath();
 		context.fillStyle = '#FF0000';
-		context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
+		context.arc(posX3, posY3, (190*m/rmax), 0, Math.PI*2);
 		context.lineWidth="1";
 		context.stroke();
 		
 		diametre_particule = 4;
+		}else{
+		diametre_particule = 2;
 	}
 	
 	//Tracé de la particule
@@ -42,7 +44,7 @@ function animate(){
 		dt = E*dtau*(1/(1-2*m/r_part));
 		temps_observateur += dt;
 		
-		if ( r_part == 0 ) {
+		if ( r_part == 0 || r_part < r_phy) {
 			arret();
 		}
 		
@@ -59,6 +61,7 @@ function animate(){
 		document.getElementById("tp").innerHTML = temps_particule.toExponential(4);
 		document.getElementById("vp").innerHTML = vm.toExponential(3);						
 		document.getElementById("ga").innerHTML = fm.toExponential(3);
+		document.getElementById("r_par").innerHTML = r_part.toExponential(3);
 		
 		if ( Number(fm) <= 1 ) {
 			
@@ -92,7 +95,8 @@ function trajectoire() {
 		//-------- Nos variables Globales ( de c à L) --------//
 		c = 299792458;													
 		G = 6.6742*Math.pow(10,-11);						
-		r0 = Number(document.getElementById("r0").value);				
+		r0 = Number(document.getElementById("r0").value);
+		r_phy = Number(document.getElementById("r_phy").value);
 		vphi = Number(document.getElementById("vphi").value); 
 		M = Number(document.getElementById("M").value);
 		vr = Number(document.getElementById("vr").value); 
@@ -120,7 +124,7 @@ function trajectoire() {
 		bool = true;
 		
 		// Ici, les positions de départ de la particule, dans son référentiel et dans celui de l'observateur//
-		if ( E > 1 ) { rmax=5*r0; }	
+		if ( E > 1 ) { rmax=5*r0; }
 		
 		x1part=190*r0*Math.cos(phi)/rmax;
 		y1part=190*r0*Math.sin(phi)/rmax;
@@ -187,9 +191,9 @@ function trajectoire() {
 				}
 				
 				if(nbClick_m > 0){
-				nbClick_m -= 1;
+					nbClick_m -= 1;
 				}
-			}else{
+				}else{
 				nbClick--;
 			}
 			//alert(nbClick+"	"+nbClick_m);
@@ -208,9 +212,9 @@ function trajectoire() {
 					dtau *= 0.5;
 				}
 				if(nbClick > 0){
-				nbClick -= 1;
+					nbClick -= 1;
 				}
-			}else{
+				}else{
 				nbClick_m--;
 			}
 			//alert(nbClick+"	"+nbClick_m);
@@ -221,60 +225,82 @@ function trajectoire() {
 			arret();
 			context.clearRect(0, 0, canvas.width, canvas.height);
 		}, false);
-	
-	// Tracé du Rayon de Schwarzchild.
-	context.lineWidth="1";
-	context.fillStyle = '#000000';
-	if((((760*m/rmax)+4)/2) < 5){
-	context.beginPath();
-	context.moveTo(posX3-10,posY3);
-	context.lineTo(posX3+10,posY3);
-	context.stroke();
-	context.beginPath();
-	context.moveTo(posX3,posY3-10);
-	context.lineTo(posX3,posY3+10);
-	context.stroke();
-	}else{
-	context.beginPath();
-	context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
-	context.stroke();
+		
+		// Tracé du Rayon de Schwarzchild.
+		context.lineWidth="1";
+		context.fillStyle = '#000000';
+		if(((190*m/rmax)) < 3){
+			context.beginPath();
+			context.moveTo(posX3-10,posY3);
+			context.lineTo(posX3-3,posY3);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(posX3+3,posY3);
+			context.lineTo(posX3+10,posY3);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(posX3,posY3-10);
+			context.lineTo(posX3,posY3-3);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(posX3,posY3+3);
+			context.lineTo(posX3,posY3+10);
+			context.stroke();
+			}else{
+			context.beginPath();
+			context.arc(posX3, posY3, ((190*m/rmax)), 0, Math.PI*2);
+			context.stroke();
+		}
+		
+		if(m < r_phy){
+			context.beginPath();
+			context.arc(posX3, posY3, (190*r_phy/rmax), 0, Math.PI*2);
+			context.stroke();
+		}
+		
+		$( document.params.traj[0] ).change(function() {
+			// Tracé du Rayon de Schwarzchild si on change en cours de simulation
+			context.lineWidth="1";
+			context.fillStyle = '#000000';
+			if(((190*m/rmax)) < 3){
+				context.beginPath();
+				context.moveTo(posX3-10,posY3);
+				context.lineTo(posX3-3,posY3);
+				context.stroke();
+				context.beginPath();
+				context.moveTo(posX3+3,posY3);
+				context.lineTo(posX3+10,posY3);
+				context.stroke();
+				context.beginPath();
+				context.moveTo(posX3,posY3-10);
+				context.lineTo(posX3,posY3-3);
+				context.stroke();
+				context.beginPath();
+				context.moveTo(posX3,posY3+3);
+				context.lineTo(posX3,posY3+10);
+				context.stroke();
+				}else{
+				context.beginPath();
+				context.arc(posX3, posY3, ((190*m/rmax)), 0, Math.PI*2);
+				context.stroke();
+			}
+		});
+		
+		document.getElementById("m").innerHTML = m.toExponential(3);
+		document.getElementById("L").innerHTML = L.toExponential(3);
+		document.getElementById("E").innerHTML = E.toExponential(3);
+		
+		for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
+			
+			V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
+			data1.push({date:r,close:V});
+			
+		}
+		V=(1-(2*m)/rmax)*(1+Math.pow(L/rmax,2))/c*c;
+		data2.push({date:rmax,close:V});
+		
+		graphique_creation_pot();
+		}else{
+		myInterval = setInterval(animate,1000/300);
 	}
-	
-	$( document.params.traj[0] ).change(function() {
-	// Tracé du Rayon de Schwarzchild si on change en cours de simulation
-	context.lineWidth="1";
-	context.fillStyle = '#000000';
-	if((((760*m/rmax)+4)/2) < 5){
-	context.beginPath();
-	context.moveTo(posX3-10,posY3);
-	context.lineTo(posX3+10,posY3);
-	context.stroke();
-	context.beginPath();
-	context.moveTo(posX3,posY3-10);
-	context.lineTo(posX3,posY3+10);
-	context.stroke();
-	}else{
-	context.beginPath();
-	context.arc(posX3, posY3, ((760*m/rmax)+4)/2, 0, Math.PI*2);
-	context.stroke();
-	}
-	});
-	
-	document.getElementById("m").innerHTML = m.toExponential(3);
-	document.getElementById("L").innerHTML = L.toExponential(3);
-	document.getElementById("E").innerHTML = E.toExponential(3);
-	
-	for(r=rayon_trouNoir;r<rmax*1.1;r+=dr) {
-	
-	V=(1-(2*m)/r)*(1+Math.pow(L/r,2))/c*c;
-	data1.push({date:r,close:V});
-	
-	}
-	V=(1-(2*m)/rmax)*(1+Math.pow(L/rmax,2))/c*c;
-	data2.push({date:rmax,close:V});
-	
-	graphique_creation_pot();
-	}else{
-	myInterval = setInterval(animate,1000/300);
-	}
-	}	
+}	
