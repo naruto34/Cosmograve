@@ -44,7 +44,12 @@ function animate(){
 		dt = E*dtau*(1/(1-2*m/r_part));
 		temps_observateur += dt;
 		
-		if ( r_part == 0 || r_part < r_phy) {
+		if ( r_part == 0) {
+			arret();
+		}
+		
+		if(r_part < r_phy){
+			document.getElementById("paf").innerHTML = "PAF";
 			arret();
 		}
 		
@@ -92,6 +97,7 @@ function animate(){
 function trajectoire() {
 	if(pause || debut){
 		debut = false;
+		document.getElementById("paf").innerHTML = "";
 		//-------- Nos variables Globales ( de c à L) --------//
 		c = 299792458;													
 		G = 6.6742*Math.pow(10,-11);						

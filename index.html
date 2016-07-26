@@ -218,36 +218,36 @@
 								</div>
 								
 								<div id="tabs-4">
-									<p>Cosmograve est une application à but pédagogique créée dans le cadre de projets tuteurés de 1er année du Master de Physique Numérique de l'Université de Montpellier.</p>
-									<p>Encadré par Jean-Pierre Cordoni, Isabelle Mougenot, Henri Reboul et David Cassagne.</p>
+									<p>Application créée dans le cadre de projets tuteurés du Master 1 de Physique Numérique de l'Université de Montpellier.</p>
+									<p>Encadrement : Jean-Pierre Cordoni & Henri Reboul (LUPM), Isabelle Mougenot (LIRMM) et David Cassagne.</p>
 									
-									<p><strong>Version 2016 :</strong> Beta - 0.9t (20160713)<br />
+									<p><strong>Version </strong> Beta - (20160726)<br />
 										<strong>Finalisé par :</strong> Anthony GOURDIN<br />
 										<strong>Développé par :</strong>  Anthony Gourdin
 										& Tamatoa Mahuta
 									& Hamza Alhousseini</p>
 									
 									<p><strong>Version 2015 :</strong><br />
-										<strong>Développé par :</strong>  Thibault Jarossay
+										  Thibault Jarossay
 										& Samir Loukyly
 										& Franck Malet
 									</p>
 									
 									<p><strong>Version 2014 :</strong><br />
-										<strong>Développé par :</strong> Pierre Barbotin
+										Pierre Barbotin
 										& Thomas Vicario
 										& Damien Maurin
 									</p>
 									
 									<p><strong>Version 2013 :</strong><br />
-										<strong>Développé par :</strong>  Nicolas Boulay
+										Nicolas Boulay
 										& Alexandra Grabon
 										& Dwight Smite
 										& El Hadj Modou Thiam
 									</p>
 									
 									<p><strong>Version 2009 :</strong><br />
-										<strong>Développé par :</strong>  Karim Bammou
+										Karim Bammou
 										& Brice Cervera
 										& Gaëlle Daste
 									</p>
@@ -268,7 +268,7 @@
 									Les paramètres cosmologiques:
 									<div>
 										<label for="T0_annexes">T<sub>0</sub> =</label>
-										<span id="T0_annexes" style="color:blue"></span> K
+										<span id="T0_annexes" style="color:blue"></span> K<span id="warning_temp"></span>
 									</div>
 									
 									<div>
@@ -326,7 +326,7 @@
 												document.getElementById("omegalambda0_annexes").value = document.getElementById('omegalambda0').value;
 												document.getElementById("resultat_omegak0_annexes").value = document.getElementById('resultat_omegak0').value;
 											}
-											
+											/*
 											$( "#z1" ).change(function() {
 												if(document.getElementById("z1").value > 5e6 && !(document.getElementById("liste").options[2].selected || document.getElementById("liste").options[1].selected)){
 													alert("La valeur maximale du décalage spectral z1 est de 5e6 sans radiation, elle a été redéfinie à 5e6.");
@@ -340,6 +340,7 @@
 													document.getElementById("z2").value = 5e6;
 												}
 											});
+											*/
 										</script>
 										<div id="plus"><button type="button" onclick="calcu()">Calcul</button> 
 										</div>

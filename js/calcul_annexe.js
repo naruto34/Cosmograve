@@ -40,10 +40,10 @@ function calcu(){
 	
 	//voir si on le garde
 	if(z1 == "inf"){
-		z1 = 1e7;
+		z1 = 5e6;//<----------------------------------------------------------
 	}
 	if(z2 == "inf"){
-		z2 = 1e7;
+		z2 = 5e6;//<-------------------------------------------------
 	}
 	
 	//détermine quelle formule sont utile pour la distance metrique, omegak positif 0 ou negatif
@@ -73,27 +73,110 @@ function calcu(){
 	dl=dm*(1+(z2-z1));
 	
 	//agebetween = (1./H0engannee)*simpson(Number(z1), Number(z2), 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
-	if(z2 <= 5e6){
-		tempsReception = simpson(Number(z2), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+	
+      
+        //on regarde si on est dans la région no big bang
+	w = 0;
+	v = 0;
+	Om0=1./omegam0-1.;
+	
+	if(omegam0 <= 0.5){
+		w=(1./3.)*Math.log(Om0+Math.sqrt(Om0*Om0-1.0));
+		Olambdalim=4.*omegam0*Math.cosh(w)*Math.cosh(w)*Math.cosh(w);
 	}else{
-		tempsReception = (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(z2, 2)));
+		v =(1./3.)*Math.acos(Om0);
+		Olambdalim=4.*omegam0*Math.cos(v)*Math.cos(v)*Math.cos(v);
+	                  }
+
+
+
+        if(Or > 0)      { 
+
+        if(z2 <= 5e6){  
+                     if(omegalambda0 >= Olambdalim) {
+                     tempsReception = simpson(0, z2, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or)) ;//<-----------------------------
+                     }else{
+		     tempsReception = simpson(Number(z2), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or))+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)))   };//<-----------------------
+	}else{
+                     if(omegalambda0 >= Olambdalim) {
+                     tempsReception = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or))+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z2,2));//<-----------------------------
+                     }else{
+          	     tempsReception = (1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(z2, 2)))   };//<------------------------------
+	}
+	
+
+
+        if(z1 <= 5e6){  
+                     if(omegalambda0 >= Olambdalim) {
+                     tempsEmission = simpson(0, z1, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));//<-----------------------------
+                     }else{
+		     tempsEmission = simpson(Number(z1), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or))+(1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(5e6, 2)))   };//<-----------------------
+	}else{
+                     if(omegalambda0 >= Olambdalim) {
+                     tempsEmission = simpson(0, 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or))+0.5*(1/(Math.pow(Or, 1/2)))*(1/Math.pow(5e6,2)-1/Math.pow(z1,2));//<-----------------------------
+                     }else{
+          	     tempsEmission = (1/(Math.pow(Or, 1/2)))*(1/(2*Math.pow(z1, 2)))   };//<------------------------------
+	}
+
+                        }
+ 
+
+
+       if(Or == 0 && omegam0 != 0)      {  
+
+        if(z2 <= 5e6){
+		tempsReception = simpson(Number(z2), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), 0.)+(1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(5e6, 3/2)));//<-----------------------
+	}else{
+		tempsReception = (1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(z2, 3/2)));//<------------------------------
 	}
 	if(z1 <= 5e6){
-		tempsEmission = simpson(Number(z1), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), Number(Or));
+		tempsEmission = simpson(Number(z1), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), 0.)+(1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(5e6, 3/2)));//<--------------------------
 	}else{
-		tempsEmission = (1/(h0*Math.pow(Or, 1/2)))*(1/(2*Math.pow(z1, 2)));
+		tempsEmission = (1/(Math.pow(omegam0, 1/2)))*(2/(3*Math.pow(z1, 3/2)));//<---------------------------------------
 	}
+                      }
+
+     
+
+        if(Or == 0 && omegam0== 0 && omegak0 != 0)      {  
+
+        if(z2 <= 5e6){
+		tempsReception = simpson(Number(z2), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), 0.)+1/(Math.pow(omegak0, 1/2)*5e6);//<-----------------------
+	}else{
+		tempsReception = 1/(Math.pow(omegak0, 1/2)*z2);//<------------------------------
+	}
+	if(z1 <= 5e6){
+		tempsEmission = simpson(Number(z1), 5e6, 1e8, fonction_integrale, omegam0, Number(omegalambda0), 0.)+1/(Math.pow(omegak0, 1/2)*5e6);//<--------------------------
+	}else{
+		tempsEmission = 1/(Math.pow(omegak0, 1/2)*z1);//<---------------------------------------
+	}
+                      }
+					  
+					  
+	if(Or == 0 && omegam0== 0 && omegak0 == 0)      {  
+
+       			tempsReception =Math.log(1+z2)/Math.pow(omegalambda0, 1/2) ;//<------------------------------
+			    tempsEmission = Math.log(1+z1)/Math.pow(omegalambda0, 1/2);//<---------------------------------------
+	            }				  
+
+
+
+	tempsReception_sec = (1./H0parsec)*tempsReception;//<--------------------------
+	tempsEmission_sec = (1./H0parsec)*tempsEmission;//<-----------------------
 	
-	tempsReception_sec = (1./H0parsec)*tempsReception;
-	tempsEmission_sec = (1./H0parsec)*tempsEmission;
-	
-	tempsReception = (1./H0enannee)*tempsReception;
-	tempsEmission = (1./H0enannee)*tempsEmission;
+	tempsReception = (1./H0enannee)*tempsReception;//<-------------------------
+	tempsEmission = (1./H0enannee)*tempsEmission;//<--------------------------
 	
 	agebetween = tempsReception - tempsEmission;
 	agebetween_sec = tempsReception_sec - tempsEmission_sec;
 	
-	//les distances sont positives
+	
+
+
+
+
+
+//les distances sont positives
 	dm = Math.abs(dm);
 	dm1 = Math.abs(dm1);
 	dm2 = Math.abs(dm2);

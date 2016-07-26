@@ -182,16 +182,16 @@ function update_modele(){
 	context.fillText(text, 40, 95);
 	
 	var text = 'Ω';
-	context.font = "23pt Verdana";
+	context.font = "18pt Verdana";
 	context.fillText(text,140,362);
-	context.font = "16pt Verdana";
-	context.fillText("m", 164,375);
+	context.font = "12pt Verdana";
+	context.fillText("m0", 160,375);
 	
 	var text = 'Ω';
-	context.font = "23pt Verdana";
+	context.font = "18pt Verdana";
 	context.fillText(text,10,172);
-	context.font = "16pt Verdana";
-	context.fillText("Λ", 32,185);
+	context.font = "12pt Verdana";
+	context.fillText("Λ0", 28,185);
 	
 	context.save();
 	var text = 'Ni Big Bang';

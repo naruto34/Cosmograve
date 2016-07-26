@@ -1,9 +1,9 @@
 function graphique_creation(){
 	
 	// Set the dimensions of the canvas / graph
-	var margin = {top: 30, right: 20, bottom: 30, left: 50},
+	var margin = {top: 30, right: 20, bottom: 50, left: 50},
 	width = 750 - margin.left - margin.right,
-	height = 450 - margin.top - margin.bottom;
+	height = 470 - margin.top - margin.bottom;
 	
 	// Set the ranges
 	var x = d3.scale.linear().range([0, width]);
@@ -98,8 +98,8 @@ function graphique_creation(){
 	
 	svg.append("text")
 	.attr("class", "legend_axe")
-	.attr("x", 225)
-	.attr("y", 415)
+	.attr("x", 255)
+	.attr("y", 423)
 	.attr("dy", ".3em")
 	.attr("transform", "rotate(0)")
 	.style("font-weight", "bold")
